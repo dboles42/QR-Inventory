@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
-
+using InventoryManagement;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,7 +28,7 @@ namespace InventoryManagement
     public sealed partial class mainMenu : Page
     {
         Inventory i1 = new Inventory();
-        ObservableCollection<Asset> listItems { get; } = new ObservableCollection<Asset>();
+        public ObservableCollection<Asset> listItems { get; } = new ObservableCollection<Asset>();
 
         public mainMenu()
         {
@@ -60,7 +60,7 @@ namespace InventoryManagement
             // GOTO: 
             foreach (Asset A in i1.listOfAssets)
             {
-                itemListView.Items.Add(A);
+                listItems.Add(A);
             }
 
             

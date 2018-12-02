@@ -156,12 +156,6 @@
       <Version>0.16.4</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\MainFinalDatabase\DataAccessLibrary\DataAccessLibrary.csproj">
-      <Project>{720f94cf-832f-49f2-b26f-89d6ad1a1992}</Project>
-      <Name>DataAccessLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
