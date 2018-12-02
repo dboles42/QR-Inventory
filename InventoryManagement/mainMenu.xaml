@@ -11,7 +11,7 @@
     <Grid>
         <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="62,84,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="310" SelectionChanged="TextBlock_SelectionChanged" FontSize="48" TextAlignment="Center"/>
         <HyperlinkButton Content="Click to go to page 1" HorizontalAlignment="Left" Height="87" Margin="62,579,0,0" VerticalAlignment="Top" Width="312" FontSize="22" Click="HyperlinkButton_Click"/>
-        <ListView  ItemsSource="{Binding listItems}">
+        <ListView x:Name="itemListView" ItemsSource="{x:Bind listItems}" SelectionChanged="ListView_SelectionChanged">
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <Grid Padding="12">
