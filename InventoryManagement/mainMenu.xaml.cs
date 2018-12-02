@@ -68,5 +68,18 @@ namespace InventoryManagement
             // stackPanel1.Children.Add(itemListView);
 
         }
+
+        private void w1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListView l1 = sender as ListView;
+            string selected = l1.SelectedItem.ToString();
+            //MessageDialog dlg = new MessageDialog("selected color: " + selected);
+
+        }
+
+        private void AddItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(addAssetsPage));
+        }
     }
 }
