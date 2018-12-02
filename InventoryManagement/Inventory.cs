@@ -85,6 +85,4 @@ namespace InventoryManagement
             return s;
         }
     }
-
-   
 }

@@ -29,7 +29,7 @@ namespace InventoryManagement
     {
         Inventory i1 = new Inventory();
         public ObservableCollection<Asset> listItems { get; } = new ObservableCollection<Asset>();
-        //public ListView itemListView = new ListView();
+        public ListView itemListView = new ListView();
 
         public mainMenu()
         {
@@ -91,6 +91,11 @@ namespace InventoryManagement
 
         }
 
+        /// <summary>
+        /// Click opens add Assets Page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddItemButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(addAssetsPage));

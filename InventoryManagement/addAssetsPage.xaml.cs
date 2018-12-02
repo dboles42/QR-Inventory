@@ -36,5 +36,15 @@ namespace InventoryManagement
         {
             this.Frame.Navigate(typeof(mainMenu));
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
