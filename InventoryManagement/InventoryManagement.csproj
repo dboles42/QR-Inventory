@@ -100,6 +100,9 @@
       <DependentUpon>BarCodeScanner.xaml</DependentUpon>
     </Compile>
     <Compile Include="Inventory.cs" />
+    <Compile Include="mainMenu.xaml.cs">
+      <DependentUpon>mainMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="BarCodeScanner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="mainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
