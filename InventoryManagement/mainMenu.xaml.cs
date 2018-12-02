@@ -39,11 +39,6 @@ namespace InventoryManagement
             i1.AddAsset("Amack's phone", "Probably really good", 7000.1, 444, 1234, false);
         }
 
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         /// <summary>
         /// simple button that takes user to first page if needed
         /// </summary>
@@ -80,20 +75,18 @@ namespace InventoryManagement
             }
 
 
-            itemListView.ItemsSource = listItems;
+            //itemListView.ItemsSource = listItems;
         }
 
-        private void w1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListView l1 = sender as ListView;
-            string selected = l1.SelectedItem.ToString();
-            //MessageDialog dlg = new MessageDialog("selected color: " + selected);
-
-        }
 
         private void AddItemButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(addAssetsPage));
+        }
+
+        private void ClearAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            i1.ClearInventory();
         }
     }
 }
