@@ -29,6 +29,7 @@ namespace InventoryManagement
     {
         Inventory i1 = new Inventory();
         public ObservableCollection<Asset> listItems { get; } = new ObservableCollection<Asset>();
+        //public ListView itemListView = new ListView();
 
         public mainMenu()
         {
@@ -62,24 +63,24 @@ namespace InventoryManagement
             {
                 listItems.Add(A);
             }
-
+            
             
             itemListView.ItemsSource = listItems;
             // stackPanel1.Children.Add(itemListView);
 
         }
 
-        private void w1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListView l1 = sender as ListView;
-            string selected = l1.SelectedItem.ToString();
-            //MessageDialog dlg = new MessageDialog("selected color: " + selected);
+            
+            // GOTO: 
+            foreach (Asset A in i1.listOfAssets)
+            {
+                listItems.Add(A);
+            }
 
-        }
 
-        private void AddItemButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(addAssetsPage));
+            itemListView.ItemsSource = listItems;
         }
     }
 }

@@ -16,9 +16,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 
-
-
-
 namespace InventoryManagement
 {
     /// <summary>
