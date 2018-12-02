@@ -33,6 +33,7 @@ using System.IO;
 using Windows.Storage.Pickers;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Collections.Generic;
+using AssetObj;
 
 namespace InventoryManagement
 {

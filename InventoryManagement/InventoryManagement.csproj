@@ -98,7 +98,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Asset.cs" />
     <Compile Include="BarCodeScanner.xaml.cs">
       <DependentUpon>BarCodeScanner.xaml</DependentUpon>
     </Compile>
@@ -156,12 +155,25 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.9</Version>
     </PackageReference>
+    <PackageReference Include="SQLitePCLRaw.bundle_winsqlite3">
+      <Version>1.1.8</Version>
+    </PackageReference>
     <PackageReference Include="WriteableBitmapEx">
       <Version>1.5.1</Version>
     </PackageReference>
     <PackageReference Include="ZXing.Net">
       <Version>0.16.4</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AssetObj\AssetObj.csproj">
+      <Project>{eee02231-3dbe-4eda-b9c5-9d2716c0572c}</Project>
+      <Name>AssetObj</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessLibrary\DataAccessLibrary.csproj">
+      <Project>{526a3efb-e6f7-4523-a836-3c48e3c171a3}</Project>
+      <Name>DataAccessLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
