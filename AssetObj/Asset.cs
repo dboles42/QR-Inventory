@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InventoryManagement
+namespace AssetObj
 {
     /// <summary>
     /// Class for assets 
@@ -13,7 +13,7 @@ namespace InventoryManagement
         public double Price { get; set; }
         public int ModelNumber { get; set; }
         public int SerialNumber { get; set; }
-        public bool CheckIn { get; set; }       
+        public bool CheckIn { get; set; }
 
         /// <summary>
         /// Default constructor that initializes a new instance of the class.
@@ -22,7 +22,7 @@ namespace InventoryManagement
         {
             this.Name = "Empty";
             this.Description = "Empty";
-            this.IDnumber = (Guid.NewGuid().ToString());
+            this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_");
             this.Price = 0;
             this.ModelNumber = 0;
             this.SerialNumber = 0;
@@ -41,7 +41,7 @@ namespace InventoryManagement
         {
             this.Name = Name;
             this.Description = Description;
-            this.IDnumber = Guid.NewGuid().ToString(); 
+            this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_"); // The char "-" is an escape sequence in SQL and not a char so it bugs the query "_" is a char wildcard
             this.Price = Price;
             this.ModelNumber = ModelNumber;
             this.SerialNumber = SerialNumber;
@@ -82,6 +82,6 @@ namespace InventoryManagement
             return $"name: {this.Name}\nDescription: {this.Description}\nID number: {this.IDnumber}\nPrice: {this.Price}\n" +
                 $"Model Number: {this.ModelNumber}\nSerial Number: {this.SerialNumber}\nCheck In: {this.CheckIn}\n";
         }
-        
+
     }
 }
