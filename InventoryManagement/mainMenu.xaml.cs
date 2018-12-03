@@ -65,5 +65,10 @@ namespace InventoryManagement
         {
             this.Frame.Navigate(typeof(addAssetsPage));
         }
+
+        private void InventoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
