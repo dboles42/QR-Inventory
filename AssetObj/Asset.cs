@@ -60,7 +60,7 @@ namespace AssetObj
                 throw new ArgumentException("The object passed is invalid");
             Asset that = (Asset)obj;                //Cast the object as an Asset
             //Compare the two ID numbers of the two assets
-            return string.Compare(this.IDnumber, that.IDnumber, StringComparison.Ordinal);
+            return string.Compare(this.Name, that.Name, StringComparison.Ordinal);
         }
 
         /// <summary>

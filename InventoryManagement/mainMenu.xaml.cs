@@ -79,8 +79,7 @@ namespace InventoryManagement
             i1.RemoveAsset(item);
             InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
         }
-
-        private void ClearAllButtonClick(object sender, RoutedEventArgs e)
+        private void RemoveAllButtonClick(object sender, RoutedEventArgs e)
         {
             i1.ClearInventory();
             InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
