@@ -22,7 +22,7 @@ namespace AssetObj
         {
             this.Name = "Empty";
             this.Description = "Empty";
-            this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_");
+            this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_"); // The char "-" is an escape sequence in SQL and not just a char so it bugs the query "_" is a char wildcard
             this.Price = 0;
             this.ModelNumber = 0;
             this.SerialNumber = 0;
@@ -41,7 +41,7 @@ namespace AssetObj
         {
             this.Name = Name;
             this.Description = Description;
-            this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_"); // The char "-" is an escape sequence in SQL and not a char so it bugs the query "_" is a char wildcard
+            this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_"); // The char "-" is an escape sequence in SQL and not just a char so it bugs the query "_" is a char wildcard
             this.Price = Price;
             this.ModelNumber = ModelNumber;
             this.SerialNumber = SerialNumber;

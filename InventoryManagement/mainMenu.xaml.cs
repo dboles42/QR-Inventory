@@ -35,26 +35,20 @@ namespace InventoryManagement
         public mainMenu()
         {
             this.InitializeComponent();
-            i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, 22, true);
-            i1.AddAsset("Emilio's phone", "Samsung", 4, 500, 33, true);
-            i1.AddAsset("Amack's phone", "iPhone 2", 4, 809, 66, true);
-            //Asset asset1 = new Asset("Omar's phone", "iPhone 7s", a, 700, 22, true);
-            //InsertIntoTable(asset1);
-            //Asset asset2 = new Asset("Emilio's phone", "Samsung", a, 500, 33, true);
-            //InsertIntoTable(asset2);
-            //Asset asset3 = new Asset("David's phone", "Nokia", a, 250, 44, true);
-            //InsertIntoTable(asset3);
-            //Asset asset4 = new Asset("Chris's phone", "Pixel 2", a, 707, 55, true);
-            //InsertIntoTable(asset4);
-            //Asset asset5 = new Asset("Amack's phone", "iPhone 2", a, 809, 66, true);
-            //InsertIntoTable(asset5)
+            //i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, 22, true); //test code
+            //i1.AddAsset("Emilio's phone", "Samsung", 4, 500, 33, true); //test code
+            //i1.AddAsset("Amack's phone", "iPhone 2", 4, 809, 66, true); //test code
+            //DataAccess.InsertIntoTable(i1.listOfAssets);                //test code
+            //InventoryList.ItemsSource = DataAccess.RetriveAllAssets();  //test code
             InventoryList.ItemsSource = i1.RetriveAllAssets();
         }
 
+        
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
+            //What's this?
         }
+        
 
         /// <summary>
         /// simple button that takes user to first page if needed
@@ -70,7 +64,7 @@ namespace InventoryManagement
         {
             ListView l1 = sender as ListView;
             string selected = l1.SelectedItem.ToString();
-            //MessageDialog dlg = new MessageDialog("selected color: " + selected);
+            //MessageDialog dlg = new MessageDialog("selected color: " + selected); //do we need this?
 
         }
 
@@ -78,16 +72,41 @@ namespace InventoryManagement
         {
             this.Frame.Navigate(typeof(addAssetsPage));
         }
+
         private void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
             Asset item = (Asset) InventoryList.SelectedItem;
             i1.RemoveAsset(item);
             InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
         }
+
         private void ClearAllButtonClick(object sender, RoutedEventArgs e)
         {
             i1.ClearInventory();
             InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+        }
+
+        /// <summary>
+        /// Saves the database with the inventory shown on the mainMenu list and Exits the app
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataAccess.RemoveAllRows();
+            DataAccess.InsertIntoTable(i1.listOfAssets);
+            Application.Current.Exit();
+        }
+
+        /// <summary>
+        /// Updates the database with the inventory that is seen on the mainMenu scroll list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataAccess.RemoveAllRows();
+            DataAccess.InsertIntoTable(i1.listOfAssets);
         }
     }
 }

@@ -6,8 +6,14 @@ using AssetObj;
 
 namespace DataAccessLibrary
 {
+    /// <summary>
+    /// Database class
+    /// </summary>
     public static class DataAccess
     {
+        /// <summary>
+        /// Initializes the database and creates AssetsInv table if the table does not exist
+        /// </summary>
         public static void InitializeDatabase()
         {
             using (SqliteConnection DBase =
@@ -31,38 +37,102 @@ namespace DataAccessLibrary
                 DBase.Close();
             }
         }
-
-        public static void InsertIntoTable(Asset asset)
+        /// <summary>
+        /// Inserts a list of Assets into the AssetsInv table of the database
+        /// </summary>
+        /// <param name="AssetList"></param>
+        public static void InsertIntoTable(List<Asset> AssetList)
         {
             using (SqliteConnection DBase =
                 new SqliteConnection("Filename=InventoryDB.db"))
             {
                 DBase.Open();
 
+                foreach (Asset currAsset in AssetList)
+                {
+                    SqliteCommand insertCommand = new SqliteCommand();
+                    insertCommand.Connection = DBase;
+
+                    insertCommand.CommandText = $"INSERT INTO AssetsInv VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
+                                                                               "@Price, @ModelNumber, @SerialNumber);";
+
+                    insertCommand.Parameters.AddWithValue("@Name", currAsset.Name);
+                    insertCommand.Parameters.AddWithValue("@Description", currAsset.Description);
+                    insertCommand.Parameters.AddWithValue("@IDnumber", currAsset.IDnumber);
+                    insertCommand.Parameters.AddWithValue("@CheckIn", currAsset.CheckIn);
+                    insertCommand.Parameters.AddWithValue("@Price", currAsset.Price);
+                    insertCommand.Parameters.AddWithValue("@ModelNumber", currAsset.ModelNumber);
+                    insertCommand.Parameters.AddWithValue("@SerialNumber", currAsset.SerialNumber);
+
+                    insertCommand.ExecuteReader();
+                }
+
+                DBase.Close();
+            }
+        }
+
+        /// <summary>
+        /// Retrieves all the contents of a table as a list of Assets
+        /// </summary>
+        /// <returns></returns>
+        public static List<Asset> listOfAssets()    
+        {
+            List<Asset> listOfAssets = new List<Asset>();
+            using (SqliteConnection DBase =
+                    new SqliteConnection("Filename=InventoryDB.db"))
+            {
+                DBase.Open();
+
+                SqliteCommand selectCommand = new SqliteCommand("SELECT * from AssetsInv", DBase); //SQL query
+
+                SqliteDataReader query = selectCommand.ExecuteReader();
+
+                //Reads All rows in the AssetsInv table 
+                while (query.Read())
+                {
+                    Asset temp = new Asset();
+                    temp.Name = query.GetString(0);
+                    temp.Description = query.GetString(1);
+                    temp.IDnumber = query.GetString(2);
+                    temp.Price = query.GetDouble(3);
+                    temp.ModelNumber = query.GetInt32(4);
+                    temp.SerialNumber = query.GetInt32(5);
+                    temp.CheckIn = query.GetBoolean(6);
+
+                    listOfAssets.Add(temp);
+                }
+
+                DBase.Close();
+            }
+            return listOfAssets;
+        }
+        /// <summary>
+        /// This method removes all rows/contents of the AssetsInv table in the Database
+        /// </summary>
+        public static void RemoveAllRows()
+        {
+            using (SqliteConnection DBase =
+                   new SqliteConnection("Filename=InventoryDB.db"))
+            {
+                DBase.Open();
+
                 SqliteCommand insertCommand = new SqliteCommand();
                 insertCommand.Connection = DBase;
 
-                insertCommand.CommandText = $"INSERT INTO AssetsInv VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
-                                                                           "@Price, @ModelNumber, @SerialNumber);";
-
-                insertCommand.Parameters.AddWithValue("@Name", asset.Name);
-                insertCommand.Parameters.AddWithValue("@Description", asset.Description);
-                insertCommand.Parameters.AddWithValue("@IDnumber", asset.IDnumber);
-                insertCommand.Parameters.AddWithValue("@CheckIn", asset.CheckIn);
-                insertCommand.Parameters.AddWithValue("@Price", asset.Price);
-                insertCommand.Parameters.AddWithValue("@ModelNumber", asset.ModelNumber);
-                insertCommand.Parameters.AddWithValue("@SerialNumber", asset.SerialNumber);
-
+                insertCommand.CommandText = $"DELETE FROM AssetsInv;"; //SQL Query
                 insertCommand.ExecuteReader();
 
                 DBase.Close();
             }
         }
 
+        /*
+        DO NOT USE!!! REVISED DESIGN STATES WE UPDATE THE DATABASE WHEN WE WANT AND NOT CONCURRENTLY. METHODS NOT NEEDED SO UNUSED CODE.
+        DO NOT ERASE WORK THAT I DID. THANKS.
         public static void RemoveWithAsset(Asset asset)
         {
             using (SqliteConnection DBase =
-                   new SqliteConnection("Filename=InventoryDB.db"))
+                    new SqliteConnection("Filename=InventoryDB.db"))
             {
                 DBase.Open();
                 SqliteCommand RemoveAssetCommand = new SqliteCommand();
@@ -93,11 +163,13 @@ namespace DataAccessLibrary
                 DBase.Close();
             }
         }
-        public static List<Asset> listOfAssets()    
+
+        public static ObservableCollection<Asset> RetriveAllAssets()
         {
-            List<Asset> listOfAssets = new List<Asset>();
+            ObservableCollection<Asset> entries = new ObservableCollection<Asset>();
+
             using (SqliteConnection DBase =
-                    new SqliteConnection("Filename=InventoryDB.db"))
+                new SqliteConnection("Filename=InventoryDB.db"))
             {
                 DBase.Open();
 
@@ -117,31 +189,14 @@ namespace DataAccessLibrary
                     temp.SerialNumber = query.GetInt32(5);
                     temp.CheckIn = query.GetBoolean(6);
 
-                    listOfAssets.Add(temp);
+                    entries.Add(temp);
                 }
 
                 DBase.Close();
             }
-            return listOfAssets;
+
+            return entries;
         }
-
-        
-
-        public static void RemoveAllRows()
-        {
-            using (SqliteConnection DBase =
-                   new SqliteConnection("Filename=InventoryDB.db"))
-            {
-                DBase.Open();
-
-                SqliteCommand insertCommand = new SqliteCommand();
-                insertCommand.Connection = DBase;
-
-                insertCommand.CommandText = $"DELETE FROM AssetsInv;";
-                insertCommand.ExecuteReader();
-
-                DBase.Close();
-            }
-        }
+        */
     }
 }
