@@ -35,7 +35,20 @@ namespace InventoryManagement
         public mainMenu()
         {
             this.InitializeComponent();
-            InventoryList.ItemsSource = DataAccess.RetriveAllAssets();
+            i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, 22, true);
+            i1.AddAsset("Emilio's phone", "Samsung", 4, 500, 33, true);
+            i1.AddAsset("Amack's phone", "iPhone 2", 4, 809, 66, true);
+            //Asset asset1 = new Asset("Omar's phone", "iPhone 7s", a, 700, 22, true);
+            //InsertIntoTable(asset1);
+            //Asset asset2 = new Asset("Emilio's phone", "Samsung", a, 500, 33, true);
+            //InsertIntoTable(asset2);
+            //Asset asset3 = new Asset("David's phone", "Nokia", a, 250, 44, true);
+            //InsertIntoTable(asset3);
+            //Asset asset4 = new Asset("Chris's phone", "Pixel 2", a, 707, 55, true);
+            //InsertIntoTable(asset4);
+            //Asset asset5 = new Asset("Amack's phone", "iPhone 2", a, 809, 66, true);
+            //InsertIntoTable(asset5)
+            InventoryList.ItemsSource = i1.RetriveAllAssets();
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
@@ -61,9 +74,20 @@ namespace InventoryManagement
 
         }
 
-        private void AddItemButton_Click(object sender, RoutedEventArgs e)
+        private void AddItemButtonClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(addAssetsPage));
+        }
+        private void RemoveButtonClick(object sender, RoutedEventArgs e)
+        {
+            Asset item = (Asset) InventoryList.SelectedItem;
+            i1.RemoveAsset(item);
+            InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+        }
+        private void ClearAllButtonClick(object sender, RoutedEventArgs e)
+        {
+            i1.ClearInventory();
+            InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
         }
     }
 }
