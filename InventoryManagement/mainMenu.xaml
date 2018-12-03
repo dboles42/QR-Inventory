@@ -60,7 +60,8 @@
         <TextBlock x:Name="OptionsText" HorizontalAlignment="Left" Height="69" Margin="1207,161,0,0" Text="Options" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" FontSize="36"/>
         <Button x:Name="AddItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="1185,223,0,0" VerticalAlignment="Top" Height="58" Width="176" Click="AddItemButtonClick"/>
         <Button x:Name="RemoveItemButton" Content="Remove Item" HorizontalAlignment="Left" Margin="1187,324,0,0" VerticalAlignment="Top" Height="58" Width="176" Click="RemoveButtonClick"/>
-        <Button x:Name="ClearAllButton" Content="Clearl All" HorizontalAlignment="Left" Margin="1184,427,0,0" VerticalAlignment="Top" Height="58" Width="176" Click="ClearAllButtonClick"/>
+        <Button x:Name="ClearAllButton" Content="Clear All" HorizontalAlignment="Left" Margin="1184,427,0,0" VerticalAlignment="Top" Height="58" Width="176" Click="RemoveAllButtonClick"/>
+
         <StackPanel HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="658" Margin="62,251,0,0"/>
 
     </Grid>

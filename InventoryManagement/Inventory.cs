@@ -19,7 +19,7 @@ namespace InventoryManagement
         public Inventory()
         {
             NumberOfAssets = 0;
-            listOfAssets = DataAccess.listOfAssets();
+            listOfAssets = DataAccess.getList();
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace InventoryManagement
         }
 
         /// <summary>
-        /// Clears the inventory.
+        /// Clears the inventory
         /// </summary>
         public void ClearInventory(){
             listOfAssets.Clear();

@@ -93,7 +93,7 @@ namespace DataAccessLibrary
                 DBase.Close();
             }
         }
-        public static List<Asset> listOfAssets()    
+        public static List<Asset> getList()    
         {
             List<Asset> listOfAssets = new List<Asset>();
             using (SqliteConnection DBase =
