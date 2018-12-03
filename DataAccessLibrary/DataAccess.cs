@@ -74,8 +74,8 @@ namespace DataAccessLibrary
         /// <summary>
         /// Retrieves all the contents of a table as a list of Assets
         /// </summary>
-        /// <returns></returns>
-        public static List<Asset> listOfAssets()    
+        /// <returns>List of Assets in the database</returns>
+        public static List<Asset> getList()    
         {
             List<Asset> listOfAssets = new List<Asset>();
             using (SqliteConnection DBase =
