@@ -124,62 +124,8 @@ namespace DataAccessLibrary
             }
             return listOfAssets;
         }
-        public static ObservableCollection<Asset> RetriveAllAssets()
-        {
-            ObservableCollection<Asset> entries = new ObservableCollection<Asset>();
 
-            using (SqliteConnection DBase =
-                new SqliteConnection("Filename=InventoryDB.db"))
-            {
-                DBase.Open();
-
-                //This gets called every time. add testing code in bewteen ->
-                //Asset asset = new Asset();
-                //RemoveWithAsset(asset); // works
-                //InsertIntoTable(asset); // works
-
-                //double a = 1000.50;
-                //Asset asset1 = new Asset("Omar's phone", "iPhone 7s", a, 700, 22, true);
-                //InsertIntoTable(asset1);
-                //Asset asset2 = new Asset("Emilio's phone", "Samsung", a, 500, 33, true);
-                //InsertIntoTable(asset2);
-                //Asset asset3 = new Asset("David's phone", "Nokia", a, 250, 44, true);
-                //InsertIntoTable(asset3);
-                //Asset asset4 = new Asset("Chris's phone", "Pixel 2", a, 707, 55, true);
-                //InsertIntoTable(asset4);
-                //Asset asset5 = new Asset("Amack's phone", "iPhone 2", a, 809, 66, true);
-                //InsertIntoTable(asset5);
-
-                //List<Asset> ListOfCurr = new List<Asset>();
-                //ListOfCurr = listOfAssets();
-                //RemoveWithIDNum(ListOfCurr[0].IDnumber);
-
-                //RemoveAllRows();
-                // <-
-                SqliteCommand selectCommand = new SqliteCommand
-                    ("SELECT * from AssetsInv", DBase);
-
-                SqliteDataReader query = selectCommand.ExecuteReader();
-
-                while (query.Read())
-                {
-                    Asset temp = new Asset();
-                    temp.Name = query.GetString(0);
-                    temp.Description = query.GetString(1);
-                    temp.IDnumber = query.GetString(2);
-                    temp.Price = query.GetDouble(3);
-                    temp.ModelNumber = query.GetInt32(4);
-                    temp.SerialNumber = query.GetInt32(5);
-                    temp.CheckIn = query.GetBoolean(6);
-
-                    entries.Add(temp);
-                }
-
-                DBase.Close();
-            }
-
-            return entries;
-        }
+        
 
         public static void RemoveAllRows()
         {
