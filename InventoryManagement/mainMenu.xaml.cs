@@ -13,7 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
-using InventoryManagement;
+using AssetObj;
+using DataAccessLibrary;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,10 +35,20 @@ namespace InventoryManagement
         public mainMenu()
         {
             this.InitializeComponent();
-            i1.AddAsset("Omar's phone", "Good phone", 700, 28, 222222, true);
-            i1.AddAsset("David's phone", "Bad phone (it's not an iphone)", 300, 12, 124, true);
-            i1.AddAsset("Amack's phone", "Probably really good", 7000.1, 444, 1234, false);
+            //i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, 22, true); //test code
+            //i1.AddAsset("Emilio's phone", "Samsung", 4, 500, 33, true); //test code
+            //i1.AddAsset("Amack's phone", "iPhone 2", 4, 809, 66, true); //test code
+            //DataAccess.InsertIntoTable(i1.listOfAssets);                //test code
+            //InventoryList.ItemsSource = DataAccess.RetriveAllAssets();  //test code
+            InventoryList.ItemsSource = i1.RetriveAllAssets();
         }
+
+        
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            //What's this?
+        }
+        
 
         /// <summary>
         /// simple button that takes user to first page if needed
@@ -49,44 +60,52 @@ namespace InventoryManagement
             this.Frame.Navigate(typeof(BarCodeScanner));
         }
 
-        private void Lists_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void w1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            ListView itemListView = new ListView();
-            // GOTO: 
-            foreach (Asset A in i1.listOfAssets)
-            {
-                listItems.Add(A);
-            }
-            
-            
-            itemListView.ItemsSource = listItems;
-            // stackPanel1.Children.Add(itemListView);
+            ListView l1 = sender as ListView;
+            string selected = l1.SelectedItem.ToString();
+            //MessageDialog dlg = new MessageDialog("selected color: " + selected); //do we need this?
 
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-            // GOTO: 
-            foreach (Asset A in i1.listOfAssets)
-            {
-                listItems.Add(A);
-            }
-
-
-            //itemListView.ItemsSource = listItems;
-        }
-
-
-        private void AddItemButton_Click(object sender, RoutedEventArgs e)
+        private void AddItemButtonClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(addAssetsPage));
         }
 
-        private void ClearAllButton_Click(object sender, RoutedEventArgs e)
+        private void RemoveButtonClick(object sender, RoutedEventArgs e)
+        {
+            Asset item = (Asset) InventoryList.SelectedItem;
+            i1.RemoveAsset(item);
+            InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+        }
+        private void RemoveAllButtonClick(object sender, RoutedEventArgs e)
         {
             i1.ClearInventory();
+            InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+        }
+
+        /// <summary>
+        /// Saves the database with the inventory shown on the mainMenu list and Exits the app
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataAccess.RemoveAllRows();
+            DataAccess.InsertIntoTable(i1.listOfAssets);
+            Application.Current.Exit();
+        }
+
+        /// <summary>
+        /// Updates the database with the inventory that is seen on the mainMenu scroll list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataAccess.RemoveAllRows();
+            DataAccess.InsertIntoTable(i1.listOfAssets);
         }
     }
 }

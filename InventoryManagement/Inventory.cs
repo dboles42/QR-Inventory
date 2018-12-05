@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using AssetObj;
+using System.Collections.ObjectModel;
+using DataAccessLibrary;
 namespace InventoryManagement
 {
     /// <summary>
@@ -17,6 +19,7 @@ namespace InventoryManagement
         public Inventory()
         {
             NumberOfAssets = 0;
+            listOfAssets = DataAccess.getList();
         }
 
         /// <summary>
@@ -45,13 +48,13 @@ namespace InventoryManagement
         /// Removes an asset from the inventory
         /// </summary>
         /// <param name="index">Index of the asset to be removed</param>
-        public void RemoveAsset(int index){
-            listOfAssets.RemoveAt(index);
+        public void RemoveAsset(Asset A){
+            listOfAssets.Remove(A);
             NumberOfAssets--;
         }
 
         /// <summary>
-        /// Clears the inventory.
+        /// Clears the inventory
         /// </summary>
         public void ClearInventory(){
             listOfAssets.Clear();
@@ -83,6 +86,16 @@ namespace InventoryManagement
                 s += "****************************************\n";
             }
             return s;
+        }
+
+        public ObservableCollection<Asset> RetriveAllAssets()
+        {
+            ObservableCollection<Asset> entries = new ObservableCollection<Asset>();
+            foreach (Asset A in listOfAssets)
+            {
+                entries.Add(A);
+            }
+            return entries;
         }
     }
 
