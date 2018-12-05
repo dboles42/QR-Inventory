@@ -31,6 +31,7 @@ namespace InventoryManagement
         public ObservableCollection<Asset> listItems { get; } = new ObservableCollection<Asset>();
         public ListView itemListView = new ListView();
 
+      
         public mainMenu()
         {
             this.InitializeComponent();
