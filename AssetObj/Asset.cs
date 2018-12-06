@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace InventoryManagement
+namespace AssetObj
 {
     /// <summary>
     /// Class for assets 
     /// </summary>
-    public class Asset : IComparable
+    public class Asset : IComparable <Asset>
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -13,7 +13,7 @@ namespace InventoryManagement
         public double Price { get; set; }
         public int ModelNumber { get; set; }
         public int SerialNumber { get; set; }
-        public bool CheckIn { get; set; }       
+        public bool CheckIn { get; set; }
 
         /// <summary>
         /// Default constructor that initializes a new instance of the class.
@@ -22,7 +22,7 @@ namespace InventoryManagement
         {
             this.Name = "Empty";
             this.Description = "Empty";
-            this.IDnumber = (Guid.NewGuid().ToString());
+            this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_"); // The char "-" is an escape sequence in SQL and not just a char so it bugs the query "_" is a char wildcard
             this.Price = 0;
             this.ModelNumber = 0;
             this.SerialNumber = 0;
@@ -41,7 +41,7 @@ namespace InventoryManagement
         {
             this.Name = Name;
             this.Description = Description;
-            this.IDnumber = Guid.NewGuid().ToString(); 
+            this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_"); // The char "-" is an escape sequence in SQL and not just a char so it bugs the query "_" is a char wildcard
             this.Price = Price;
             this.ModelNumber = ModelNumber;
             this.SerialNumber = SerialNumber;
@@ -54,13 +54,12 @@ namespace InventoryManagement
         /// <returns>Returns 1 if the current assets ID number is greater than the ID number of the asset
         /// being compared to, -1 if less than, and 0 if equal to</returns>
         /// <param name="obj">Object.</param>
-        public int CompareTo(object obj)
+        public int CompareTo(Asset that)
         {
-            if (!(obj is Asset) || obj == null)
+            if (that == null)
                 throw new ArgumentException("The object passed is invalid");
-            Asset that = (Asset)obj;                //Cast the object as an Asset
             //Compare the two ID numbers of the two assets
-            return string.Compare(this.IDnumber, that.IDnumber, StringComparison.Ordinal);
+            return string.Compare(this.Name, that.Name, StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -82,6 +81,5 @@ namespace InventoryManagement
             return $"name: {this.Name}\nDescription: {this.Description}\nID number: {this.IDnumber}\nPrice: {this.Price}\n" +
                 $"Model Number: {this.ModelNumber}\nSerial Number: {this.SerialNumber}\nCheck In: {this.CheckIn}\n";
         }
-        
     }
 }

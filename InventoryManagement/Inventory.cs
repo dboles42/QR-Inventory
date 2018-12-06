@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using AssetObj;
+using System.Collections.ObjectModel;
+using DataAccessLibrary;
 namespace InventoryManagement
 {
     /// <summary>
     /// Class for the inventory
     /// </summary>
-    public class Inventory
+    public class Inventory : IComparable<Inventory>
     {
-        public List<Asset> listOfAssets = new List<Asset>();
+        public List<Asset> listOfAssets { get; set; } = new List<Asset>();
         public int NumberOfAssets { get; set; }
-
         /// <summary>
         /// Default constructor for the inventory class
         /// </summary>
         public Inventory()
         {
             NumberOfAssets = 0;
+            listOfAssets = myDataAccess.getList();
         }
 
         /// <summary>
@@ -45,13 +47,13 @@ namespace InventoryManagement
         /// Removes an asset from the inventory
         /// </summary>
         /// <param name="index">Index of the asset to be removed</param>
-        public void RemoveAsset(int index){
-            listOfAssets.RemoveAt(index);
+        public void RemoveAsset(Asset A){
+            listOfAssets.Remove(A);
             NumberOfAssets--;
         }
 
         /// <summary>
-        /// Clears the inventory.
+        /// Clears the inventory
         /// </summary>
         public void ClearInventory(){
             listOfAssets.Clear();
@@ -71,6 +73,30 @@ namespace InventoryManagement
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="that">The inventory we are comparing with the original</param>
+        /// <returns>Returns 1 if the current inventory has more assets than the other inventory, -1 if it has less, and 0 if they have the
+        /// same number of assets</returns>
+        public int CompareTo(Inventory that)
+        {
+            if (that == null)
+                throw new ArgumentException("The object passed is invalid");
+            //Compare the number of assets each inventory holds
+            return this.NumberOfAssets.CompareTo(that.NumberOfAssets);
+        }
+
+        /// <summary>
+        /// Serves as a hash function for an inventory object.
+        /// </summary>
+        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        /// <summary>
         /// Returns a string that represents the current inventory
         /// </summary>
         /// <returns>A string that represents the current inventory.</returns>
@@ -83,6 +109,20 @@ namespace InventoryManagement
                 s += "****************************************\n";
             }
             return s;
+        }
+
+        /// <summary>
+        /// Retrieves all assets in the inventoryList and places them in an observable collection
+        /// </summary>
+        /// <returns>An observable collection</returns>
+        public ObservableCollection<Asset> RetriveAllAssets()
+        {
+            ObservableCollection<Asset> entries = new ObservableCollection<Asset>();
+            foreach (Asset A in listOfAssets)
+            {
+                entries.Add(A);
+            }
+            return entries;
         }
     }
 }

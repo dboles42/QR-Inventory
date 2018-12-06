@@ -13,37 +13,33 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
-using InventoryManagement;
-
+using AssetObj;
+using DataAccessLibrary;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace InventoryManagement
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class mainMenu : Page
+    public partial class mainMenu : Page
     {
         Inventory i1 = new Inventory();
-        public ObservableCollection<Asset> listItems { get; } = new ObservableCollection<Asset>();
-        public ListView itemListView = new ListView();
-
-      
+        public static Asset CurrentAsset { get; set; }
+        DataAccess DataAccessKey = new DataAccess();
         public mainMenu()
         {
             this.InitializeComponent();
-            i1.AddAsset("Omar's phone", "Good phone", 700, 28, 222222, true);
-            i1.AddAsset("David's phone", "Bad phone (it's not an iphone)", 300, 12, 124, true);
-            i1.AddAsset("Amack's phone", "Probably really good", 7000.1, 444, 1234, false);
+            i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, 22, true); //test code
+            i1.AddAsset("Emilio's phone", "Samsung", 4, 500, 33, true); //test code
+            i1.AddAsset("Amack's phone", "iPhone 8", 4, 809, 66, true); //test code
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);                //test code
+            InventoryList.ItemsSource = i1.RetriveAllAssets();
         }
 
+        
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
+            //What's this?
         }
+        
 
         /// <summary>
         /// simple button that takes user to first page if needed
@@ -55,51 +51,60 @@ namespace InventoryManagement
             this.Frame.Navigate(typeof(BarCodeScanner));
         }
 
-        private void Lists_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AddItemButtonClick(object sender, RoutedEventArgs e)
         {
-
-            ListView itemListView = new ListView();
-            // GOTO: 
-            foreach (Asset A in i1.listOfAssets)
-            {
-                listItems.Add(A);
-            }
-            
-            
-            itemListView.ItemsSource = listItems;
-            // stackPanel1.Children.Add(itemListView);
-
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            this.Frame.Navigate(typeof(addAssetsPage));
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
-            
-            // GOTO: 
-            foreach (Asset A in i1.listOfAssets)
-            {
-                listItems.Add(A);
-            }
-
-
-            itemListView.ItemsSource = listItems;
+            Asset item = (Asset) InventoryList.SelectedItem;
+            i1.RemoveAsset(item);
+            InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
         }
-
-        private void w1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void RemoveAllButtonClick(object sender, RoutedEventArgs e)
         {
-            ListView l1 = sender as ListView;
-            string selected = l1.SelectedItem.ToString();
-            //MessageDialog dlg = new MessageDialog("selected color: " + selected);
-
+            i1.ClearInventory();
+            InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
         }
 
         /// <summary>
-        /// Click opens add Assets Page
+        /// Saves the database with the inventory shown on the mainMenu list and Exits the app
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddItemButton_Click(object sender, RoutedEventArgs e)
+        private void ExitButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(addAssetsPage));
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            Application.Current.Exit();
+        }
+
+        /// <summary>
+        /// Updates the database with the inventory that is seen on the mainMenu scroll list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+        }
+
+        private void ScanButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            CurrentAsset = (Asset)InventoryList.SelectedItem;
+        }
+
+        private void PrintButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            CurrentAsset = (Asset)InventoryList.SelectedItem;
         }
     }
 }
