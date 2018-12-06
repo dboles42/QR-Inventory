@@ -26,7 +26,7 @@ namespace InventoryManagement
         private string descripInput { get; set; }
         private double priceInput { get; set; }
         private int modelNumInput { get; set; }
-        private int serialNumInput { get; set; }
+        private string serialNumInput { get; set; }
 
 
         Inventory i1 = new Inventory();
@@ -57,6 +57,7 @@ namespace InventoryManagement
             i1.AddAsset(nameInput, descripInput, priceInput, modelNumInput, serialNumInput);
             DataAccessKey.RemoveAllRows();
             DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            Frame.Navigate(typeof(mainMenu));
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void SerialnumText_TextChanged(object sender, TextChangedEventArgs e)
         {
-           serialNumInput = int.Parse(serialnumText.Text);
+           serialNumInput = serialnumText.Text;
         }
 
     }
