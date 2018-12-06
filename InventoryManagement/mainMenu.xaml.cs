@@ -105,6 +105,7 @@ namespace InventoryManagement
             DataAccessKey.RemoveAllRows();
             DataAccessKey.InsertIntoTable(i1.listOfAssets);
             CurrentAsset = (Asset)InventoryList.SelectedItem;
+            this.Frame.Navigate(typeof(BarcodeGenerator));
         }
     }
 }
