@@ -32,8 +32,8 @@ namespace InventoryManagement
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-
-            DataAccess.InitializeDatabase();
+            DataAccess DataAccessKey = new DataAccess();
+            DataAccessKey.InitializeDatabase();
         }
 
         /// <summary>

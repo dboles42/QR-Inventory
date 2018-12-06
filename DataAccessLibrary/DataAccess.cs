@@ -22,14 +22,14 @@ namespace DataAccessLibrary
                 DBase.Open();
 
                 String CreateTableQuery = "CREATE TABLE IF NOT " +
-                    "EXISTS AssetsInv (" +
+                    "EXISTS AssetsInventory (" +
                     "AssetName VARCHAR(255)," +
                     "Description VARCHAR(255)," +
                     "IDNumber VARCHAR(255)," +
                     "CheckIn INT NOT NULL," +
                     "Price FLOAT NOT NULL," +
                     "ModelNumber INT NOT NULL," +
-                    "SerialNumber INT NOT NULL)";
+                    "SerialNumber VARCHAR(255))";
 
                 SqliteCommand createTable = new SqliteCommand(CreateTableQuery, DBase);
 
@@ -53,7 +53,7 @@ namespace DataAccessLibrary
                     SqliteCommand insertCommand = new SqliteCommand();
                     insertCommand.Connection = DBase;
 
-                    insertCommand.CommandText = $"INSERT INTO AssetsInv VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
+                    insertCommand.CommandText = $"INSERT INTO AssetsInventory VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
                                                                                "@Price, @ModelNumber, @SerialNumber);";
 
                     insertCommand.Parameters.AddWithValue("@Name", currAsset.Name);
@@ -83,7 +83,7 @@ namespace DataAccessLibrary
             {
                 DBase.Open();
 
-                SqliteCommand selectCommand = new SqliteCommand("SELECT * from AssetsInv", DBase); //SQL query
+                SqliteCommand selectCommand = new SqliteCommand("SELECT * from AssetsInventory", DBase); //SQL query
 
                 SqliteDataReader query = selectCommand.ExecuteReader();
 
@@ -96,7 +96,7 @@ namespace DataAccessLibrary
                     temp.IDnumber = query.GetString(2);
                     temp.Price = query.GetDouble(3);
                     temp.ModelNumber = query.GetInt32(4);
-                    temp.SerialNumber = query.GetInt32(5);
+                    temp.SerialNumber = query.GetString(5);
                     temp.CheckIn = query.GetBoolean(6);
 
                     listOfAssets.Add(temp);
@@ -119,7 +119,7 @@ namespace DataAccessLibrary
                 SqliteCommand insertCommand = new SqliteCommand();
                 insertCommand.Connection = DBase;
 
-                insertCommand.CommandText = $"DELETE FROM AssetsInv;"; //SQL Query
+                insertCommand.CommandText = $"DELETE FROM AssetsInventory;"; //SQL Query
                 insertCommand.ExecuteReader();
 
                 DBase.Close();

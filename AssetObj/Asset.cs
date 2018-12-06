@@ -12,7 +12,7 @@ namespace AssetObj
         public string IDnumber { get; set; }
         public double Price { get; set; }
         public int ModelNumber { get; set; }
-        public int SerialNumber { get; set; }
+        public string SerialNumber { get; set; }
         public bool CheckIn { get; set; }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace AssetObj
             this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_"); // The char "-" is an escape sequence in SQL and not just a char so it bugs the query "_" is a char wildcard
             this.Price = 0;
             this.ModelNumber = 0;
-            this.SerialNumber = 0;
+            this.SerialNumber = "Empty";
             this.CheckIn = false;
         }
 
@@ -37,7 +37,7 @@ namespace AssetObj
         /// <param name="ModelNumber">Model number.</param>
         /// <param name="SerialNumber">Serial number.</param>
         /// <param name="CheckIn">If set to <c>true</c> check in.</param>
-        public Asset(string Name, string Description, double Price, int ModelNumber, int SerialNumber, bool CheckIn)
+        public Asset(string Name, string Description, double Price, int ModelNumber, string SerialNumber, bool CheckIn)
         {
             this.Name = Name;
             this.Description = Description;

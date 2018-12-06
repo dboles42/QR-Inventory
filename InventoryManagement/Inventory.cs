@@ -12,13 +12,14 @@ namespace InventoryManagement
     {
         public List<Asset> listOfAssets { get; set; } = new List<Asset>();
         public int NumberOfAssets { get; set; }
+        DataAccess DataAccessKey = new DataAccess();
         /// <summary>
         /// Default constructor for the inventory class
         /// </summary>
         public Inventory()
         {
             NumberOfAssets = 0;
-            listOfAssets = myDataAccess.getList();
+            listOfAssets = DataAccessKey.getList();
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace InventoryManagement
         /// <param name="ModelNumber">Model number.</param>
         /// <param name="SerialNumber">Serial number.</param>
         /// <param name="CheckIn">If set to <c>true</c> check in.</param>
-        public void AddAsset(string Name = "None", string Description = "None", double Price = 0, int ModelNumber = 0, int SerialNumber = 0, bool CheckIn = false){
+        public void AddAsset(string Name = "None", string Description = "None", double Price = 0, int ModelNumber = 0, string SerialNumber = "none", bool CheckIn = false){
             listOfAssets.Add(new Asset(Name, Description, Price, ModelNumber, SerialNumber, CheckIn));
             listOfAssets.Sort();
             NumberOfAssets++;
@@ -109,6 +110,16 @@ namespace InventoryManagement
                 s += "****************************************\n";
             }
             return s;
+        }
+
+        /// <summary>
+        /// Finds an in the list asset with a specific ID
+        /// </summary>
+        /// <param name="assetID"></param>
+        /// <returns>Returns the asset with the requested ID</returns>
+        public Asset FindAsset(string assetID)
+        {
+            return listOfAssets.Find(item => item.IDnumber == assetID);
         }
 
         /// <summary>
