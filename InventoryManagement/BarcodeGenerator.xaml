@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="InventoryManagement.BarcodeGenerator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InventoryManagement"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Button x:Name="btnPrint" Click="btnPrint_Click" Content=" Print QR Code"    Height="150" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.061,0.236" Width="206" Margin="87,80,0,0">
+        </Button>
+        <Image HorizontalAlignment="Left" Height="250" Margin="581,155,0,0" VerticalAlignment="Top" Width="241"/>
+
+    </Grid>
+</Page>
