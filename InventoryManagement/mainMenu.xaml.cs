@@ -23,14 +23,14 @@ namespace InventoryManagement
     {
         Inventory i1 = new Inventory();
         public static Asset CurrentAsset { get; set; }
-
+        DataAccess DataAccessKey = new DataAccess();
         public mainMenu()
         {
             this.InitializeComponent();
             i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, 22, true); //test code
             i1.AddAsset("Emilio's phone", "Samsung", 4, 500, 33, true); //test code
             i1.AddAsset("Amack's phone", "iPhone 8", 4, 809, 66, true); //test code
-            DataAccess.InsertIntoTable(i1.listOfAssets);                //test code
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);                //test code
             InventoryList.ItemsSource = i1.RetriveAllAssets();
         }
 
@@ -53,6 +53,8 @@ namespace InventoryManagement
 
         private void AddItemButtonClick(object sender, RoutedEventArgs e)
         {
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
             this.Frame.Navigate(typeof(addAssetsPage));
         }
 
@@ -75,8 +77,8 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void ExitButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccess.RemoveAllRows();
-            DataAccess.InsertIntoTable(i1.listOfAssets);
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
             Application.Current.Exit();
         }
 
@@ -87,21 +89,21 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void UpdateButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccess.RemoveAllRows();
-            DataAccess.InsertIntoTable(i1.listOfAssets);
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
         }
 
         private void ScanButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccess.RemoveAllRows();
-            DataAccess.InsertIntoTable(i1.listOfAssets);
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
             CurrentAsset = (Asset)InventoryList.SelectedItem;
         }
 
         private void PrintButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccess.RemoveAllRows();
-            DataAccess.InsertIntoTable(i1.listOfAssets);
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
             CurrentAsset = (Asset)InventoryList.SelectedItem;
         }
     }
