@@ -10,9 +10,8 @@ namespace InventoryManagement
     /// </summary>
     public class Inventory
     {
-        public List<Asset> listOfAssets = new List<Asset>();
+        public List<Asset> listOfAssets { get; set; } = new List<Asset>();
         public int NumberOfAssets { get; set; }
-
         /// <summary>
         /// Default constructor for the inventory class
         /// </summary>
