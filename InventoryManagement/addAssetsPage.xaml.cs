@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using AssetObj;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace InventoryManagement
@@ -22,6 +22,8 @@ namespace InventoryManagement
     /// </summary>
     public sealed partial class addAssetsPage : Page
     {
+        Inventory i1 = new Inventory();
+
         public addAssetsPage()
         {
             this.InitializeComponent();
