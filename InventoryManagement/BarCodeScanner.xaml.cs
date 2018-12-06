@@ -184,7 +184,7 @@ namespace InventoryManagement
         public async void btnPrint_Click(object sender, RoutedEventArgs e)
         {
             //QR code conversion from jepg and return string.
-            Asset A2 = new Asset("David's phone", "Bad phone (it's not an iphone)", 300, 12, 124, true);
+            Asset A2 = new Asset("David's phone", "Bad phone (it's not an iphone)", 300, 12, "124", true);
 
             ZXing.IBarcodeWriter writer = new ZXing.BarcodeWriter
             {
