@@ -9,12 +9,12 @@ namespace DataAccessLibrary
     /// <summary>
     /// Database class
     /// </summary>
-    public static class DataAccess
+    public class DataAccess
     {
         /// <summary>
         /// Initializes the database and creates AssetsInv table if the table does not exist
         /// </summary>
-        public static void InitializeDatabase()
+        public void InitializeDatabase()
         {
             using (SqliteConnection DBase =
                 new SqliteConnection("Filename=InventoryDB.db"))
@@ -41,7 +41,7 @@ namespace DataAccessLibrary
         /// Inserts a list of Assets into the AssetsInv table of the database
         /// </summary>
         /// <param name="AssetList"></param>
-        public static void InsertIntoTable(List<Asset> AssetList)
+        public void InsertIntoTable(List<Asset> AssetList)
         {
             using (SqliteConnection DBase =
                 new SqliteConnection("Filename=InventoryDB.db"))
@@ -75,7 +75,7 @@ namespace DataAccessLibrary
         /// Retrieves all the contents of a table as a list of Assets
         /// </summary>
         /// <returns>List of Assets in the database</returns>
-        public static List<Asset> getList()    
+        public List<Asset> getList()    
         {
             List<Asset> listOfAssets = new List<Asset>();
             using (SqliteConnection DBase =
@@ -109,7 +109,7 @@ namespace DataAccessLibrary
         /// <summary>
         /// This method removes all rows/contents of the AssetsInv table in the Database
         /// </summary>
-        public static void RemoveAllRows()
+        public void RemoveAllRows()
         {
             using (SqliteConnection DBase =
                    new SqliteConnection("Filename=InventoryDB.db"))

@@ -5,7 +5,7 @@ namespace AssetObj
     /// <summary>
     /// Class for assets 
     /// </summary>
-    public class Asset : IComparable
+    public class Asset : IComparable <Asset>
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -54,11 +54,10 @@ namespace AssetObj
         /// <returns>Returns 1 if the current assets ID number is greater than the ID number of the asset
         /// being compared to, -1 if less than, and 0 if equal to</returns>
         /// <param name="obj">Object.</param>
-        public int CompareTo(object obj)
+        public int CompareTo(Asset that)
         {
-            if (!(obj is Asset) || obj == null)
+            if (that == null)
                 throw new ArgumentException("The object passed is invalid");
-            Asset that = (Asset)obj;                //Cast the object as an Asset
             //Compare the two ID numbers of the two assets
             return string.Compare(this.Name, that.Name, StringComparison.Ordinal);
         }
@@ -82,6 +81,5 @@ namespace AssetObj
             return $"name: {this.Name}\nDescription: {this.Description}\nID number: {this.IDnumber}\nPrice: {this.Price}\n" +
                 $"Model Number: {this.ModelNumber}\nSerial Number: {this.SerialNumber}\nCheck In: {this.CheckIn}\n";
         }
-
     }
 }
