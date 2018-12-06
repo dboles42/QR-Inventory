@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AssetObj;
 using System.Collections.ObjectModel;
 using DataAccessLibrary;
+
 namespace InventoryManagement
 {
     /// <summary>
@@ -12,13 +13,15 @@ namespace InventoryManagement
     {
         public List<Asset> listOfAssets { get; set; } = new List<Asset>();
         public int NumberOfAssets { get; set; }
+        DataAccess DataAccessKey = new DataAccess();
+
         /// <summary>
         /// Default constructor for the inventory class
         /// </summary>
         public Inventory()
         {
             NumberOfAssets = 0;
-            listOfAssets = myDataAccess.getList();
+            listOfAssets = DataAccessKey.getList();
         }
 
         /// <summary>

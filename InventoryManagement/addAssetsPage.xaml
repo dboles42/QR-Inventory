@@ -21,14 +21,14 @@
             <TextBlock Text="Serial Number" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="58" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Height="461" Margin="676,185,0,0" VerticalAlignment="Top" Width="652">
-            <TextBox x:Name="nameTextBox" Text="" HorizontalAlignment="Stretch" Height="56" Margin="0,0,0,0" VerticalAlignment="Stretch" SelectionChanged="Name_SelectionChanged"/>
-            <TextBox x:Name="descriptionText" Text="" HorizontalAlignment="Stretch" Height="61" Margin="0,0,0,0" VerticalAlignment="Stretch" SelectionChanged="DescriptionText_SelectionChanged"/>
+            <TextBox x:Name="nameTextBox" Text="" HorizontalAlignment="Stretch" Height="56" Margin="0,0,0,0" VerticalAlignment="Stretch" TextChanged="NameTextBox_TextChanged"/>
+            <TextBox x:Name="descriptionText" Text="" HorizontalAlignment="Stretch" Height="61" Margin="0,0,0,0" VerticalAlignment="Stretch" TextChanged="DescriptionText_TextChanged"/>
             <TextBox x:Name="idnumText" Text="" HorizontalAlignment="Stretch" Height="68" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-            <TextBox x:Name="priceText" Text="" HorizontalAlignment="Stretch" Height="67" Margin="0,0,0,0" VerticalAlignment="Stretch" SelectionChanged="PriceText_SelectionChanged"/>
-            <TextBox x:Name="modelnumText" Text="" HorizontalAlignment="Stretch" Height="68" Margin="0,0,0,0" VerticalAlignment="Stretch" SelectionChanged="ModelNumberText_SelectionChanged"/>
-            <TextBox x:Name="serialnumText" Text="" HorizontalAlignment="Stretch" Height="49" Margin="0,0,0,0" VerticalAlignment="Stretch" SelectionChanged="SerialNumberText_SelectionChanged"/>
+            <TextBox x:Name="priceText" Text="" HorizontalAlignment="Stretch" Height="67" Margin="0,0,0,0" VerticalAlignment="Stretch" TextChanged="PriceText_TextChanged"/>
+            <TextBox x:Name="modelnumText" Text="" HorizontalAlignment="Stretch" Height="68" Margin="0,0,0,0" VerticalAlignment="Stretch" TextChanged="ModelnumText_TextChanged"/>
+            <TextBox x:Name="serialnumText" Text="" HorizontalAlignment="Stretch" Height="49" Margin="0,0,0,0" VerticalAlignment="Stretch" TextChanged="SerialnumText_TextChanged"/>
         </StackPanel>
-        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="315,685,0,0" VerticalAlignment="Top" Height="56" Width="134" Click="BackButton_Clicl"/>
+        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="315,685,0,0" VerticalAlignment="Top" Height="56" Width="134" Click="BackButton_Click"/>
 
     </Grid>
 </Page>
