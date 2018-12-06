@@ -49,7 +49,9 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-           //i1.AddAsset(nameInput, descriptionInput, modelNumInput, serialNumInput);
+            //i1.AddAsset(nameInput, descriptionInput, modelNumInput, serialNumInput);
+            Inventory test = new Inventory();
+            test.AddAsset(nameInput, descriptionInput, modelNumInput, serialNumInput);
         }
 
         /// <summary>
