@@ -122,6 +122,11 @@ namespace InventoryManagement
             return listOfAssets.Find(item => item.IDnumber == assetID);
         }
 
+        public int FindIndex(Asset A)
+        {
+            return listOfAssets.IndexOf(A);
+        }
+
         /// <summary>
         /// Retrieves all assets in the inventoryList and places them in an observable collection
         /// </summary>
