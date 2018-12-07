@@ -34,6 +34,7 @@ using Windows.Storage.Pickers;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Collections.Generic;
 using AssetObj;
+using DataAccessLibrary;
 
 namespace InventoryManagement
 {
@@ -47,11 +48,15 @@ namespace InventoryManagement
         // or not while our app is active.
         private readonly DisplayRequest _displayRequest = new DisplayRequest();
 
-        public Asset SelectedAsset = mainMenu.CurrentAsset;
+        Inventory i1 = new Inventory();
+        DataAccess DataAccessKey = new DataAccess();
+        Asset CheckInAsset = new Asset();
 
         public BarCodeScanner()
         {
             InitializeComponent();
+            btnCheckIn.IsEnabled = false;
+            btnCheckOut.IsEnabled = false;
 
         }
         /// <summary>
@@ -148,15 +153,32 @@ namespace InventoryManagement
                     Options = { TryHarder = true }
                 };
                 Result result = reader.Decode(writeableBitmap);
-                // do something with the result
+            
                 if (result != null)
                 {
-                    Name.Text = SelectedAsset.Name.ToString();
-                    Description.Text = SelectedAsset.Description.ToString();
-                    Price.Text = SelectedAsset.Price.ToString();
-                    Model.Text = SelectedAsset.ModelNumber.ToString();
-                    Serial.Text = SelectedAsset.SerialNumber.ToString();
+                    Asset ScannedAsset = i1.FindAsset(result.Text);
+                    if (ScannedAsset != null)
+                    {
+                        Name.Text = ScannedAsset.Name.ToString();
+                        Description.Text = ScannedAsset.Description.ToString();
+                        Price.Text = ScannedAsset.Price.ToString();
+                        Model.Text = ScannedAsset.ModelNumber.ToString();
+                        Serial.Text = ScannedAsset.SerialNumber.ToString();
+                        ScanResult.Text = "Scan Succcesful";
+                        CheckInAsset = ScannedAsset;
+
+                        if (ScannedAsset.CheckIn == true)
+                        {
+                            btnCheckIn.IsEnabled = true;
+                        }
+                        else
+                            btnCheckOut.IsEnabled = true;
+                    }
+                    else 
+                    ScanResult.Text = "Scan Unsucccesful. Try again";
                 }
+                else 
+                    ScanResult.Text = "Scan Unsucccesful. Try again";
             }
         }
 
@@ -188,6 +210,16 @@ namespace InventoryManagement
         private void Serial_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void ScanResult_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(mainMenu));
         }
 
         /// <summary>
