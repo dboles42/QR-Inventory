@@ -27,8 +27,8 @@ namespace InventoryManagement
         public mainMenu()
         {
             this.InitializeComponent();
-            i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, "22", true); //test code
-            i1.AddAsset("Emilio's phone", "Samsung", 4, 500, "33", true); //test code
+            //i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, "22", true); //test code
+           // i1.AddAsset("Emilio's phone", "Samsung", 4, 500, "33", true); //test code
             i1.AddAsset("Amack's phone", "iPhone 8", 4, 809, "66", true); //test code
             DataAccessKey.InsertIntoTable(i1.listOfAssets);                //test code
             InventoryList.ItemsSource = i1.RetriveAllAssets();
@@ -98,6 +98,7 @@ namespace InventoryManagement
             DataAccessKey.RemoveAllRows();
             DataAccessKey.InsertIntoTable(i1.listOfAssets);
             CurrentAsset = (Asset)InventoryList.SelectedItem;
+            this.Frame.Navigate(typeof(BarCodeScanner));
         }
 
         private void PrintButtonClick(object sender, RoutedEventArgs e)
@@ -105,6 +106,7 @@ namespace InventoryManagement
             DataAccessKey.RemoveAllRows();
             DataAccessKey.InsertIntoTable(i1.listOfAssets);
             CurrentAsset = (Asset)InventoryList.SelectedItem;
+            this.Frame.Navigate(typeof(BarcodeGenerator));
         }
     }
 }
