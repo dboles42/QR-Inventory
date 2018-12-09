@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
 using AssetObj;
 using DataAccessLibrary;
+using UserObj;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace InventoryManagement
@@ -23,21 +24,20 @@ namespace InventoryManagement
     {
         Inventory i1 = new Inventory();
         public static Asset CurrentAsset { get; set; }
-        DataAccess DataAccessKey = new DataAccess();
+        public static User CurrUser { get; set; }
+        DataAccess AssetDataAccessKey = new DataAccess("Asset");
         public mainMenu()
         {
             this.InitializeComponent();
             //i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, "22", true); //test code
-           // i1.AddAsset("Emilio's phone", "Samsung", 4, 500, "33", true); //test code
-            i1.AddAsset("Amack's phone", "iPhone 8", 4, 809, "66", true); //test code
-            DataAccessKey.InsertIntoTable(i1.listOfAssets);                //test code
-            InventoryList.ItemsSource = i1.RetriveAllAssets();
-        }
-
-        
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            //What's this?
+            //i1.AddAsset("Emilio's phone", "Samsung", 4, 500, "33", true); //test code
+            i1.AddAsset("Amack's phone", "iPhone 8", 4, 809, "66", true);   //test code
+            AssetDataAccessKey.InsertListToTable(i1.listOfAssets);               //test code
+            if ((bool)mainMenu.CurrUser.ReadPermission)
+            {
+                InventoryList.ItemsSource = i1.RetriveAllAssets();
+            }
+            
         }
         
 
@@ -53,21 +53,30 @@ namespace InventoryManagement
 
         private void AddItemButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccessKey.RemoveAllRows();
-            DataAccessKey.InsertIntoTable(i1.listOfAssets);
-            this.Frame.Navigate(typeof(addAssetsPage));
+            if (mainMenu.CurrUser.WritePermission)
+            {
+                AssetDataAccessKey.RemoveAllRows();
+                AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
+                this.Frame.Navigate(typeof(addAssetsPage));
+            }
         }
 
         private void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
-            Asset item = (Asset) InventoryList.SelectedItem;
-            i1.RemoveAsset(item);
-            InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+            if (mainMenu.CurrUser.RemovePermission)
+            {
+                Asset item = (Asset)InventoryList.SelectedItem;
+                i1.RemoveAsset(item);
+                InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+            }
         }
         private void RemoveAllButtonClick(object sender, RoutedEventArgs e)
         {
-            i1.ClearInventory();
-            InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+            if (mainMenu.CurrUser.RemovePermission)
+            {
+                i1.ClearInventory();
+                InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+            }
         }
 
         /// <summary>
@@ -77,8 +86,8 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void ExitButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccessKey.RemoveAllRows();
-            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            AssetDataAccessKey.RemoveAllRows();
+            AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
             Application.Current.Exit();
         }
 
@@ -89,24 +98,56 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void UpdateButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccessKey.RemoveAllRows();
-            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            if (mainMenu.CurrUser.WritePermission || mainMenu.CurrUser.RemovePermission)
+            {
+                AssetDataAccessKey.RemoveAllRows();
+                AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
+            }
         }
 
         private void ScanButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccessKey.RemoveAllRows();
-            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            AssetDataAccessKey.RemoveAllRows();
+            AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
             CurrentAsset = (Asset)InventoryList.SelectedItem;
             this.Frame.Navigate(typeof(BarCodeScanner));
         }
 
         private void PrintButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccessKey.RemoveAllRows();
-            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            AssetDataAccessKey.RemoveAllRows();
+            AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
             CurrentAsset = (Asset)InventoryList.SelectedItem;
             this.Frame.Navigate(typeof(BarcodeGenerator));
+        }
+
+        private void UpdateButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!(mainMenu.CurrUser.WritePermission || mainMenu.CurrUser.RemovePermission))
+            {
+                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+        }
+
+        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!mainMenu.CurrUser.RemovePermission)
+            {
+                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+        }
+
+        private void AddItemButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if(!mainMenu.CurrUser.WritePermission)
+            {
+                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+        }
+
+        private void BackButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(LoginPage));
         }
     }
 }

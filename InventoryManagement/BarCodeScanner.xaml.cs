@@ -49,7 +49,7 @@ namespace InventoryManagement
         private readonly DisplayRequest _displayRequest = new DisplayRequest();
 
         Inventory i1 = new Inventory();
-        DataAccess DataAccessKey = new DataAccess();
+        DataAccess DataAccessKey = new DataAccess("Asset");
         Asset CheckInAsset = new Asset();
 
         public BarCodeScanner()
@@ -182,6 +182,8 @@ namespace InventoryManagement
             }
         }
 
+
+
         private void InitializeWebCam(object sender, RoutedEventArgs e)
         {
             Dispose();
@@ -220,6 +222,16 @@ namespace InventoryManagement
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(mainMenu));
+        }
+
+        private void btnCheckIn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCheckOut_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         /// <summary>
