@@ -122,6 +122,11 @@ namespace InventoryManagement
             return listOfAssets.Find(item => item.IDnumber == assetID);
         }
 
+        /// <summary>
+        /// Finds the index of an asset in the list of assets
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns>An int that is the index of the asset in the list</returns>
         public int FindIndex(Asset A)
         {
             return listOfAssets.IndexOf(A);

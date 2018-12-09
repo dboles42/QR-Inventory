@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
+using Windows.UI.Popups;
 using AssetObj;
 using DataAccessLibrary;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -27,8 +28,8 @@ namespace InventoryManagement
         public mainMenu()
         {
             this.InitializeComponent();
-            //i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, "22", true); //test code
-           // i1.AddAsset("Emilio's phone", "Samsung", 4, 500, "33", true); //test code
+            i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, "22", true); //test code
+            i1.AddAsset("Emilio's phone", "Samsung", 4, 500, "33", true); //test code
             i1.AddAsset("Amack's phone", "iPhone 8", 4, 809, "66", true); //test code
             DataAccessKey.InsertIntoTable(i1.listOfAssets);                //test code
             InventoryList.ItemsSource = i1.RetriveAllAssets();
@@ -58,16 +59,41 @@ namespace InventoryManagement
             this.Frame.Navigate(typeof(addAssetsPage));
         }
 
-        private void RemoveButtonClick(object sender, RoutedEventArgs e)
+        private async void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
-            Asset item = (Asset) InventoryList.SelectedItem;
-            i1.RemoveAsset(item);
-            InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+            if(InventoryList.SelectedItem == null)
+            {
+                MessageDialog msgbox = new MessageDialog("You have to select an item before executing this command.");
+                await msgbox.ShowAsync();
+            }
+            else
+            {
+                i1.RemoveAsset((Asset)InventoryList.SelectedItem);
+                InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+                MessageDialog msgbox = new MessageDialog("The asset has been successfully removed.");
+                await msgbox.ShowAsync();
+            }
         }
-        private void RemoveAllButtonClick(object sender, RoutedEventArgs e)
+
+        private async void RemoveAllButtonClick(object sender, RoutedEventArgs e)
         {
-            i1.ClearInventory();
-            InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+            MessageDialog msgbox = new MessageDialog("This will delete all assets in the inventory. Are you sure bro?");
+            msgbox.Commands.Add(new UICommand { Label = "Yes bro", Id = 0 });
+            msgbox.Commands.Add(new UICommand { Label = "No bro", Id = 1 });
+            msgbox.Commands.Add(new UICommand { Label = "Not sure bro", Id = 2 });
+            var answer = await msgbox.ShowAsync();
+            if((int) answer.Id == 0)
+            {
+                i1.ClearInventory();
+                InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+                MessageDialog msgbox2 = new MessageDialog("Okay bro");
+                await msgbox2.ShowAsync();
+            }
+            else if((int) answer.Id == 1)
+            {
+                MessageDialog msgbox2 = new MessageDialog("That's fine man");
+                await msgbox2.ShowAsync();
+            }
         }
 
         /// <summary>
@@ -87,10 +113,12 @@ namespace InventoryManagement
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UpdateButtonClick(object sender, RoutedEventArgs e)
+        private async void UpdateButtonClick(object sender, RoutedEventArgs e)
         {
             DataAccessKey.RemoveAllRows();
             DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            MessageDialog msgbox = new MessageDialog("The database has been successfully updated.");
+            await msgbox.ShowAsync();
         }
 
         private void ScanButtonClick(object sender, RoutedEventArgs e)
@@ -101,12 +129,25 @@ namespace InventoryManagement
             this.Frame.Navigate(typeof(BarCodeScanner));
         }
 
-        private void PrintButtonClick(object sender, RoutedEventArgs e)
+        private async void PrintButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccessKey.RemoveAllRows();
-            DataAccessKey.InsertIntoTable(i1.listOfAssets);
-            CurrentAsset = (Asset)InventoryList.SelectedItem;
-            this.Frame.Navigate(typeof(BarcodeGenerator));
+            if (InventoryList.SelectedItem == null)
+            {
+                MessageDialog msgbox = new MessageDialog("You have to select an item before executing this command.");
+                await msgbox.ShowAsync();
+            }
+            else
+            {
+                DataAccessKey.RemoveAllRows();
+                DataAccessKey.InsertIntoTable(i1.listOfAssets);
+                CurrentAsset = (Asset)InventoryList.SelectedItem;
+                this.Frame.Navigate(typeof(BarcodeGenerator));
+            }  
+        }
+
+        private void InventoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
