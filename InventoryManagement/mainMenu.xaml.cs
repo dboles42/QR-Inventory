@@ -29,10 +29,6 @@ namespace InventoryManagement
         public mainMenu()
         {
             this.InitializeComponent();
-            //i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, "22", true); //test code
-            //i1.AddAsset("Emilio's phone", "Samsung", 4, 500, "33", true); //test code
-            i1.AddAsset("Amack's phone", "iPhone 8", 4, 809, "66", true);   //test code
-            AssetDataAccessKey.InsertListToTable(i1.listOfAssets);               //test code
             if ((bool)mainMenu.CurrUser.ReadPermission)
             {
                 InventoryList.ItemsSource = i1.RetriveAllAssets();
