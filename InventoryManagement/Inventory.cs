@@ -8,18 +8,18 @@ namespace InventoryManagement
     /// <summary>
     /// Class for the inventory
     /// </summary>
-    public class Inventory
+    public class Inventory : IComparable<Inventory>
     {
-        public List<Asset> listOfAssets = new List<Asset>();
+        public List<Asset> listOfAssets { get; set; } = new List<Asset>();
         public int NumberOfAssets { get; set; }
-
+        DataAccess DataAccessKey = new DataAccess();
         /// <summary>
         /// Default constructor for the inventory class
         /// </summary>
         public Inventory()
         {
             NumberOfAssets = 0;
-            listOfAssets = DataAccess.getList();
+            listOfAssets = DataAccessKey.getList();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace InventoryManagement
         /// <param name="ModelNumber">Model number.</param>
         /// <param name="SerialNumber">Serial number.</param>
         /// <param name="CheckIn">If set to <c>true</c> check in.</param>
-        public void AddAsset(string Name = "None", string Description = "None", double Price = 0, int ModelNumber = 0, int SerialNumber = 0, bool CheckIn = false){
+        public void AddAsset(string Name = "None", string Description = "None", double Price = 0, int ModelNumber = 0, string SerialNumber = "none", bool CheckIn = false){
             listOfAssets.Add(new Asset(Name, Description, Price, ModelNumber, SerialNumber, CheckIn));
             listOfAssets.Sort();
             NumberOfAssets++;
@@ -74,6 +74,30 @@ namespace InventoryManagement
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="that">The inventory we are comparing with the original</param>
+        /// <returns>Returns 1 if the current inventory has more assets than the other inventory, -1 if it has less, and 0 if they have the
+        /// same number of assets</returns>
+        public int CompareTo(Inventory that)
+        {
+            if (that == null)
+                throw new ArgumentException("The object passed is invalid");
+            //Compare the number of assets each inventory holds
+            return this.NumberOfAssets.CompareTo(that.NumberOfAssets);
+        }
+
+        /// <summary>
+        /// Serves as a hash function for an inventory object.
+        /// </summary>
+        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        /// <summary>
         /// Returns a string that represents the current inventory
         /// </summary>
         /// <returns>A string that represents the current inventory.</returns>
@@ -88,6 +112,25 @@ namespace InventoryManagement
             return s;
         }
 
+        /// <summary>
+        /// Finds an in the list asset with a specific ID
+        /// </summary>
+        /// <param name="assetID"></param>
+        /// <returns>Returns the asset with the requested ID</returns>
+        public Asset FindAsset(string assetID)
+        {
+            return listOfAssets.Find(item => item.IDnumber == assetID);
+        }
+
+        public int FindIndex(Asset A)
+        {
+            return listOfAssets.IndexOf(A);
+        }
+
+        /// <summary>
+        /// Retrieves all assets in the inventoryList and places them in an observable collection
+        /// </summary>
+        /// <returns>An observable collection</returns>
         public ObservableCollection<Asset> RetriveAllAssets()
         {
             ObservableCollection<Asset> entries = new ObservableCollection<Asset>();
@@ -98,6 +141,4 @@ namespace InventoryManagement
             return entries;
         }
     }
-
-   
 }

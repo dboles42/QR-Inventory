@@ -15,31 +15,22 @@ using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
 using AssetObj;
 using DataAccessLibrary;
-
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace InventoryManagement
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class mainMenu : Page
+    public partial class mainMenu : Page
     {
         Inventory i1 = new Inventory();
-        public ObservableCollection<Asset> listItems { get; } = new ObservableCollection<Asset>();
-        //public ListView itemListView = new ListView();
-
+        public static Asset CurrentAsset { get; set; }
+        DataAccess DataAccessKey = new DataAccess();
         public mainMenu()
         {
             this.InitializeComponent();
-            //i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, 22, true); //test code
-            //i1.AddAsset("Emilio's phone", "Samsung", 4, 500, 33, true); //test code
-            //i1.AddAsset("Amack's phone", "iPhone 2", 4, 809, 66, true); //test code
-            //DataAccess.InsertIntoTable(i1.listOfAssets);                //test code
-            //InventoryList.ItemsSource = DataAccess.RetriveAllAssets();  //test code
+            //i1.AddAsset("Omar's phone", "iPhone 7s", 4, 700, "22", true); //test code
+           // i1.AddAsset("Emilio's phone", "Samsung", 4, 500, "33", true); //test code
+            i1.AddAsset("Amack's phone", "iPhone 8", 4, 809, "66", true); //test code
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);                //test code
             InventoryList.ItemsSource = i1.RetriveAllAssets();
         }
 
@@ -60,16 +51,10 @@ namespace InventoryManagement
             this.Frame.Navigate(typeof(BarCodeScanner));
         }
 
-        private void w1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListView l1 = sender as ListView;
-            string selected = l1.SelectedItem.ToString();
-            //MessageDialog dlg = new MessageDialog("selected color: " + selected); //do we need this?
-
-        }
-
         private void AddItemButtonClick(object sender, RoutedEventArgs e)
         {
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
             this.Frame.Navigate(typeof(addAssetsPage));
         }
 
@@ -92,8 +77,8 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void ExitButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccess.RemoveAllRows();
-            DataAccess.InsertIntoTable(i1.listOfAssets);
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
             Application.Current.Exit();
         }
 
@@ -104,8 +89,24 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void UpdateButtonClick(object sender, RoutedEventArgs e)
         {
-            DataAccess.RemoveAllRows();
-            DataAccess.InsertIntoTable(i1.listOfAssets);
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+        }
+
+        private void ScanButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            CurrentAsset = (Asset)InventoryList.SelectedItem;
+            this.Frame.Navigate(typeof(BarCodeScanner));
+        }
+
+        private void PrintButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            CurrentAsset = (Asset)InventoryList.SelectedItem;
+            this.Frame.Navigate(typeof(BarcodeGenerator));
         }
     }
 }

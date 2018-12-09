@@ -9,12 +9,12 @@ namespace DataAccessLibrary
     /// <summary>
     /// Database class
     /// </summary>
-    public static class DataAccess
+    public class DataAccess
     {
         /// <summary>
         /// Initializes the database and creates AssetsInv table if the table does not exist
         /// </summary>
-        public static void InitializeDatabase()
+        public void InitializeDatabase()
         {
             using (SqliteConnection DBase =
                 new SqliteConnection("Filename=InventoryDB.db"))
@@ -22,14 +22,14 @@ namespace DataAccessLibrary
                 DBase.Open();
 
                 String CreateTableQuery = "CREATE TABLE IF NOT " +
-                    "EXISTS AssetsInv (" +
+                    "EXISTS AssetsInventory (" +
                     "AssetName VARCHAR(255)," +
                     "Description VARCHAR(255)," +
                     "IDNumber VARCHAR(255)," +
                     "CheckIn INT NOT NULL," +
                     "Price FLOAT NOT NULL," +
                     "ModelNumber INT NOT NULL," +
-                    "SerialNumber INT NOT NULL)";
+                    "SerialNumber VARCHAR(255))";
 
                 SqliteCommand createTable = new SqliteCommand(CreateTableQuery, DBase);
 
@@ -41,7 +41,7 @@ namespace DataAccessLibrary
         /// Inserts a list of Assets into the AssetsInv table of the database
         /// </summary>
         /// <param name="AssetList"></param>
-        public static void InsertIntoTable(List<Asset> AssetList)
+        public void InsertIntoTable(List<Asset> AssetList)
         {
             using (SqliteConnection DBase =
                 new SqliteConnection("Filename=InventoryDB.db"))
@@ -53,7 +53,7 @@ namespace DataAccessLibrary
                     SqliteCommand insertCommand = new SqliteCommand();
                     insertCommand.Connection = DBase;
 
-                    insertCommand.CommandText = $"INSERT INTO AssetsInv VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
+                    insertCommand.CommandText = $"INSERT INTO AssetsInventory VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
                                                                                "@Price, @ModelNumber, @SerialNumber);";
 
                     insertCommand.Parameters.AddWithValue("@Name", currAsset.Name);
@@ -75,7 +75,7 @@ namespace DataAccessLibrary
         /// Retrieves all the contents of a table as a list of Assets
         /// </summary>
         /// <returns>List of Assets in the database</returns>
-        public static List<Asset> getList()    
+        public List<Asset> getList()    
         {
             List<Asset> listOfAssets = new List<Asset>();
             using (SqliteConnection DBase =
@@ -83,7 +83,7 @@ namespace DataAccessLibrary
             {
                 DBase.Open();
 
-                SqliteCommand selectCommand = new SqliteCommand("SELECT * from AssetsInv", DBase); //SQL query
+                SqliteCommand selectCommand = new SqliteCommand("SELECT * from AssetsInventory", DBase); //SQL query
 
                 SqliteDataReader query = selectCommand.ExecuteReader();
 
@@ -96,7 +96,7 @@ namespace DataAccessLibrary
                     temp.IDnumber = query.GetString(2);
                     temp.Price = query.GetDouble(3);
                     temp.ModelNumber = query.GetInt32(4);
-                    temp.SerialNumber = query.GetInt32(5);
+                    temp.SerialNumber = query.GetString(5);
                     temp.CheckIn = query.GetBoolean(6);
 
                     listOfAssets.Add(temp);
@@ -109,7 +109,7 @@ namespace DataAccessLibrary
         /// <summary>
         /// This method removes all rows/contents of the AssetsInv table in the Database
         /// </summary>
-        public static void RemoveAllRows()
+        public void RemoveAllRows()
         {
             using (SqliteConnection DBase =
                    new SqliteConnection("Filename=InventoryDB.db"))
@@ -119,7 +119,7 @@ namespace DataAccessLibrary
                 SqliteCommand insertCommand = new SqliteCommand();
                 insertCommand.Connection = DBase;
 
-                insertCommand.CommandText = $"DELETE FROM AssetsInv;"; //SQL Query
+                insertCommand.CommandText = $"DELETE FROM AssetsInventory;"; //SQL Query
                 insertCommand.ExecuteReader();
 
                 DBase.Close();
