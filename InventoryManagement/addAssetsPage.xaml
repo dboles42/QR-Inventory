@@ -15,7 +15,6 @@
         <StackPanel HorizontalAlignment="Left" Height="495" Margin="68,180,0,0" VerticalAlignment="Top" Width="606">
             <TextBlock Text="Name" TextWrapping="Wrap" Height="73"/>
             <TextBlock Text="Description" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="64" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-            <TextBlock Text="ID Number" TextWrapping="Wrap" Height="58"/>
             <TextBlock Text="Price" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="70" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
             <TextBlock Text="Model Number" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="65" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
             <TextBlock Text="Serial Number" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="58" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
@@ -28,6 +27,5 @@
             <TextBox x:Name="serialnumText" Text="" HorizontalAlignment="Stretch" Height="49" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
         </StackPanel>
         <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="315,685,0,0" VerticalAlignment="Top" Height="56" Width="134" Click="BackButton_Click"/>
-
     </Grid>
 </Page>
