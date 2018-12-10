@@ -10,7 +10,7 @@
 
     <Grid>
         <Button x:Name="btnscan" Click="btnscan_Click" Content=" Scan Qr Code" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,128,0,0" Height="83" Width="134"/>
-        <RelativePanel HorizontalAlignment="Left" Height="278" Margin="549,128,0,0" VertsicalAlignment="Top" Width="423">
+        <RelativePanel HorizontalAlignment="Left" Height="278" Margin="549,128,0,0" VerticalAlignment="Top" Width="423">
             <TextBox x:Name="Name" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="143,0,0,0" HorizontalAlignment="Left"/>
             <TextBox x:Name="Description" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="144,41,0,0" HorizontalAlignment="Left"/>
             <TextBox x:Name="Price" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="144,84,0,0" HorizontalAlignment="Left"/>
