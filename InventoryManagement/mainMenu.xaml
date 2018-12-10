@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="62,84,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="310" SelectionChanged="TextBlock_SelectionChanged" FontSize="48" TextAlignment="Center"/>
+        <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="62,84,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="310" FontSize="48" TextAlignment="Left"/>
         <HyperlinkButton Content="Click to go to page 1" HorizontalAlignment="Left" Height="87" Margin="243,818,0,0" VerticalAlignment="Top" Width="312" FontSize="22" Click="HyperlinkButton_Click"/>
         <ListView Name="InventoryList"
                   SelectionMode="Single"
@@ -19,36 +19,31 @@
                   ScrollViewer.HorizontalScrollMode="Enabled"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   ScrollViewer.IsHorizontalRailEnabled="True"
-                  Margin="20,168,344,122" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  Margin="10,169,436,121" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal"  >
-                        <TextBlock Text="ID" Margin="8,0" Width="300" Foreground="DarkRed" />
-                        <TextBlock Text="Name" Width="150" Foreground="DarkRed" />
-                        <TextBlock Text="SerialNumber" Width="200" Foreground="DarkRed" />
-                        <TextBlock Text="ModelNumber" Width="120" Foreground="DarkRed" />
-                        <TextBlock Text="Description" Width="150" Foreground="DarkRed" />
-                        <TextBlock Text="Price" Width="80" Foreground="DarkRed" />
-                        <TextBlock Text="CheckIn" Width="80" Foreground="DarkRed" />
-
+                    <StackPanel Orientation="Horizontal" Height="38" Width="942" Margin="0,0,0,0"  >
+                        <TextBlock Text="Name" Width="150" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Text="SerialNumber" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Text="ModelNumber" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Description" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Price" Width="80" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Text="CheckIn" Width="80" Foreground="DarkRed" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.HeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local1:Asset">
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Name="ItemId"
-                                    Text="{x:Bind IDnumber}"
-                                    Width="300" />
+                    <StackPanel Orientation="Horizontal" Width="942" Margin="0,0,0,0" >
                         <TextBlock Name="Name"
                                     Text="{x:Bind Name}"
                                     Width="150" />
                         <TextBlock Text="{x:Bind SerialNumber}"
                                    Width="200" />
                         <TextBlock Text="{x:Bind ModelNumber}"
-                                   Width="150" />
+                                   Width="200" />
                         <TextBlock Text="{x:Bind Description}"
-                                   Width="120" />
+                                   Width="200" />
                         <TextBlock Text="{x:Bind Price}"
                                    Width="80" />
                         <TextBlock Text="{x:Bind CheckIn}"
@@ -58,14 +53,40 @@
             </ListView.ItemTemplate>
         </ListView>
         <TextBlock x:Name="OptionsText" HorizontalAlignment="Left" Height="69" Margin="1207,161,0,0" Text="Options" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" FontSize="36"/>
-        <Button x:Name="AddItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="1184,223,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="AddItemButtonClick"/>
-        <Button x:Name="RemoveItemButton" Content="Remove Item" HorizontalAlignment="Left" Margin="1184,324,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="RemoveButtonClick"/>
-        <Button x:Name="RemoveAllButton" Content="Remove All" HorizontalAlignment="Left" Margin="1184,427,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="RemoveAllButtonClick"/>
-        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="1184,523,0,0" VerticalAlignment="Top" Height="54" Width="179" Click="UpdateButtonClick"/>
+        <Button x:Name="AddItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="1184,223,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="AddItemButtonClick" Tapped="AddItemButton_Tapped">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout>
+                    <TextBlock Text="Access Denied"/>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
+        <Button x:Name="RemoveItemButton" Content="Remove Item" HorizontalAlignment="Left" Margin="1184,324,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="RemoveButtonClick" Tapped="RemoveButton_Tapped">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout>
+                    <TextBlock Text="Access Denied"/>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
+        <Button x:Name="RemoveAllButton" Content="Remove All" HorizontalAlignment="Left" Margin="1184,427,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="RemoveAllButtonClick" Tapped="RemoveButton_Tapped">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout>
+                    <TextBlock Text="Access Denied"/>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
+        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="1184,523,0,0" VerticalAlignment="Top" Height="54" Width="179" Click="UpdateButtonClick" Tapped="UpdateButton_Tapped">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout>
+                    <TextBlock Text="Access Denied"/>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="62,813,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="ExitButtonClick"/>
+        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="571,813,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="BackButtonClick"/>
+
         <StackPanel HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="658" Margin="62,251,0,0"/>
         <Button x:Name="ScanButton" Content="Scan QR Code" HorizontalAlignment="Left" Margin="1187,612,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="ScanButtonClick"/>
         <Button x:Name="PrintButton" Content="Print QR Code" HorizontalAlignment="Left" Margin="1190,705,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="PrintButtonClick"/>
-      
+
     </Grid>
 </Page>

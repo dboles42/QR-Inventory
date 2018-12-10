@@ -12,7 +12,7 @@ namespace InventoryManagement
     {
         public List<Asset> listOfAssets { get; set; } = new List<Asset>();
         public int NumberOfAssets { get; set; }
-        DataAccess DataAccessKey = new DataAccess();
+        DataAccess DataAccessKey = new DataAccess("Asset");
         /// <summary>
         /// Default constructor for the inventory class
         /// </summary>
@@ -120,6 +120,16 @@ namespace InventoryManagement
         public Asset FindAsset(string assetID)
         {
             return listOfAssets.Find(item => item.IDnumber == assetID);
+        }
+
+        /// <summary>
+        /// Finds the index of an asset in the list of assets
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns>An int that is the index of the asset in the list</returns>
+        public int FindIndex(Asset A)
+        {
+            return listOfAssets.IndexOf(A);
         }
 
         /// <summary>

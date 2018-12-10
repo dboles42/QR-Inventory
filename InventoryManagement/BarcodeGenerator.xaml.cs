@@ -94,29 +94,10 @@ namespace InventoryManagement
             var success = await Windows.System.Launcher.LaunchFileAsync(file);
         }
 
-        private void Name_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Name.Text = SelectedAsset.Name.ToString();
-        }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Description.Text = SelectedAsset.Description.ToString();
-        }
-
-        private void Price_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Price.Text = SelectedAsset.Price.ToString();
-        }
-
-        private void Model_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Model.Text = SelectedAsset.ModelNumber.ToString();
-        }
-
-        private void Serial_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Serial.Text = SelectedAsset.SerialNumber.ToString();
+            this.Frame.Navigate(typeof(mainMenu));
         }
     }
 }
