@@ -9,15 +9,20 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock HorizontalAlignment="Center" Margin="0,185,0,0" TextWrapping="Wrap" Text="Registration" VerticalAlignment="Top" FontSize="100" TextAlignment="Center" Height="158" Width="636"/>
-        <StackPanel HorizontalAlignment="Center" Margin="0,341,0,110" VerticalAlignment="Stretch" >
+        <TextBlock HorizontalAlignment="Left" Margin="395,48,0,0" TextWrapping="Wrap" Text="Registration" VerticalAlignment="Top" FontSize="100" TextAlignment="Center" Height="158" Width="636"/>
+        <StackPanel HorizontalAlignment="Left" Margin="603,204,0,247" VerticalAlignment="Stretch" >
             <TextBox x:Name="UsernameTextBox" FontSize="24" PlaceholderText="Register Username" HorizontalAlignment="Left"  VerticalAlignment="Top" Header="Username"/>
             <PasswordBox x:Name="PasswordText" PasswordChar="*" PlaceholderText="Register Password" FontSize="24" HorizontalAlignment="Center"  Header="Password" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="220"/>
             <CheckBox x:Name="ReadCheck" Content="Read Permission" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="0,15,0,0"/>
             <CheckBox x:Name="WriteCheck" Content="Write Permission" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="0,1,0,0"/>
             <CheckBox x:Name="RemoveCheck" Content="Remove Permission" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="0,1,0,0"/>
         </StackPanel>
-        <Button x:Name="RegistrationButton"  Content="Register" HorizontalAlignment="Left" Margin="928,579,0,0" VerticalAlignment="Top" Height="58" Width="132" Click="RegistrationButton_Click"/>
-
+        <Button x:Name="RegistrationButton"  Content="Register" HorizontalAlignment="Left" Margin="891,442,0,0" VerticalAlignment="Top" Height="58" Width="132" Click="RegistrationButton_Click" Tapped="RegistrationButton_Tapped">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout>
+                    <TextBlock Text="Please Enter a Username and Password"/>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
     </Grid>
 </Page>
