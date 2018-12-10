@@ -94,6 +94,10 @@ namespace InventoryManagement
             var success = await Windows.System.Launcher.LaunchFileAsync(file);
         }
 
-        
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(mainMenu));
+        }
     }
 }
