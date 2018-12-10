@@ -193,9 +193,10 @@ namespace InventoryManagement
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(mainMenu));
             DataAccessKey.RemoveAllRows();
             DataAccessKey.InsertListToTable(i1.listOfAssets);
+            this.Frame.Navigate(typeof(mainMenu));
+
             
         }
 

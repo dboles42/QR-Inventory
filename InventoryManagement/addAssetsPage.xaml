@@ -9,23 +9,20 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="589,55,0,0" TextWrapping="Wrap" Text="Add Assets" VerticalAlignment="Top" FontSize="72" TextAlignment="Center"/>
-
-        <Button Content="Add" HorizontalAlignment="Left" Margin="636,679,0,0" VerticalAlignment="Top" Height="55" Width="154" Click="AddButtonClick"/>
-        <StackPanel HorizontalAlignment="Left" Height="495" Margin="68,180,0,0" VerticalAlignment="Top" Width="606">
-            <TextBlock Text="Name" TextWrapping="Wrap" Height="73"/>
-            <TextBlock Text="Description" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="64" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-            <TextBlock Text="Price" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="70" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-            <TextBlock Text="Model Number" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="65" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-            <TextBlock Text="Serial Number" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="58" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Height="461" Margin="676,185,0,0" VerticalAlignment="Top" Width="652">
-            <TextBox x:Name="nameTextBox" Text="" HorizontalAlignment="Stretch" Height="56" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-            <TextBox x:Name="descriptionText" Text="" HorizontalAlignment="Stretch" Height="61" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-            <TextBox x:Name="priceText" Text="" HorizontalAlignment="Stretch" Height="67" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-            <TextBox x:Name="modelnumText" Text="" HorizontalAlignment="Stretch" Height="68" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-            <TextBox x:Name="serialnumText" Text="" HorizontalAlignment="Stretch" Height="49" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-        </StackPanel>
-        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="315,685,0,0" VerticalAlignment="Top" Height="56" Width="134" Click="BackButton_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="621,56,0,0" TextWrapping="Wrap" Text="Add Assets" VerticalAlignment="Top" FontSize="72" TextAlignment="Center"/>
+        <RelativePanel HorizontalAlignment="Left" Height="273" Margin="603,180,0,0" VerticalAlignment="Top" Width="400">
+            <Button Content="Add" HorizontalAlignment="Left" Margin="300,223,0,0"  Click="AddButtonClick" VerticalAlignment="Top" Height="50" Width="100" />
+            <Button x:Name="backButton" Content="Back"  Margin="106,223,0,0"   Click="BackButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="100"/>
+            <TextBlock Text="Name" Height="32" Width="41"  VerticalAlignment="Top" Margin="0,0,359,0" HorizontalAlignment="Right"  />
+            <TextBlock Text="Description" Height="29" Width="101" VerticalAlignment="Top" Margin="0,39,0,0" HorizontalAlignment="Left"/>
+            <TextBlock Text="Price" Height="26" Width="70" VerticalAlignment="Top" Margin="0,77,0,0" HorizontalAlignment="Left"/>
+            <TextBlock Text="Model Number"  VerticalAlignment="Top" Margin="0,159,0,0" HorizontalAlignment="Left"/>
+            <TextBlock Text="Serial Number"  VerticalAlignment="Top" Margin="0,121,0,0" HorizontalAlignment="Left" />
+            <TextBox x:Name="nameTextBox" Text="" Width="294" VerticalAlignment="Top" Margin="106,0,0,0" HorizontalAlignment="Left" />
+            <TextBox x:Name="descriptionText" Text="" Margin="106,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="294"/>
+            <TextBox x:Name="priceText" Text="" Margin="106,77,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="294" />
+            <TextBox x:Name="modelnumText" Text=""  Margin="106,115,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="294"/>
+            <TextBox x:Name="serialnumText" Text="" Margin="106,153,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="294"/>
+        </RelativePanel>
     </Grid>
 </Page>

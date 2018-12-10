@@ -16,11 +16,11 @@
             <TextBox x:Name="Price" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="144,84,0,0" HorizontalAlignment="Left"/>
             <TextBox x:Name="Model" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="144,128,0,0" HorizontalAlignment="Left"/>
             <TextBox x:Name="Serial" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="144,171,0,0" Height="38" Width="279" />
-            <TextBox x:Name="Name_Copy" HorizontalAlignment="Left" Text="Name" VerticalAlignment="Top" Height="38" Width="135" />
-            <TextBox x:Name="Description_Copy" HorizontalAlignment="Left" Text="Description" VerticalAlignment="Top" Margin="0,41,0,0" Height="38" Width="135" />
-            <TextBox x:Name="Price_Copy" HorizontalAlignment="Left" Text="Price ($)" VerticalAlignment="Top" Margin="0,84,0,0" Height="38" Width="135" />
-            <TextBox x:Name="Model_Copy" HorizontalAlignment="Left" Text="Model #" VerticalAlignment="Top" Margin="0,128,0,0" Height="38" Width="135" />
-            <TextBox x:Name="Serial_Copy" HorizontalAlignment="Left" Text="Serial #" VerticalAlignment="Top" Margin="0,171,0,0" Height="38" Width="135" />
+            <TextBlock x:Name="Name_Copy" HorizontalAlignment="Left" Text="Name" VerticalAlignment="Top" Height="38" Width="135" />
+            <TextBlock x:Name="Description_Copy" HorizontalAlignment="Left" Text="Description" VerticalAlignment="Top" Margin="0,41,0,0" Height="38" Width="135" />
+            <TextBlock x:Name="Price_Copy" HorizontalAlignment="Left" Text="Price ($)" VerticalAlignment="Top" Margin="0,84,0,0" Height="38" Width="135" />
+            <TextBlock x:Name="Model_Copy" HorizontalAlignment="Left" Text="Model #" VerticalAlignment="Top" Margin="0,128,0,0" Height="38" Width="135" />
+            <TextBlock x:Name="Serial_Copy" HorizontalAlignment="Left" Text="Serial #" VerticalAlignment="Top" Margin="0,171,0,0" Height="38" Width="135" />
             <TextBox x:Name="ScanResult" HorizontalAlignment="Center" Margin="0,246,0,0" Text="" VerticalAlignment="Top" Height="27" Width="423" />
         </RelativePanel>
         <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="180,500,0,0" VerticalAlignment="Top" Height="56" Width="134" Click="BackButton_Click"/>
