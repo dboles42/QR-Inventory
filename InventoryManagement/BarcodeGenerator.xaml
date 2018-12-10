@@ -14,16 +14,16 @@
         </Button>
         <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="154,348,0,0" VerticalAlignment="Top" Height="56" Width="134" Click="BackButton_Click"/>
         <RelativePanel HorizontalAlignment="Left" Height="209" Margin="428,195,0,0" VerticalAlignment="Top" Width="423">
-            <TextBox x:Name="Name" HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Top" Margin="143,0,0,0" Height="38" Width="279" TextChanged="Name_TextChanged"/>
-            <TextBox x:Name="Description" HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Top" Margin="144,41,0,0" Height="38" Width="279" TextChanged="TextBox_TextChanged"/>
-            <TextBox x:Name="Price" HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Top" Margin="144,84,0,0" Height="38" Width="279" TextChanged="Price_TextChanged"/>
-            <TextBox x:Name="Model" HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Top" Margin="144,128,0,0" Height="38" Width="279" TextChanged="Model_TextChanged"/>
-            <TextBox x:Name="Serial" HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Top" Margin="144,171,0,0" Height="38" Width="279" TextChanged="Serial_TextChanged"/>
-            <TextBox x:Name="Name_Copy" HorizontalAlignment="Left" Text="Name" VerticalAlignment="Top" Height="38" Width="135" TextChanged="Name_TextChanged"/>
-            <TextBox x:Name="Description_Copy" HorizontalAlignment="Left" Text="Description" VerticalAlignment="Top" Margin="0,41,0,0" Height="38" Width="135" TextChanged="TextBox_TextChanged"/>
-            <TextBox x:Name="Price_Copy" HorizontalAlignment="Left" Text="Price ($)" VerticalAlignment="Top" Margin="0,84,0,0" Height="38" Width="135" TextChanged="Price_TextChanged"/>
-            <TextBox x:Name="Model_Copy" HorizontalAlignment="Left" Text="Model #" VerticalAlignment="Top" Margin="0,128,0,0" Height="38" Width="135" TextChanged="Model_TextChanged"/>
-            <TextBox x:Name="Serial_Copy" HorizontalAlignment="Left" Text="Serial #" VerticalAlignment="Top" Margin="0,171,0,0" Height="38" Width="135" TextChanged="Serial_TextChanged"/>
+            <TextBox x:Name="Name" HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Top" Margin="143,0,0,0" Height="38" Width="279" />
+            <TextBox x:Name="Description" HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Top" Margin="144,41,0,0" Height="38" Width="279" />
+            <TextBox x:Name="Price" HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Top" Margin="144,84,0,0" Height="38" Width="279" />
+            <TextBox x:Name="Model" HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Top" Margin="144,128,0,0" Height="38" Width="279" />
+            <TextBox x:Name="Serial" HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Top" Margin="144,171,0,0" Height="38" Width="279" />
+            <TextBox x:Name="Name_Copy" HorizontalAlignment="Left" Text="Name" VerticalAlignment="Top" Height="38" Width="135" />
+            <TextBox x:Name="Description_Copy" HorizontalAlignment="Left" Text="Description" VerticalAlignment="Top" Margin="0,41,0,0" Height="38" Width="135" />
+            <TextBox x:Name="Price_Copy" HorizontalAlignment="Left" Text="Price ($)" VerticalAlignment="Top" Margin="0,84,0,0" Height="38" Width="135" />
+            <TextBox x:Name="Model_Copy" HorizontalAlignment="Left" Text="Model #" VerticalAlignment="Top" Margin="0,128,0,0" Height="38" Width="135" />
+            <TextBox x:Name="Serial_Copy" HorizontalAlignment="Left" Text="Serial #" VerticalAlignment="Top" Margin="0,171,0,0" Height="38" Width="135" />
 
         </RelativePanel>
 

@@ -19,7 +19,7 @@
                   ScrollViewer.HorizontalScrollMode="Enabled"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   ScrollViewer.IsHorizontalRailEnabled="True"
-                  Margin="20,168,426,122" SelectionChanged="InventoryList_SelectionChanged">
+                  Margin="20,168,426,122" >
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Height="38" Width="942" Margin="0,0,0,0"  >

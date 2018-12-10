@@ -189,41 +189,13 @@ namespace InventoryManagement
             Dispose();
         }
 
-        private void Name_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Price_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Model_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Serial_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void ScanResult_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+        
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(mainMenu));
             DataAccessKey.RemoveAllRows();
-            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            DataAccessKey.InsertListToTable(i1.listOfAssets);
             
         }
 
