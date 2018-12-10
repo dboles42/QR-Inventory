@@ -49,7 +49,7 @@ namespace InventoryManagement
         private readonly DisplayRequest _displayRequest = new DisplayRequest();
 
         Inventory i1 = new Inventory();
-        DataAccess DataAccessKey = new DataAccess();
+        DataAccess DataAccessKey = new DataAccess("Asset");
         Asset CheckInAsset = new Asset();
 
         public BarCodeScanner()
@@ -181,6 +181,8 @@ namespace InventoryManagement
                     ScanResult.Text = "Scan Unsucccesful. Try again";
             }
         }
+
+
 
         private void InitializeWebCam(object sender, RoutedEventArgs e)
         {

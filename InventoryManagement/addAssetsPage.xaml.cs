@@ -30,7 +30,7 @@ namespace InventoryManagement
 
 
         Inventory i1 = new Inventory();
-        DataAccess DataAccessKey = new DataAccess();
+        DataAccess DataAccessKey = new DataAccess("Asset");
 
         public addAssetsPage()
         {
@@ -56,7 +56,7 @@ namespace InventoryManagement
         {
             i1.AddAsset(nameInput, descripInput, priceInput, modelNumInput, serialNumInput);
             DataAccessKey.RemoveAllRows();
-            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            DataAccessKey.InsertListToTable(i1.listOfAssets);
             Frame.Navigate(typeof(mainMenu));
         }
 
@@ -110,5 +110,9 @@ namespace InventoryManagement
            serialNumInput = serialnumText.Text;
         }
 
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

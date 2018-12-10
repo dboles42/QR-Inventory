@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="InventoryManagement.RegistrationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InventoryManagement"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" Margin="0,185,0,0" TextWrapping="Wrap" Text="Registration" VerticalAlignment="Top" FontSize="100" TextAlignment="Center" Height="158" Width="636"/>
+        <StackPanel HorizontalAlignment="Center" Margin="0,341,0,110" VerticalAlignment="Stretch" >
+            <TextBox x:Name="UsernameTextBox" FontSize="24" PlaceholderText="Register Username" HorizontalAlignment="Left"  VerticalAlignment="Top" Header="Username"/>
+            <PasswordBox x:Name="PasswordText" PasswordChar="*" PlaceholderText="Register Password" FontSize="24" HorizontalAlignment="Center"  Header="Password" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="220"/>
+            <CheckBox x:Name="ReadCheck" Content="Read Permission" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="0,15,0,0"/>
+            <CheckBox x:Name="WriteCheck" Content="Write Permission" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="0,1,0,0"/>
+            <CheckBox x:Name="RemoveCheck" Content="Remove Permission" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="0,1,0,0"/>
+        </StackPanel>
+        <Button x:Name="RegistrationButton"  Content="Register" HorizontalAlignment="Left" Margin="928,579,0,0" VerticalAlignment="Top" Height="58" Width="132" Click="RegistrationButton_Click"/>
+
+    </Grid>
+</Page>
