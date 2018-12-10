@@ -3,26 +3,62 @@ using Microsoft.Data.Sqlite;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using AssetObj;
+using UserObj;
 
 namespace DataAccessLibrary
 {
     /// <summary>
     /// Database class
     /// </summary>
-    public class DataAccess
+    public class DataAccess : IComparable<DataAccess>
     {
+        private string DB { get; set; }
+        private string WorkingTable { get; set; }
+        private string AssetsInv { get; set; }
+        private string LoginInfo { get; set; }
+
+        public DataAccess()
+        {
+            DB = "InventoryDB.db";
+            AssetsInv = "AssetsInventory";
+            LoginInfo = "LoginInfo";
+            WorkingTable = "Default";
+
+            InitializeDatabase();
+        }
+
+        public DataAccess(string WorkingTable)
+        {
+            DB = "InventoryDB.db";
+            AssetsInv = "AssetsInventory";
+            LoginInfo = "LoginInfo";
+
+            if (WorkingTable.CompareTo("Asset") == 0)
+            {
+                this.WorkingTable = AssetsInv;
+            }
+            else if (WorkingTable.CompareTo("Login") == 0)
+            {
+                this.WorkingTable = LoginInfo;
+            }
+            else
+                this.WorkingTable = "Default";
+
+            InitializeDatabase();
+        }
+
         /// <summary>
         /// Initializes the database and creates AssetsInv table if the table does not exist
         /// </summary>
-        public void InitializeDatabase()
+        private void InitializeDatabase()
         {
             using (SqliteConnection DBase =
-                new SqliteConnection("Filename=InventoryDB.db"))
+                new SqliteConnection("Filename=" + DB))
             {
                 DBase.Open();
 
-                String CreateTableQuery = "CREATE TABLE IF NOT " +
-                    "EXISTS AssetsInventory (" +
+                String CreateAssetTableQuery = "CREATE TABLE IF NOT " +
+                    "EXISTS " + AssetsInv + " (" +
                     "AssetName VARCHAR(255)," +
                     "Description VARCHAR(255)," +
                     "IDNumber VARCHAR(255)," +
@@ -31,46 +67,96 @@ namespace DataAccessLibrary
                     "ModelNumber INT NOT NULL," +
                     "SerialNumber VARCHAR(255))";
 
-                SqliteCommand createTable = new SqliteCommand(CreateTableQuery, DBase);
+                String CreateLoginTableQuery = "CREATE TABLE IF NOT " +
+                    "EXISTS " + LoginInfo + " (" +
+                    "Username VARCHAR(255)," +
+                    "Password VARCHAR(255)," +
+                    "ReadPermission INT NOT NULL," +
+                    "WritePermission INT NOT NULL," +
+                    "RemovePermission INT NOT NULL)";
 
-                createTable.ExecuteReader();
+                SqliteCommand createAssetTable = new SqliteCommand(CreateAssetTableQuery, DBase);
+                SqliteCommand createLoginTable = new SqliteCommand(CreateLoginTableQuery, DBase);
+
+                createAssetTable.ExecuteReader();
+                createLoginTable.ExecuteReader();
+
+                createAssetTable.Dispose();
+                createLoginTable.Dispose();
+                DBase.Dispose();
                 DBase.Close();
             }
         }
+
         /// <summary>
         /// Inserts a list of Assets into the AssetsInv table of the database
         /// </summary>
         /// <param name="AssetList"></param>
-        public void InsertIntoTable(List<Asset> AssetList)
+        public void InsertListToTable(List<Asset> AssetList)
         {
-            using (SqliteConnection DBase =
-                new SqliteConnection("Filename=InventoryDB.db"))
+            if (WorkingTable.CompareTo(AssetsInv) == 0)
             {
-                DBase.Open();
-
-                foreach (Asset currAsset in AssetList)
+                using (SqliteConnection DBase =
+                new SqliteConnection("Filename=" + DB))
                 {
-                    SqliteCommand insertCommand = new SqliteCommand();
-                    insertCommand.Connection = DBase;
+                    DBase.Open();
 
-                    insertCommand.CommandText = $"INSERT INTO AssetsInventory VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
-                                                                               "@Price, @ModelNumber, @SerialNumber);";
+                    foreach (Asset currAsset in AssetList)
+                    {
+                        SqliteCommand insertCommand = new SqliteCommand();
+                        insertCommand.Connection = DBase;
 
-                    insertCommand.Parameters.AddWithValue("@Name", currAsset.Name);
-                    insertCommand.Parameters.AddWithValue("@Description", currAsset.Description);
-                    insertCommand.Parameters.AddWithValue("@IDnumber", currAsset.IDnumber);
-                    insertCommand.Parameters.AddWithValue("@CheckIn", currAsset.CheckIn);
-                    insertCommand.Parameters.AddWithValue("@Price", currAsset.Price);
-                    insertCommand.Parameters.AddWithValue("@ModelNumber", currAsset.ModelNumber);
-                    insertCommand.Parameters.AddWithValue("@SerialNumber", currAsset.SerialNumber);
+                        insertCommand.CommandText = $"INSERT INTO " + AssetsInv + " VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
+                                                                                   "@Price, @ModelNumber, @SerialNumber);";
 
-                    insertCommand.ExecuteReader();
+                        insertCommand.Parameters.AddWithValue("@Name", currAsset.Name);
+                        insertCommand.Parameters.AddWithValue("@Description", currAsset.Description);
+                        insertCommand.Parameters.AddWithValue("@IDnumber", currAsset.IDnumber);
+                        insertCommand.Parameters.AddWithValue("@CheckIn", currAsset.CheckIn);
+                        insertCommand.Parameters.AddWithValue("@Price", currAsset.Price);
+                        insertCommand.Parameters.AddWithValue("@ModelNumber", currAsset.ModelNumber);
+                        insertCommand.Parameters.AddWithValue("@SerialNumber", currAsset.SerialNumber);
+
+                        insertCommand.ExecuteReader();
+                        insertCommand.Dispose();
+                    }
+                    DBase.Dispose();
+                    DBase.Close();
                 }
-
-                DBase.Close();
             }
         }
 
+        public void InsertUserToTable(User user)
+        {
+            if (WorkingTable.CompareTo(LoginInfo) == 0)
+            {
+                using (SqliteConnection DBase =
+                new SqliteConnection("Filename=" + DB))
+                {
+                    DBase.Open();
+
+                    SqliteCommand insertCommand = new SqliteCommand();
+                    insertCommand.Connection = DBase;
+
+                    insertCommand.CommandText = $"INSERT INTO " + LoginInfo + " VALUES (@Username, @Password, @Read, @Write, " +
+                                                                                "@Remove);";
+                    
+                    insertCommand.Parameters.AddWithValue("@Username", user.Username);
+
+                    user.encryption();
+                    insertCommand.Parameters.AddWithValue("@Password", user.Password);
+
+                    insertCommand.Parameters.AddWithValue("@Read", user.ReadPermission);
+                    insertCommand.Parameters.AddWithValue("@Write", user.WritePermission);
+                    insertCommand.Parameters.AddWithValue("@Remove", user.RemovePermission);
+
+                    insertCommand.ExecuteReader();
+                    insertCommand.Dispose();
+                    DBase.Dispose();
+                    DBase.Close();
+                }
+            }
+        }
         /// <summary>
         /// Retrieves all the contents of a table as a list of Assets
         /// </summary>
@@ -79,11 +165,11 @@ namespace DataAccessLibrary
         {
             List<Asset> listOfAssets = new List<Asset>();
             using (SqliteConnection DBase =
-                    new SqliteConnection("Filename=InventoryDB.db"))
+                    new SqliteConnection("Filename=" + DB))
             {
                 DBase.Open();
 
-                SqliteCommand selectCommand = new SqliteCommand("SELECT * from AssetsInventory", DBase); //SQL query
+                SqliteCommand selectCommand = new SqliteCommand("SELECT * From " + AssetsInv, DBase); //SQL query
 
                 SqliteDataReader query = selectCommand.ExecuteReader();
 
@@ -101,10 +187,55 @@ namespace DataAccessLibrary
 
                     listOfAssets.Add(temp);
                 }
-
+                selectCommand.Dispose();
+                query.Close();
+                DBase.Dispose();
                 DBase.Close();
             }
             return listOfAssets;
+        }
+
+        public User getUser(string Username, string Password)
+        {
+            User temp = new User();
+
+            using (SqliteConnection DBase =
+                    new SqliteConnection("Filename=" + DB))
+            {
+                DBase.Open();
+
+                SqliteCommand selectCommand = new SqliteCommand("SELECT * FROM " + LoginInfo + " WHERE Username LIKE @Username"); //SQL query
+                selectCommand.Connection = DBase;
+                selectCommand.Parameters.AddWithValue("@Username", Username);
+
+                SqliteDataReader query = selectCommand.ExecuteReader();
+
+                
+                if (query.Read())
+                {
+                    temp.Username = query.GetString(0);
+                    temp.Password = query.GetString(1);
+                    temp.ReadPermission = query.GetBoolean(2);
+                    temp.WritePermission = query.GetBoolean(3);
+                    temp.RemovePermission = query.GetBoolean(4);
+
+                    temp.decryption();
+
+                    if(Password.CompareTo(temp.Password) != 0)
+                    {
+                        temp = null;
+                    }
+                }
+                else
+                {
+                    temp = null;
+                }
+                query.Close();
+                selectCommand.Dispose();
+                DBase.Close();
+                DBase.Dispose();
+            }
+            return temp;
         }
         /// <summary>
         /// This method removes all rows/contents of the AssetsInv table in the Database
@@ -116,87 +247,32 @@ namespace DataAccessLibrary
             {
                 DBase.Open();
 
-                SqliteCommand insertCommand = new SqliteCommand();
-                insertCommand.Connection = DBase;
+                SqliteCommand RemoveAllCommand = new SqliteCommand();
+                RemoveAllCommand.Connection = DBase;
 
-                insertCommand.CommandText = $"DELETE FROM AssetsInventory;"; //SQL Query
-                insertCommand.ExecuteReader();
+                RemoveAllCommand.CommandText = $"DELETE FROM " + AssetsInv + ";"; //SQL Query
+                RemoveAllCommand.ExecuteReader();
 
+                RemoveAllCommand.Dispose();
                 DBase.Close();
+                DBase.Dispose();
             }
         }
-
-        /*
-        DO NOT USE!!! REVISED DESIGN STATES WE UPDATE THE DATABASE WHEN WE WANT AND NOT CONCURRENTLY. METHODS NOT NEEDED SO UNUSED CODE.
-        DO NOT ERASE WORK THAT I DID. THANKS.
-        public static void RemoveWithAsset(Asset asset)
+        public override string ToString()
         {
-            using (SqliteConnection DBase =
-                    new SqliteConnection("Filename=InventoryDB.db"))
-            {
-                DBase.Open();
-                SqliteCommand RemoveAssetCommand = new SqliteCommand();
-                RemoveAssetCommand.Connection = DBase;
-
-                RemoveAssetCommand.CommandText = $"DELETE FROM AssetsInv WHERE ModelNumber=@ModelNumber AND SerialNumber=@SerialNumber AND AssetName LIKE @Name";
-                RemoveAssetCommand.Parameters.AddWithValue("@Name", asset.Name);
-                RemoveAssetCommand.Parameters.AddWithValue("@ModelNumber", asset.ModelNumber);
-                RemoveAssetCommand.Parameters.AddWithValue("@SerialNumber", asset.SerialNumber);
-                RemoveAssetCommand.ExecuteReader();
-
-                DBase.Close();
-            }
+            return $"| Database: {DB} | Table: {WorkingTable} |"; 
         }
-        public static void RemoveWithIDNum(string GUID)
+
+        public int CompareTo(DataAccess other)
         {
-            using (SqliteConnection DBase =
-                new SqliteConnection("Filename=InventoryDB.db"))
+            if (other != null)
             {
-                DBase.Open();
-                SqliteCommand RemoveIDNumCommand = new SqliteCommand();
-                RemoveIDNumCommand.Connection = DBase;
-
-                RemoveIDNumCommand.CommandText = $"DELETE FROM AssetsInv WHERE IDNumber LIKE @IDNum";
-                RemoveIDNumCommand.Parameters.AddWithValue("@IDNum", GUID);
-                RemoveIDNumCommand.ExecuteReader();
-
-                DBase.Close();
+                return this.WorkingTable.CompareTo(other.WorkingTable);
+            }
+            else
+            {
+                throw new ArgumentException("The object passed is invalid");
             }
         }
-
-        public static ObservableCollection<Asset> RetriveAllAssets()
-        {
-            ObservableCollection<Asset> entries = new ObservableCollection<Asset>();
-
-            using (SqliteConnection DBase =
-                new SqliteConnection("Filename=InventoryDB.db"))
-            {
-                DBase.Open();
-
-                SqliteCommand selectCommand = new SqliteCommand
-                    ("SELECT * from AssetsInv", DBase);
-
-                SqliteDataReader query = selectCommand.ExecuteReader();
-
-                while (query.Read())
-                {
-                    Asset temp = new Asset();
-                    temp.Name = query.GetString(0);
-                    temp.Description = query.GetString(1);
-                    temp.IDnumber = query.GetString(2);
-                    temp.Price = query.GetDouble(3);
-                    temp.ModelNumber = query.GetInt32(4);
-                    temp.SerialNumber = query.GetInt32(5);
-                    temp.CheckIn = query.GetBoolean(6);
-
-                    entries.Add(temp);
-                }
-
-                DBase.Close();
-            }
-
-            return entries;
-        }
-        */
     }
 }
