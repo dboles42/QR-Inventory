@@ -9,8 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="62,84,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="310" FontSize="48" TextAlignment="Left"/>
-        <HyperlinkButton Content="Click to go to page 1" HorizontalAlignment="Left" Height="87" Margin="243,818,0,0" VerticalAlignment="Top" Width="312" FontSize="22" Click="HyperlinkButton_Click"/>
+        <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="438,6,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="212" FontSize="48" TextAlignment="Left"/>
         <ListView Name="InventoryList"
                   SelectionMode="Single"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -19,10 +18,10 @@
                   ScrollViewer.HorizontalScrollMode="Enabled"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   ScrollViewer.IsHorizontalRailEnabled="True"
-                  Margin="10,169,436,121" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  Margin="10,80,436,57" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Height="38" Width="942" Margin="0,0,0,0"  >
+                    <StackPanel Orientation="Horizontal" Height="38" Width="942" Margin="0,0,0,0" HorizontalAlignment="Left"  >
                         <TextBlock Text="Name" Width="150" Foreground="DarkRed" HorizontalAlignment="Left"/>
                         <TextBlock Text="SerialNumber" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
                         <TextBlock Text="ModelNumber" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
@@ -52,41 +51,45 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <TextBlock x:Name="OptionsText" HorizontalAlignment="Left" Height="69" Margin="1207,161,0,0" Text="Options" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" FontSize="36"/>
-        <Button x:Name="AddItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="1184,223,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="AddItemButtonClick" Tapped="AddItemButton_Tapped">
-            <FlyoutBase.AttachedFlyout>
-                <Flyout>
-                    <TextBlock Text="Access Denied"/>
-                </Flyout>
-            </FlyoutBase.AttachedFlyout>
-        </Button>
-        <Button x:Name="RemoveItemButton" Content="Remove Item" HorizontalAlignment="Left" Margin="1184,324,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="RemoveButtonClick" Tapped="RemoveButton_Tapped">
-            <FlyoutBase.AttachedFlyout>
-                <Flyout>
-                    <TextBlock Text="Access Denied"/>
-                </Flyout>
-            </FlyoutBase.AttachedFlyout>
-        </Button>
-        <Button x:Name="RemoveAllButton" Content="Remove All" HorizontalAlignment="Left" Margin="1184,427,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="RemoveAllButtonClick" Tapped="RemoveButton_Tapped">
-            <FlyoutBase.AttachedFlyout>
-                <Flyout>
-                    <TextBlock Text="Access Denied"/>
-                </Flyout>
-            </FlyoutBase.AttachedFlyout>
-        </Button>
-        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="1184,523,0,0" VerticalAlignment="Top" Height="54" Width="179" Click="UpdateButtonClick" Tapped="UpdateButton_Tapped">
-            <FlyoutBase.AttachedFlyout>
-                <Flyout>
-                    <TextBlock Text="Access Denied"/>
-                </Flyout>
-            </FlyoutBase.AttachedFlyout>
-        </Button>
-        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="62,813,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="ExitButtonClick"/>
-        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="571,813,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="BackButtonClick"/>
+        <RelativePanel HorizontalAlignment="Left" Height="577" Margin="1192,17,0,0" VerticalAlignment="Top" Width="179">
+            <TextBlock x:Name="OptionsText" HorizontalAlignment="Left" Height="53" Margin="21,0,0,0" Text="Options" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" FontSize="36"/>
+            <Button x:Name="AddItemButton" Content="Add Item" HorizontalAlignment="Center" Margin="0,59,0,0" VerticalAlignment="Top" Height="56" Width="179" Click="AddItemButtonClick" Tapped="AddItemButton_Tapped">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock Text="Access Denied"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Button>
+            <Button x:Name="RemoveItemButton" Content="Remove Item" HorizontalAlignment="Center" Margin="0,122,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="RemoveButtonClick" Tapped="RemoveButton_Tapped">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock Text="Access Denied"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Button>
+            <Button x:Name="RemoveAllButton" Content="Remove All" HorizontalAlignment="Center" Margin="0,189,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="RemoveAllButtonClick" Tapped="RemoveButton_Tapped">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock Text="Access Denied"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Button>
+            <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Center" Margin="0,256,0,0" VerticalAlignment="Top" Height="54" Width="179" Click="UpdateButtonClick" Tapped="UpdateButton_Tapped">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock Text="Access Denied"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Button>
+            <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Center" Margin="0,521,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="ExitButtonClick"/>
+            <Button x:Name="BackButton" Content="Logoff" HorizontalAlignment="Center" Margin="0,453,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="BackButtonClick"/>
+
+            <Button x:Name="ScanButton" Content="Scan QR Code" HorizontalAlignment="Center" Margin="0,319,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="ScanButtonClick"/>
+            <Button x:Name="PrintButton" Content="Print QR Code" HorizontalAlignment="Center" Margin="0,385,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="PrintButtonClick"/>
+
+        </RelativePanel>
 
         <StackPanel HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="658" Margin="62,251,0,0"/>
-        <Button x:Name="ScanButton" Content="Scan QR Code" HorizontalAlignment="Left" Margin="1187,612,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="ScanButtonClick"/>
-        <Button x:Name="PrintButton" Content="Print QR Code" HorizontalAlignment="Left" Margin="1190,705,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="PrintButtonClick"/>
 
     </Grid>
 </Page>
