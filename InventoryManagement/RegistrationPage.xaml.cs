@@ -24,6 +24,7 @@ namespace InventoryManagement
     /// </summary>
     public sealed partial class RegistrationPage : Page
     {
+        bool IsTextBoxEmpty { get; set; }
         DataAccess LoginDataAccessKey = new DataAccess("Login");
         public RegistrationPage()
         {
@@ -33,13 +34,30 @@ namespace InventoryManagement
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)
         {
             User Registered = new User();
-            Registered.Username = UsernameTextBox.Text;
-            Registered.Password = PasswordText.Password;
-            Registered.ReadPermission = (bool)ReadCheck.IsChecked;
-            Registered.WritePermission = (bool)WriteCheck.IsChecked;
-            Registered.RemovePermission = (bool)RemoveCheck.IsChecked;
-            LoginDataAccessKey.InsertUserToTable(Registered);
-            this.Frame.Navigate(typeof(LoginPage));
+            if (UsernameTextBox.Text.CompareTo("") == 0 ||
+                PasswordText.Password.CompareTo("") == 0)
+            {
+                IsTextBoxEmpty = true;
+            }
+            else
+            {
+                IsTextBoxEmpty = false;
+                Registered.Username = UsernameTextBox.Text;
+                Registered.Password = PasswordText.Password;
+                Registered.ReadPermission = (bool)ReadCheck.IsChecked;
+                Registered.WritePermission = (bool)WriteCheck.IsChecked;
+                Registered.RemovePermission = (bool)RemoveCheck.IsChecked;
+                LoginDataAccessKey.InsertUserToTable(Registered);
+                this.Frame.Navigate(typeof(LoginPage));
+            }
+        }
+
+        private void RegistrationButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (IsTextBoxEmpty == true)
+            {
+                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
+            }
         }
     }
 }

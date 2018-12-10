@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="62,84,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="310" FontSize="48" TextAlignment="Center"/>
+        <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="62,84,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="310" FontSize="48" TextAlignment="Left"/>
         <HyperlinkButton Content="Click to go to page 1" HorizontalAlignment="Left" Height="87" Margin="243,818,0,0" VerticalAlignment="Top" Width="312" FontSize="22" Click="HyperlinkButton_Click"/>
         <ListView Name="InventoryList"
                   SelectionMode="Single"
@@ -23,12 +23,12 @@
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Height="38" Width="942" Margin="0,0,0,0"  >
-                        <TextBlock Text="Name" Width="150" Foreground="DarkRed" />
-                        <TextBlock Text="SerialNumber" Width="200" Foreground="DarkRed" />
-                        <TextBlock Text="ModelNumber" Width="200" Foreground="DarkRed" />
-                        <TextBlock Text="Description" Width="200" Foreground="DarkRed" />
-                        <TextBlock Text="Price" Width="80" Foreground="DarkRed" />
-                        <TextBlock Text="CheckIn" Width="80" Foreground="DarkRed" />
+                        <TextBlock Text="Name" Width="150" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Text="SerialNumber" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Text="ModelNumber" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Description" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Price" Width="80" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Text="CheckIn" Width="80" Foreground="DarkRed" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.HeaderTemplate>
