@@ -19,7 +19,7 @@
                   ScrollViewer.HorizontalScrollMode="Enabled"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   ScrollViewer.IsHorizontalRailEnabled="True"
-                  Margin="20,168,426,122">
+                  Margin="10,169,436,121" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Height="38" Width="942" Margin="0,0,0,0"  >
