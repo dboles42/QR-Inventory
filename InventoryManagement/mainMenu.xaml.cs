@@ -79,21 +79,20 @@ namespace InventoryManagement
         {
             if (CurrUser.RemovePermission)
             {
-                MessageDialog msgbox = new MessageDialog("This will delete all assets in the inventory. Are you sure bro?");
-                msgbox.Commands.Add(new UICommand { Label = "Yes bro", Id = 0 });
-                msgbox.Commands.Add(new UICommand { Label = "No bro", Id = 1 });
-                msgbox.Commands.Add(new UICommand { Label = "Not sure bro", Id = 2 });
+                MessageDialog msgbox = new MessageDialog("This will delete all assets in the inventory. Are you sure?");
+                msgbox.Commands.Add(new UICommand { Label = "Yes, I am sure", Id = 0 });
+                msgbox.Commands.Add(new UICommand { Label = "Cancel", Id = 1 });
                 var answer = await msgbox.ShowAsync();
                 if ((int)answer.Id == 0)
                 {
                     i1.ClearInventory();
                     InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
-                    MessageDialog msgbox2 = new MessageDialog("Okay bro");
+                    MessageDialog msgbox2 = new MessageDialog("All assets successfully deleted from the inventory");
                     await msgbox2.ShowAsync();
                 }
                 else if ((int)answer.Id == 1)
                 {
-                    MessageDialog msgbox2 = new MessageDialog("That's fine man");
+                    MessageDialog msgbox2 = new MessageDialog("Operation Cancelled");
                     await msgbox2.ShowAsync();
                 }
             }

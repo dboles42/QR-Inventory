@@ -32,7 +32,6 @@ namespace DataAccessLibrary
             DB = "InventoryDB.db";
             AssetsInv = "AssetsInventory";
             LoginInfo = "LoginInfo";
-
             if (WorkingTable.CompareTo("Asset") == 0)
             {
                 this.WorkingTable = AssetsInv;
@@ -105,10 +104,8 @@ namespace DataAccessLibrary
                     {
                         SqliteCommand insertCommand = new SqliteCommand();
                         insertCommand.Connection = DBase;
-
                         insertCommand.CommandText = $"INSERT INTO " + AssetsInv + " VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
                                                                                    "@Price, @ModelNumber, @SerialNumber);";
-
                         insertCommand.Parameters.AddWithValue("@Name", currAsset.Name);
                         insertCommand.Parameters.AddWithValue("@Description", currAsset.Description);
                         insertCommand.Parameters.AddWithValue("@IDnumber", currAsset.IDnumber);

@@ -28,7 +28,6 @@ namespace InventoryManagement
         private int modelNumInput { get; set; }
         private string serialNumInput { get; set; }
 
-
         Inventory i1 = new Inventory();
         DataAccess DataAccessKey = new DataAccess("Asset");
 
@@ -54,65 +53,10 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            i1.AddAsset(nameInput, descripInput, priceInput, modelNumInput, serialNumInput);
+            i1.AddAsset((string) nameTextBox.Text,(string) descriptionText.Text, double.Parse(priceText.Text), int.Parse(modelnumText.Text), serialnumText.Text);
             DataAccessKey.RemoveAllRows();
             DataAccessKey.InsertListToTable(i1.listOfAssets);
             Frame.Navigate(typeof(mainMenu));
-        }
-
-        /// <summary>
-        /// saves name textbox user input
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            nameInput = nameTextBox.Text;
-        }
-
-        /// <summary>
-        /// saves description textbox user input
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DescriptionText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            descripInput = descriptionText.Text;
-        }
-
-        /// <summary>
-        /// saves price textbox user input
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PriceText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            priceInput = double.Parse(priceText.Text);
-        }
-
-        /// <summary>
-        /// saves modelnumber textbox user input
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ModelnumText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            modelNumInput = int.Parse(modelnumText.Text);
-        }
-
-        /// <summary>
-        /// saves serialnumber user input
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SerialnumText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-           serialNumInput = serialnumText.Text;
-        }
-
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
