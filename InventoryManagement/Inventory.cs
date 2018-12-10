@@ -123,6 +123,16 @@ namespace InventoryManagement
         }
 
         /// <summary>
+        /// Finds the index of an asset in the list of assets
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns>An int that is the index of the asset in the list</returns>
+        public int FindIndex(Asset A)
+        {
+            return listOfAssets.IndexOf(A);
+        }
+
+        /// <summary>
         /// Retrieves all assets in the inventoryList and places them in an observable collection
         /// </summary>
         /// <returns>An observable collection</returns>

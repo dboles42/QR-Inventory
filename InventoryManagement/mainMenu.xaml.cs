@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
+using Windows.UI.Popups;
 using AssetObj;
 using DataAccessLibrary;
 using UserObj;
@@ -29,13 +30,11 @@ namespace InventoryManagement
         public mainMenu()
         {
             this.InitializeComponent();
-            if ((bool)mainMenu.CurrUser.ReadPermission)
+            if (mainMenu.CurrUser.ReadPermission)
             {
                 InventoryList.ItemsSource = i1.RetriveAllAssets();
             }
-            
         }
-        
 
         /// <summary>
         /// simple button that takes user to first page if needed
@@ -57,21 +56,46 @@ namespace InventoryManagement
             }
         }
 
-        private void RemoveButtonClick(object sender, RoutedEventArgs e)
+        private async void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
             if (mainMenu.CurrUser.RemovePermission)
             {
-                Asset item = (Asset)InventoryList.SelectedItem;
-                i1.RemoveAsset(item);
-                InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+                if (InventoryList.SelectedItem == null)
+                {
+                    MessageDialog msgbox = new MessageDialog("You have to select an item before executing this command.");
+                    await msgbox.ShowAsync();
+                }
+                else
+                {
+                    i1.RemoveAsset((Asset)InventoryList.SelectedItem);
+                    InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+                    MessageDialog msgbox = new MessageDialog("The asset has been successfully removed.");
+                    await msgbox.ShowAsync();
+                }
             }
         }
-        private void RemoveAllButtonClick(object sender, RoutedEventArgs e)
+
+        private async void RemoveAllButtonClick(object sender, RoutedEventArgs e)
         {
-            if (mainMenu.CurrUser.RemovePermission)
+            if (CurrUser.RemovePermission)
             {
-                i1.ClearInventory();
-                InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+                MessageDialog msgbox = new MessageDialog("This will delete all assets in the inventory. Are you sure bro?");
+                msgbox.Commands.Add(new UICommand { Label = "Yes bro", Id = 0 });
+                msgbox.Commands.Add(new UICommand { Label = "No bro", Id = 1 });
+                msgbox.Commands.Add(new UICommand { Label = "Not sure bro", Id = 2 });
+                var answer = await msgbox.ShowAsync();
+                if ((int)answer.Id == 0)
+                {
+                    i1.ClearInventory();
+                    InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+                    MessageDialog msgbox2 = new MessageDialog("Okay bro");
+                    await msgbox2.ShowAsync();
+                }
+                else if ((int)answer.Id == 1)
+                {
+                    MessageDialog msgbox2 = new MessageDialog("That's fine man");
+                    await msgbox2.ShowAsync();
+                }
             }
         }
 
@@ -82,8 +106,11 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void ExitButtonClick(object sender, RoutedEventArgs e)
         {
-            AssetDataAccessKey.RemoveAllRows();
-            AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
+            if (CurrUser.WritePermission || CurrUser.RemovePermission)
+            {
+                AssetDataAccessKey.RemoveAllRows();
+                AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
+            }
             Application.Current.Exit();
         }
 
@@ -92,12 +119,14 @@ namespace InventoryManagement
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UpdateButtonClick(object sender, RoutedEventArgs e)
+        private async void UpdateButtonClick(object sender, RoutedEventArgs e)
         {
-            if (mainMenu.CurrUser.WritePermission || mainMenu.CurrUser.RemovePermission)
+            if (CurrUser.WritePermission || CurrUser.RemovePermission)
             {
                 AssetDataAccessKey.RemoveAllRows();
                 AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
+                MessageDialog msgbox = new MessageDialog("The database has been successfully updated.");
+                await msgbox.ShowAsync();
             }
         }
 
@@ -109,19 +138,27 @@ namespace InventoryManagement
             this.Frame.Navigate(typeof(BarCodeScanner));
         }
 
-        private void PrintButtonClick(object sender, RoutedEventArgs e)
+        private async void PrintButtonClick(object sender, RoutedEventArgs e)
         {
-            AssetDataAccessKey.RemoveAllRows();
-            AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
-            CurrentAsset = (Asset)InventoryList.SelectedItem;
-            this.Frame.Navigate(typeof(BarcodeGenerator));
+            if (InventoryList.SelectedItem == null)
+            {
+                MessageDialog msgbox = new MessageDialog("You have to select an item before executing this command.");
+                await msgbox.ShowAsync();
+            }
+            else
+            {
+                AssetDataAccessKey.RemoveAllRows();
+                AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
+                CurrentAsset = (Asset)InventoryList.SelectedItem;
+                this.Frame.Navigate(typeof(BarcodeGenerator));
+            }
         }
 
-        private void UpdateButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void AddItemButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (!(mainMenu.CurrUser.WritePermission || mainMenu.CurrUser.RemovePermission))
+            if (!mainMenu.CurrUser.WritePermission)
             {
-                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
         }
 
@@ -129,15 +166,15 @@ namespace InventoryManagement
         {
             if (!mainMenu.CurrUser.RemovePermission)
             {
-                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
         }
 
-        private void AddItemButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void UpdateButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if(!mainMenu.CurrUser.WritePermission)
+            if (!(mainMenu.CurrUser.RemovePermission || mainMenu.CurrUser.WritePermission))
             {
-                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
         }
 

@@ -19,36 +19,31 @@
                   ScrollViewer.HorizontalScrollMode="Enabled"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   ScrollViewer.IsHorizontalRailEnabled="True"
-                  Margin="20,168,344,122" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  Margin="20,168,426,122" SelectionChanged="InventoryList_SelectionChanged">
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal"  >
-                        <TextBlock Text="ID" Margin="8,0" Width="300" Foreground="DarkRed" />
+                    <StackPanel Orientation="Horizontal" Height="38" Width="942" Margin="0,0,0,0"  >
                         <TextBlock Text="Name" Width="150" Foreground="DarkRed" />
                         <TextBlock Text="SerialNumber" Width="200" Foreground="DarkRed" />
-                        <TextBlock Text="ModelNumber" Width="120" Foreground="DarkRed" />
-                        <TextBlock Text="Description" Width="150" Foreground="DarkRed" />
+                        <TextBlock Text="ModelNumber" Width="200" Foreground="DarkRed" />
+                        <TextBlock Text="Description" Width="200" Foreground="DarkRed" />
                         <TextBlock Text="Price" Width="80" Foreground="DarkRed" />
                         <TextBlock Text="CheckIn" Width="80" Foreground="DarkRed" />
-
                     </StackPanel>
                 </DataTemplate>
             </ListView.HeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local1:Asset">
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Name="ItemId"
-                                    Text="{x:Bind IDnumber}"
-                                    Width="300" />
+                    <StackPanel Orientation="Horizontal" Width="942" Margin="0,0,0,0" >
                         <TextBlock Name="Name"
                                     Text="{x:Bind Name}"
                                     Width="150" />
                         <TextBlock Text="{x:Bind SerialNumber}"
                                    Width="200" />
                         <TextBlock Text="{x:Bind ModelNumber}"
-                                   Width="150" />
+                                   Width="200" />
                         <TextBlock Text="{x:Bind Description}"
-                                   Width="120" />
+                                   Width="200" />
                         <TextBlock Text="{x:Bind Price}"
                                    Width="80" />
                         <TextBlock Text="{x:Bind CheckIn}"
