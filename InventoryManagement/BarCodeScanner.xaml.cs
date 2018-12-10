@@ -169,10 +169,10 @@ namespace InventoryManagement
 
                         if (ScannedAsset.CheckIn == true)
                         {
-                            btnCheckIn.IsEnabled = true;
+                            btnCheckOut.IsEnabled = true;
                         }
                         else
-                            btnCheckOut.IsEnabled = true;
+                            btnCheckIn.IsEnabled = true;
                     }
                     else 
                     ScanResult.Text = "Scan Unsucccesful. Try again";
@@ -220,15 +220,29 @@ namespace InventoryManagement
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(mainMenu));
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertIntoTable(i1.listOfAssets);
+            
         }
 
         private void btnCheckIn_Click(object sender, RoutedEventArgs e)
         {
-
+            i1.listOfAssets[i1.FindIndex(CheckInAsset)].CheckIn = true;
+            if (CheckInAsset.CheckIn == true)
+            {
+                btnCheckIn.IsEnabled = false;
+                btnCheckOut.IsEnabled = true;
+            }
         }
 
         private void btnCheckOut_Click(object sender, RoutedEventArgs e)
         {
+            i1.listOfAssets[i1.FindIndex(CheckInAsset)].CheckIn = false;
+            if (CheckInAsset.CheckIn == false)
+            {
+                btnCheckIn.IsEnabled = true;
+                btnCheckOut.IsEnabled = false;
+            }
 
         }
 
