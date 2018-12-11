@@ -21,8 +21,8 @@
             <TextBox x:Name="nameTextBox" Text="" Width="294" VerticalAlignment="Top" Margin="106,0,0,0" HorizontalAlignment="Left" />
             <TextBox x:Name="descriptionText" Text="" Margin="106,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="294"/>
             <TextBox x:Name="priceText" Text="" Margin="106,77,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="294" />
-            <TextBox x:Name="modelnumText" Text=""  Margin="106,115,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="294"/>
-            <TextBox x:Name="serialnumText" Text="" Margin="106,153,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="294"/>
+            <TextBox x:Name="serialnumText" Text=""  Margin="106,115,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="294"/>
+            <TextBox x:Name="modelnumText" Text="" Margin="106,153,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="294"/>
         </RelativePanel>
     </Grid>
 </Page>

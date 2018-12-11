@@ -20,7 +20,7 @@ namespace DataAccessLibrary
         public DataAccess()
         {
             DB = "InventoryDB.db";
-            AssetsInv = "AssetsInventory";
+            AssetsInv = "AssetsInventory10";
             LoginInfo = "LoginInfo";
             WorkingTable = "Default";
 
@@ -30,7 +30,7 @@ namespace DataAccessLibrary
         public DataAccess(string WorkingTable)
         {
             DB = "InventoryDB.db";
-            AssetsInv = "AssetsInventory";
+            AssetsInv = "AssetsInventory10";
             LoginInfo = "LoginInfo";
             if (WorkingTable.CompareTo("Asset") == 0)
             {
@@ -60,11 +60,11 @@ namespace DataAccessLibrary
                     "EXISTS " + AssetsInv + " (" +
                     "AssetName VARCHAR(255)," +
                     "Description VARCHAR(255)," +
+                    "Price VARCHAR(255)," +
                     "IDNumber VARCHAR(255)," +
-                    "CheckIn INT NOT NULL," +
-                    "Price FLOAT NOT NULL," +
+                    "SerialNumber VARCHAR(255)," +
                     "ModelNumber INT NOT NULL," +
-                    "SerialNumber VARCHAR(255))";
+                    "CheckIn INT NOT NULL)";
 
                 String CreateLoginTableQuery = "CREATE TABLE IF NOT " +
                     "EXISTS " + LoginInfo + " (" +
@@ -104,13 +104,13 @@ namespace DataAccessLibrary
                     {
                         SqliteCommand insertCommand = new SqliteCommand();
                         insertCommand.Connection = DBase;
-                        insertCommand.CommandText = $"INSERT INTO " + AssetsInv + " VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
-                                                                                   "@Price, @ModelNumber, @SerialNumber);";
+                        insertCommand.CommandText = $"INSERT INTO " + AssetsInv + $" VALUES (@Name, @Description, @Price, @IDnumber, " +
+                                                                                   "@SerialNumber, @ModelNumber, @CheckIn);";
                         insertCommand.Parameters.AddWithValue("@Name", currAsset.Name);
                         insertCommand.Parameters.AddWithValue("@Description", currAsset.Description);
-                        insertCommand.Parameters.AddWithValue("@IDnumber", currAsset.IDnumber);
+                        insertCommand.Parameters.AddWithValue("@IDnumber", currAsset.IDnumber.Replace("-","_"));
                         insertCommand.Parameters.AddWithValue("@CheckIn", currAsset.CheckIn);
-                        insertCommand.Parameters.AddWithValue("@Price", currAsset.Price);
+                        insertCommand.Parameters.AddWithValue("@Price", currAsset.Price.Replace(".","_"));
                         insertCommand.Parameters.AddWithValue("@ModelNumber", currAsset.ModelNumber);
                         insertCommand.Parameters.AddWithValue("@SerialNumber", currAsset.SerialNumber);
 
@@ -176,10 +176,10 @@ namespace DataAccessLibrary
                     Asset temp = new Asset();
                     temp.Name = query.GetString(0);
                     temp.Description = query.GetString(1);
-                    temp.IDnumber = query.GetString(2);
-                    temp.Price = query.GetDouble(3);
-                    temp.ModelNumber = query.GetInt32(4);
-                    temp.SerialNumber = query.GetString(5);
+                    temp.Price = query.GetString(2).Replace("_", ".");
+                    temp.IDnumber = query.GetString(3).Replace("_", "-");
+                    temp.SerialNumber = query.GetString(4);
+                    temp.ModelNumber = query.GetInt32(5);
                     temp.CheckIn = query.GetBoolean(6);
 
                     listOfAssets.Add(temp);

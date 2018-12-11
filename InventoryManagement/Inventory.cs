@@ -38,7 +38,7 @@ namespace InventoryManagement
         /// <param name="ModelNumber">Model number.</param>
         /// <param name="SerialNumber">Serial number.</param>
         /// <param name="CheckIn">If set to <c>true</c> check in.</param>
-        public void AddAsset(string Name = "None", string Description = "None", double Price = 0, int ModelNumber = 0, string SerialNumber = "none", bool CheckIn = false){
+        public void AddAsset(string Name = "None", string Description = "None", string Price = "0.0", int ModelNumber = 0, string SerialNumber = "none", bool CheckIn = false){
             listOfAssets.Add(new Asset(Name, Description, Price, ModelNumber, SerialNumber, CheckIn));
             listOfAssets.Sort();
             NumberOfAssets++;
@@ -68,7 +68,7 @@ namespace InventoryManagement
         public double FindTotalValue(){
             double TotalValue = 0;
             foreach (Asset A in listOfAssets){
-                TotalValue += A.Price;
+                TotalValue += double.Parse(A.Price);
             }
             return TotalValue;
         }
@@ -107,7 +107,6 @@ namespace InventoryManagement
             foreach (Asset A in listOfAssets)
             {
                 s += A.ToString();
-                s += "****************************************\n";
             }
             return s;
         }

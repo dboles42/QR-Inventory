@@ -53,7 +53,7 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            i1.AddAsset((string) nameTextBox.Text,(string) descriptionText.Text, double.Parse(priceText.Text), int.Parse(modelnumText.Text), serialnumText.Text);
+            i1.AddAsset((string)nameTextBox.Text,(string)descriptionText.Text, priceText.Text.ToString(), int.Parse(modelnumText.Text), serialnumText.Text.ToString());
             DataAccessKey.RemoveAllRows();
             DataAccessKey.InsertListToTable(i1.listOfAssets);
             Frame.Navigate(typeof(mainMenu));
