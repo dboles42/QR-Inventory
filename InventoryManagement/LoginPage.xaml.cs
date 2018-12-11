@@ -25,6 +25,9 @@ namespace InventoryManagement
     {
         DataAccess LoginDataAccessKey = new DataAccess("Login");
         bool HasAccess { get; set; }
+        /// <summary>
+        /// Constructor for the Login Page
+        /// </summary>
         public LoginPage()
         {
             this.InitializeComponent();
@@ -34,7 +37,11 @@ namespace InventoryManagement
         {
             this.Frame.Navigate(typeof(RegistrationPage));
         }
-
+        /// <summary>
+        /// Checks the database to see if the user has valid information to login
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             mainMenu.CurrUser = LoginDataAccessKey.getUser(UsernameTextBox.Text,PasswordText.Password);
@@ -48,6 +55,11 @@ namespace InventoryManagement
                 this.Frame.Navigate(typeof(mainMenu));
             }
         }
+        /// <summary>
+        /// Shows Access Denied if the user doesnt enter valid information to login
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (HasAccess == false)

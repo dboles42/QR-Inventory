@@ -12,11 +12,17 @@ namespace DataAccessLibrary
     /// </summary>
     public class DataAccess : IComparable<DataAccess>
     {
+        /// <summary>
+        /// Private Fields
+        /// </summary>
         private string DB { get; set; }
         private string WorkingTable { get; set; }
         private string AssetsInv { get; set; }
         private string LoginInfo { get; set; }
 
+        /// <summary>
+        /// Defualt Constructor
+        /// </summary>
         public DataAccess()
         {
             DB = "InventoryDB.db";
@@ -26,7 +32,10 @@ namespace DataAccessLibrary
 
             InitializeDatabase();
         }
-
+        /// <summary>
+        /// Explicit constructor that takes in the table the developer is working on.
+        /// </summary>
+        /// <param name="WorkingTable"></param>
         public DataAccess(string WorkingTable)
         {
             DB = "InventoryDB.db";
@@ -122,7 +131,10 @@ namespace DataAccessLibrary
                 }
             }
         }
-
+        /// <summary>
+        /// Inserts a user in the Login Information table of the database
+        /// </summary>
+        /// <param name="user"></param>
         public void InsertUserToTable(User user)
         {
             if (WorkingTable.CompareTo(LoginInfo) == 0)
@@ -191,7 +203,12 @@ namespace DataAccessLibrary
             }
             return listOfAssets;
         }
-
+        /// <summary>
+        /// Gets the user based on username and password
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
         public User getUser(string Username, string Password)
         {
             User temp = new User();
@@ -255,11 +272,19 @@ namespace DataAccessLibrary
                 DBase.Dispose();
             }
         }
+        /// <summary>
+        /// Tells you what database your in and what table that instance of DataAccess is working with
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"| Database: {DB} | Table: {WorkingTable} |"; 
         }
-
+        /// <summary>
+        /// Compares the working tables with each other
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public int CompareTo(DataAccess other)
         {
             if (other != null)

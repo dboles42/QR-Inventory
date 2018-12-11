@@ -4,6 +4,9 @@ using System.Text;
 
 namespace UserObj
 {
+    /// <summary>
+    /// User class
+    /// </summary>
     public class User : IComparable<User>
     {
         public string Username { get; set; }
@@ -11,7 +14,9 @@ namespace UserObj
         public bool ReadPermission { get; set; }
         public bool WritePermission { get; set; }
         public bool RemovePermission { get; set; }
-
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public User()
         {
             Username = "NoUserSelected";
@@ -20,7 +25,14 @@ namespace UserObj
             WritePermission = false;
             RemovePermission = false;
         }
-
+        /// <summary>
+        /// Explicit constructor.
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Password"></param>
+        /// <param name="ReadPermission"></param>
+        /// <param name="WritePermission"></param>
+        /// <param name="RemovePermission"></param>
         public User(string Username, string Password, bool ReadPermission, bool WritePermission, bool RemovePermission)
         {
             this.Username = Username;
@@ -29,7 +41,11 @@ namespace UserObj
             this.WritePermission = WritePermission;
             this.RemovePermission = RemovePermission;
         }
-
+        /// <summary>
+        /// Encrypts the password of the user using fibonacci sequence so the password appears different in the database.
+        /// I don't think I should fully explain the way this method works for security reasons.
+        /// Just kidding it just adds to the 0 index char starting at 2 then the next char in the password gets incremented by 3 then 5 then 8.
+        /// </summary>
         public void encryption()
         {
             //encryption using Fibonacci sequence
@@ -49,7 +65,10 @@ namespace UserObj
             string encrypted = new string(PassCharArray);
             this.Password = encrypted;
         }
-
+        /// <summary>
+        /// Decrypts the password of the user using fibonacci sequence so the we can check if the password is the same as what the user enters
+        /// Does encryption but backwords starts at the end of the password string and subtracts starting at the furthest fibbonacci sequence the password string ends.
+        /// </summary>
         public void decryption()
         {
             //decryption using Fibonacci sequence
@@ -77,7 +96,10 @@ namespace UserObj
             string decrypted = new string(PassCharArray);
             this.Password = decrypted;
         }
-
+        /// <summary>
+        /// Turns the User object into a orderly and clear readable string
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"| Username: {Username} | Password: {Password} | ReadPermission: {ReadPermission} " +

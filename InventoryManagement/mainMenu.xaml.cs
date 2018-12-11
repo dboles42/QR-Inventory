@@ -27,6 +27,10 @@ namespace InventoryManagement
         public static Asset CurrentAsset { get; set; }
         public static User CurrUser { get; set; }
         DataAccess AssetDataAccessKey = new DataAccess("Asset");
+            
+        /// <summary>
+        /// Page Constructor
+        /// </summary>
         public mainMenu()
         {
             this.InitializeComponent();
@@ -45,7 +49,11 @@ namespace InventoryManagement
         {
             this.Frame.Navigate(typeof(BarCodeScanner));
         }
-
+        /// <summary>
+        /// Adds an asset when the button is clicked if the user has permission
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddItemButtonClick(object sender, RoutedEventArgs e)
         {
             if (mainMenu.CurrUser.WritePermission)
@@ -55,7 +63,11 @@ namespace InventoryManagement
                 this.Frame.Navigate(typeof(addAssetsPage));
             }
         }
-
+        /// <summary>
+        /// Removes an asset when one is selected and the user has remove permissions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
             if (mainMenu.CurrUser.RemovePermission)
@@ -74,7 +86,11 @@ namespace InventoryManagement
                 }
             }
         }
-
+        /// <summary>
+        /// Removes all assets when the user has remove permissions and requests verification. Refreshes the page to show changes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void RemoveAllButtonClick(object sender, RoutedEventArgs e)
         {
             if (CurrUser.RemovePermission)
@@ -128,7 +144,11 @@ namespace InventoryManagement
                 await msgbox.ShowAsync();
             }
         }
-
+        /// <summary>
+        /// If the respective print button is clicked the program navigates to BarCodeScanner page 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScanButtonClick(object sender, RoutedEventArgs e)
         {
             AssetDataAccessKey.RemoveAllRows();
@@ -136,7 +156,11 @@ namespace InventoryManagement
             CurrentAsset = (Asset)InventoryList.SelectedItem;
             this.Frame.Navigate(typeof(BarCodeScanner));
         }
-
+        /// <summary>
+        /// If the respective print button is clicked the program navigates to BarcodeGenerator page 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void PrintButtonClick(object sender, RoutedEventArgs e)
         {
             if (InventoryList.SelectedItem == null)
@@ -152,7 +176,11 @@ namespace InventoryManagement
                 this.Frame.Navigate(typeof(BarcodeGenerator));
             }
         }
-
+        /// <summary>
+        /// If the user doesnt have write permissions it shows this denied flyout
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddItemButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (!mainMenu.CurrUser.WritePermission)
@@ -160,7 +188,11 @@ namespace InventoryManagement
                 FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
         }
-
+        /// <summary>
+        /// If the user doesnt have remove permissions it shows this denied flyout
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (!mainMenu.CurrUser.RemovePermission)
@@ -168,7 +200,11 @@ namespace InventoryManagement
                 FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
         }
-
+        /// <summary>
+        /// If the user doesnt have permissions it shows this denied flyout
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (!(mainMenu.CurrUser.RemovePermission || mainMenu.CurrUser.WritePermission))
@@ -176,7 +212,11 @@ namespace InventoryManagement
                 FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
         }
-
+        /// <summary>
+        /// Goes back to login page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(LoginPage));

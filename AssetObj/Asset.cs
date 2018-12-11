@@ -32,11 +32,12 @@ namespace AssetObj
         /// <summary>
         /// Explicit value constructor that Initializes a new instance of the asset class.
         /// </summary>
-        /// <param name="Name">Name.</param>
-        /// <param name="Description">Description.</param>
-        /// <param name="ModelNumber">Model number.</param>
-        /// <param name="SerialNumber">Serial number.</param>
-        /// <param name="CheckIn">If set to <c>true</c> check in.</param>
+        /// <param name="Name"></param>
+        /// <param name="Description"></param>
+        /// <param name="Price"></param>
+        /// <param name="ModelNumber"></param>
+        /// <param name="SerialNumber"></param>
+        /// <param name="CheckIn"></param>
         public Asset(string Name, string Description, string Price, int ModelNumber, string SerialNumber, bool CheckIn)
         {
             this.Name = Name;

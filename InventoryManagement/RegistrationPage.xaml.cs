@@ -26,11 +26,18 @@ namespace InventoryManagement
     {
         bool IsTextBoxEmpty { get; set; }
         DataAccess LoginDataAccessKey = new DataAccess("Login");
+        /// <summary>
+        /// Registrations page constructor
+        /// </summary>
         public RegistrationPage()
         {
             this.InitializeComponent();
         }
-
+        /// <summary>
+        /// When the username and password is filled it allows you to register an account with the database with respective permissions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)
         {
             User Registered = new User();
@@ -51,7 +58,11 @@ namespace InventoryManagement
                 this.Frame.Navigate(typeof(LoginPage));
             }
         }
-
+        /// <summary>
+        /// Shows flyout if the username or password text boxes are left empty
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegistrationButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (IsTextBoxEmpty == true)
