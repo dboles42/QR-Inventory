@@ -217,5 +217,12 @@ namespace InventoryManagement
             }
             this.Frame.Navigate(typeof(LoginPage));
         }
+
+        private void SearchButtonClick(object sender, RoutedEventArgs e)
+        {
+            AssetDataAccessKey.RemoveAllRows();
+            AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
+            this.Frame.Navigate(typeof(Search));
+        }
     }
 }

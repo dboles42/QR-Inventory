@@ -87,5 +87,12 @@
             <Button x:Name="PrintButton" Content="Print QR Code" HorizontalAlignment="Center" Margin="0,385,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="PrintButtonClick"/>
         </RelativePanel>
         <StackPanel HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="658" Margin="62,251,0,0"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="1192,608,0,0" VerticalAlignment="Top" Height="56" Width="179" Click="SearchButtonClick">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout>
+                    <TextBlock Text="Access Denied"/>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
     </Grid>
 </Page>

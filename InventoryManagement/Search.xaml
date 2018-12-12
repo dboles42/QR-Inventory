@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="InventoryManagement.Search"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InventoryManagement"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <RelativePanel HorizontalAlignment="Left" Height="213" VerticalAlignment="Top" Width="355" Margin="1133,163,0,0">
+            <ComboBox x:Name="SearchSelect" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="306" SelectedIndex="0" Margin="25,10,0,0">
+                <ComboBoxItem Content="Name"/>
+                <ComboBoxItem Content="Serial Number"/>
+                <ComboBoxItem Content="Model Number"/>
+
+            </ComboBox>
+            <TextBox HorizontalAlignment="Left" Margin="25,66,0,0" Text="Enter Search Parameter" VerticalAlignment="Top" Height="40" Width="306"/>
+            <Button Content="Search" HorizontalAlignment="Left" Margin="130,115,0,0" VerticalAlignment="Top" Height="35" Width="94" Click="SearchItemClick"/>
+
+        </RelativePanel>
+
+    </Grid>
+</Page>
