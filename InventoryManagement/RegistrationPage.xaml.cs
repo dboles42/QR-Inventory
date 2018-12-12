@@ -24,7 +24,6 @@ namespace InventoryManagement
     /// </summary>
     public sealed partial class RegistrationPage : Page
     {
-        bool IsTextBoxEmpty { get; set; }
         DataAccess LoginDataAccessKey = new DataAccess("Login");
         /// <summary>
         /// Registrations page constructor
@@ -44,11 +43,10 @@ namespace InventoryManagement
             if (UsernameTextBox.Text.CompareTo("") == 0 ||
                 PasswordText.Password.CompareTo("") == 0)
             {
-                IsTextBoxEmpty = true;
+                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
             }
             else
             {
-                IsTextBoxEmpty = false;
                 Registered.Username = UsernameTextBox.Text;
                 Registered.Password = PasswordText.Password;
                 Registered.ReadPermission = (bool)ReadCheck.IsChecked;
@@ -58,17 +56,9 @@ namespace InventoryManagement
                 this.Frame.Navigate(typeof(LoginPage));
             }
         }
-        /// <summary>
-        /// Shows flyout if the username or password text boxes are left empty
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RegistrationButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (IsTextBoxEmpty == true)
-            {
-                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
-            }
+            this.Frame.Navigate(typeof(LoginPage));
         }
     }
 }

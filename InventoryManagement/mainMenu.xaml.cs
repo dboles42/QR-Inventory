@@ -17,23 +17,26 @@ using Windows.UI.Popups;
 using AssetObj;
 using DataAccessLibrary;
 using UserObj;
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace InventoryManagement
 {
+    /// <summary>
+    /// This page is the mainMenu. The user can view the inventory here and request operations
+    /// </summary>
     public partial class mainMenu : Page
     {
         Inventory i1 = new Inventory();
-        public static Asset CurrentAsset { get; set; }
+        public static Asset CurrentAsset { get; set; }      //The currently selected asset
         public static User CurrUser { get; set; }
         DataAccess AssetDataAccessKey = new DataAccess("Asset");
-            
+        
         /// <summary>
         /// Page Constructor
         /// </summary>
         public mainMenu()
         {
             this.InitializeComponent();
+            //Show the list view if the user has read permission
             if (mainMenu.CurrUser.ReadPermission)
             {
                 InventoryList.ItemsSource = i1.RetriveAllAssets();
@@ -56,13 +59,20 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void AddItemButtonClick(object sender, RoutedEventArgs e)
         {
-            if (mainMenu.CurrUser.WritePermission)
+            //If the user doesn't have write permission, show them that they don't have access
+            if (!mainMenu.CurrUser.WritePermission)
+            {
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            //Update the database then go to the addAssets page
+            else
             {
                 AssetDataAccessKey.RemoveAllRows();
                 AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
                 this.Frame.Navigate(typeof(addAssetsPage));
             }
         }
+
         /// <summary>
         /// Removes an asset when one is selected and the user has remove permissions
         /// </summary>
@@ -70,7 +80,12 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private async void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
-            if (mainMenu.CurrUser.RemovePermission)
+            //If the user doesn't have remove permission, show them that access is denied
+            if (!mainMenu.CurrUser.RemovePermission)
+            {
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            else
             {
                 if (InventoryList.SelectedItem == null)
                 {
@@ -93,7 +108,11 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private async void RemoveAllButtonClick(object sender, RoutedEventArgs e)
         {
-            if (CurrUser.RemovePermission)
+            if (!mainMenu.CurrUser.RemovePermission)
+            {
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            else
             {
                 MessageDialog msgbox = new MessageDialog("This will delete all assets in the inventory. Are you sure?");
                 msgbox.Commands.Add(new UICommand { Label = "Yes, I am sure", Id = 0 });
@@ -136,7 +155,12 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private async void UpdateButtonClick(object sender, RoutedEventArgs e)
         {
-            if (CurrUser.WritePermission || CurrUser.RemovePermission)
+            //If the user doesnt have permissions, show them that access is denied
+            if (!(mainMenu.CurrUser.RemovePermission || mainMenu.CurrUser.WritePermission))
+            {
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            else 
             {
                 AssetDataAccessKey.RemoveAllRows();
                 AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
@@ -144,6 +168,7 @@ namespace InventoryManagement
                 await msgbox.ShowAsync();
             }
         }
+
         /// <summary>
         /// If the respective print button is clicked the program navigates to BarCodeScanner page 
         /// </summary>
@@ -176,49 +201,20 @@ namespace InventoryManagement
                 this.Frame.Navigate(typeof(BarcodeGenerator));
             }
         }
-        /// <summary>
-        /// If the user doesnt have write permissions it shows this denied flyout
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddItemButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (!mainMenu.CurrUser.WritePermission)
-            {
-                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-            }
-        }
-        /// <summary>
-        /// If the user doesnt have remove permissions it shows this denied flyout
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (!mainMenu.CurrUser.RemovePermission)
-            {
-                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-            }
-        }
-        /// <summary>
-        /// If the user doesnt have permissions it shows this denied flyout
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (!(mainMenu.CurrUser.RemovePermission || mainMenu.CurrUser.WritePermission))
-            {
-                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-            }
-        }
+       
         /// <summary>
         /// Goes back to login page
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BackButtonClick(object sender, RoutedEventArgs e)
+        private void LogOffClick(object sender, RoutedEventArgs e)
         {
+            //Update the database if the user has permissions
+            if (CurrUser.WritePermission || CurrUser.RemovePermission)
+            {
+                AssetDataAccessKey.RemoveAllRows();
+                AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
+            }
             this.Frame.Navigate(typeof(LoginPage));
         }
     }
