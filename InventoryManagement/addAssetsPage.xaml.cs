@@ -25,7 +25,7 @@ namespace InventoryManagement
         private string nameInput { get; set; }
         private string descripInput { get; set; }
         private double priceInput { get; set; }
-        private int modelNumInput { get; set; }
+        private string modelNumInput { get; set; }
         private string serialNumInput { get; set; }
 
         Inventory i1 = new Inventory();
@@ -53,7 +53,7 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            i1.AddAsset((string)nameTextBox.Text,(string)descriptionText.Text, priceText.Text.ToString(), int.Parse(modelnumText.Text), serialnumText.Text.ToString());
+            i1.AddAsset((string)nameTextBox.Text,(string)descriptionText.Text, priceText.Text.ToString(), modelnumText.Text.ToString(), serialnumText.Text.ToString());
             DataAccessKey.RemoveAllRows();
             DataAccessKey.InsertListToTable(i1.listOfAssets);
             Frame.Navigate(typeof(mainMenu));

@@ -11,7 +11,7 @@ namespace AssetObj
         public string Description { get; set; }
         public string IDnumber { get; set; }
         public string Price { get; set; }
-        public int ModelNumber { get; set; }
+        public string ModelNumber { get; set; }
         public string SerialNumber { get; set; }
         public bool CheckIn { get; set; }
 
@@ -24,7 +24,7 @@ namespace AssetObj
             this.Description = "Empty";
             this.IDnumber = Guid.NewGuid().ToString();
             this.Price = "0.0";
-            this.ModelNumber = 0;
+            this.ModelNumber = "0";
             this.SerialNumber = "Empty";
             this.CheckIn = false;
         }
@@ -38,7 +38,7 @@ namespace AssetObj
         /// <param name="ModelNumber"></param>
         /// <param name="SerialNumber"></param>
         /// <param name="CheckIn"></param>
-        public Asset(string Name, string Description, string Price, int ModelNumber, string SerialNumber, bool CheckIn)
+        public Asset(string Name, string Description, string Price, string ModelNumber, string SerialNumber, bool CheckIn)
         {
             this.Name = Name;
             this.Description = Description;
