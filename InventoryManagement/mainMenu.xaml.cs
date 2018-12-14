@@ -13,10 +13,15 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
+using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using AssetObj;
 using DataAccessLibrary;
 using UserObj;
+
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using Windows.Storage;
 
 namespace InventoryManagement
 {
@@ -29,7 +34,7 @@ namespace InventoryManagement
         public static Asset CurrentAsset { get; set; }      //The currently selected asset
         public static User CurrUser { get; set; }
         DataAccess AssetDataAccessKey = new DataAccess("Asset");
-        
+
         /// <summary>
         /// Page Constructor
         /// </summary>
@@ -160,7 +165,7 @@ namespace InventoryManagement
             {
                 FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
-            else 
+            else
             {
                 AssetDataAccessKey.RemoveAllRows();
                 AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
@@ -201,7 +206,7 @@ namespace InventoryManagement
                 this.Frame.Navigate(typeof(BarcodeGenerator));
             }
         }
-       
+
         /// <summary>
         /// Goes back to login page
         /// </summary>
@@ -223,6 +228,56 @@ namespace InventoryManagement
             AssetDataAccessKey.RemoveAllRows();
             AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
             this.Frame.Navigate(typeof(Search));
+        }
+        /// <summary>
+        /// Export Existing list to Excel using Epplus library.  Epplus requires filestream NOT StorageFIle. 
+        /// Since path definitions for Filestreams are locked by
+        /// security controls, I convert the StorageFile (which gives permissions in win10 to file) to system.IO.Filestream before
+        /// saving.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void ExportExcel_Click(object sender, RoutedEventArgs e)
+        {
+
+            int RowIndex = 1;
+            ExcelPackage excel = new ExcelPackage();
+            var workSheet = excel.Workbook.Worksheets.Add("AssetInventory");
+            workSheet.TabColor = System.Drawing.Color.Black;
+            workSheet.DefaultRowHeight = 12;
+            //Setup Header
+            workSheet.Row(1).Height = 20;
+            workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(1).Style.Font.Bold = true;
+            workSheet.Cells[RowIndex, 1].Value = "Name";
+            workSheet.Cells[RowIndex, 2].Value = "Serial Number";
+            workSheet.Cells[RowIndex, 3].Value = "Model Number";
+            workSheet.Cells[RowIndex, 4].Value = "Description";
+            workSheet.Cells[RowIndex, 5].Value = "Price";
+            workSheet.Cells[RowIndex, 6].Value = "Check In";
+            ++RowIndex; //bump row index before iterating through list
+
+            foreach (Asset A in i1.listOfAssets)
+            {
+                workSheet.Cells[RowIndex, 1].Value = A.Name.ToString();
+                workSheet.Cells[RowIndex, 2].Value = A.SerialNumber.ToString();
+                workSheet.Cells[RowIndex, 3].Value = A.ModelNumber.ToString();
+                workSheet.Cells[RowIndex, 4].Value = A.Description.ToString();
+                workSheet.Cells[RowIndex, 5].Value = A.Price.ToString();
+                workSheet.Cells[RowIndex, 6].Value = A.CheckIn.ToString();
+                ++RowIndex;  //increment next row
+            }
+
+            string filename = "test.xlsx";
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile file = await storageFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+            var stream = System.IO.File.Open(file.Path, FileMode.Open);
+            bool check = stream is FileStream;
+
+            excel.SaveAs(stream);
+            stream.Close();
+
+            var success = await Windows.System.Launcher.LaunchFileAsync(file);
         }
     }
 }
