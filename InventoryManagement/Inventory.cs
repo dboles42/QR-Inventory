@@ -23,7 +23,7 @@ namespace InventoryManagement
         }
 
         /// <summary>
-        /// Sorts the inventory based on the unique ID number for each asset
+        /// Sorts the inventory based on the names of the assets
         /// </summary>
         public void SortInventory()
         {
@@ -40,6 +40,17 @@ namespace InventoryManagement
         /// <param name="CheckIn">If set to <c>true</c> check in.</param>
         public void AddAsset(string Name = "None", string Description = "None", string Price = "0.0", int ModelNumber = 0, string SerialNumber = "none", bool CheckIn = false){
             listOfAssets.Add(new Asset(Name, Description, Price, ModelNumber, SerialNumber, CheckIn));
+            listOfAssets.Sort();
+            NumberOfAssets++;
+        }
+
+        /// <summary>
+        /// Adds an asset to the inventory
+        /// </summary>
+        /// <param name="A">Asset to be added</param>
+        public void AddAsset(Asset A)
+        {
+            listOfAssets.Add(A);
             listOfAssets.Sort();
             NumberOfAssets++;
         }
@@ -112,7 +123,7 @@ namespace InventoryManagement
         }
 
         /// <summary>
-        /// Finds an in the list asset with a specific ID
+        /// Finds an asset in the list asset with a unique ID
         /// </summary>
         /// <param name="assetID"></param>
         /// <returns>Returns the asset with the requested ID</returns>
@@ -121,6 +132,74 @@ namespace InventoryManagement
             return listOfAssets.Find(item => item.IDnumber == assetID);
         }
 
+        /// <summary>
+        /// Filters the list based on a name, a serial number, and a model number. You could use all three, two, or just one.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="serialNum"></param>
+        /// <param name="modelNum"></param>
+        /// <returns>A list containing assets that have the requested name, serial number, and model number</returns>
+        public List<Asset> FilterInventory(string name, string serialNum, string modelNum)
+        {
+            List<Asset> filterdList = new List<Asset>();
+            //If only a name is used
+            if(!string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(serialNum) && string.IsNullOrWhiteSpace(modelNum))
+            {
+                foreach (Asset A in listOfAssets.FindAll(items => items.Name == name))
+                {
+                    filterdList.Add(A);
+                }
+            }
+            //If only a serial number is used
+            else if (string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(serialNum) && string.IsNullOrWhiteSpace(modelNum))
+            {
+                foreach (Asset A in listOfAssets.FindAll(items => items.SerialNumber == serialNum))
+                {
+                    filterdList.Add(A);
+                }
+            }
+            //If only a model number is used
+            else if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(serialNum) && !string.IsNullOrWhiteSpace(modelNum))
+            {
+                foreach (Asset A in listOfAssets.FindAll(items => items.ModelNumber.ToString() == modelNum))
+                {
+                    filterdList.Add(A);
+                }
+            }
+            //If both a name and a serial number are used
+            if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(serialNum) && string.IsNullOrWhiteSpace(modelNum))
+            {
+                foreach (Asset A in listOfAssets.FindAll(items => (items.Name == name) && (items.SerialNumber == serialNum)))
+                {
+                    filterdList.Add(A);
+                }
+            }
+            //If both a name and a model number are used
+            if (!string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(serialNum) && !string.IsNullOrWhiteSpace(modelNum))
+            {
+                foreach (Asset A in listOfAssets.FindAll(items => (items.Name == name) && (items.ModelNumber.ToString()== modelNum)))
+                {
+                    filterdList.Add(A);
+                }
+            }
+            //If both a serial and a model number are used
+            if (string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(serialNum) && !string.IsNullOrWhiteSpace(modelNum))
+            {
+                foreach (Asset A in listOfAssets.FindAll(items => (items.SerialNumber == serialNum) && (items.ModelNumber.ToString() == modelNum)))
+                {
+                    filterdList.Add(A);
+                }
+            }
+            //If a name, a serial and a model number are used
+            if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(serialNum) && !string.IsNullOrWhiteSpace(modelNum))
+            {
+                foreach (Asset A in listOfAssets.FindAll(items => (items.Name == name) && (items.SerialNumber == serialNum) && (items.ModelNumber.ToString() == modelNum)))
+                {
+                    filterdList.Add(A);
+                }
+            }
+            return filterdList;
+        }
         /// <summary>
         /// Finds the index of an asset in the list of assets
         /// </summary>
