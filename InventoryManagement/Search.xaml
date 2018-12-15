@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Style="{StaticResource GridStyle}">
         <ListView Name="InventoryList"
                   SelectionMode="Single"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -51,7 +51,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <RelativePanel HorizontalAlignment="Left" Height="287" VerticalAlignment="Top" Width="394" Margin="1098,10,0,0">
+        <RelativePanel HorizontalAlignment="Left" Height="287" VerticalAlignment="Top" Width="394" Margin="814,203,0,0">
             <TextBlock Text="Name" Height="32" Width="97" FontSize="20" VerticalAlignment="Top" Margin="15,16,0,0" HorizontalAlignment="Left"/>
             <TextBlock Text="Serial Number" Height="32" Width="147" FontSize="20" VerticalAlignment="Top" Margin="15,76,0,0" HorizontalAlignment="Left"/>
             <TextBlock Text="Model Number" Height="32" Width="170" FontSize="20" VerticalAlignment="Top" Margin="15,146,0,0" HorizontalAlignment="Left"/>

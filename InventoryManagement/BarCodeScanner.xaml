@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button x:Name="btnscan" Click="btnscan_Click" Content=" Scan Qr Code" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,128,0,0" Height="83" Width="134"/>
+        <Button x:Name="btnscan" Click="btnscan_Click" Content=" Scan Qr Code" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="310,138,0,0" Height="83" Width="134"/>
         <RelativePanel HorizontalAlignment="Left" Height="278" Margin="549,128,0,0" VerticalAlignment="Top" Width="423">
             <TextBox x:Name="Name" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="143,0,0,0" HorizontalAlignment="Left"/>
             <TextBox x:Name="Description" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="144,41,0,0" HorizontalAlignment="Left"/>
@@ -23,8 +23,8 @@
             <TextBlock x:Name="Serial_Copy" HorizontalAlignment="Left" Text="Serial #" VerticalAlignment="Top" Margin="0,171,0,0" Height="38" Width="135" />
             <TextBox x:Name="ScanResult" HorizontalAlignment="Center" Margin="0,246,0,0" Text="" VerticalAlignment="Top" Height="27" Width="423" />
         </RelativePanel>
-        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="180,500,0,0" VerticalAlignment="Top" Height="56" Width="134" Click="BackButton_Click"/>
-        <Button x:Name="btnCheckIn" Click="btnCheckIn_Click" Content=" Check In Asset" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,245,0,0" Height="83" Width="134"/>
-        <Button x:Name="btnCheckOut" Click="btnCheckOut_Click" Content=" Check Out Asset" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,359,0,0" Height="83" Width="134"/>
+        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="310,510,0,0" VerticalAlignment="Top" Height="56" Width="134" Click="BackButton_Click"/>
+        <Button x:Name="btnCheckIn" Click="btnCheckIn_Click" Content=" Check In Asset" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="310,255,0,0" Height="83" Width="134"/>
+        <Button x:Name="btnCheckOut" Click="btnCheckOut_Click" Content=" Check Out Asset" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="310,369,0,0" Height="83" Width="134"/>
     </Grid>
 </Page>
