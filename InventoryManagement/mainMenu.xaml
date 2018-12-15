@@ -8,8 +8,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="438,6,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="212" FontSize="48" TextAlignment="Left"/>
+    <Grid Style="{StaticResource GridStyle}">
+        <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="441,32,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="212" FontSize="48" TextAlignment="Left"/>
         <ListView Name="InventoryList"
                   SelectionMode="Single"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -18,10 +18,34 @@
                   ScrollViewer.HorizontalScrollMode="Enabled"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   ScrollViewer.IsHorizontalRailEnabled="True"
-                  Margin="10,80,436,57" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  Margin="45,122,569,183" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Height="38" Width="942" Margin="0,0,0,0" HorizontalAlignment="Left"  >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Name" Width="150" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="2" Text="SerialNumber" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="4" Text="ModelNumber" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="6" Text="Description" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="8" Text="Price" Width="80" Foreground="DarkRed" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="10" Text="CheckIn" Width="80" Foreground="DarkRed" HorizontalAlignment="Left"/>
+
+                    </Grid>
+
+                    <!-- 
+                        <StackPanel Orientation="Horizontal" Height="38" Width="942" Margin="0,0,0,0" HorizontalAlignment="Left"  >
                         <TextBlock Text="Name" Width="150" Foreground="DarkRed" HorizontalAlignment="Left"/>
                         <TextBlock Text="SerialNumber" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
                         <TextBlock Text="ModelNumber" Width="200" Foreground="DarkRed" HorizontalAlignment="Left"/>
@@ -29,10 +53,34 @@
                         <TextBlock Text="Price" Width="80" Foreground="DarkRed" HorizontalAlignment="Left"/>
                         <TextBlock Text="CheckIn" Width="80" Foreground="DarkRed" HorizontalAlignment="Left"/>
                     </StackPanel>
+                    -->
                 </DataTemplate>
             </ListView.HeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local1:Asset">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Name="Name" Text="{x:Bind Name}" Width="150" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="2" Text="{x:Bind SerialNumber}" Width="200" HorizontalAlignment="Left" />
+                        <TextBlock Grid.Column="4" Text="{x:Bind ModelNumber}" Width="200" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="6" Text="{x:Bind Description}" Width="200" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="8" Text="{x:Bind Price}" Width="80" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="10" Text="{x:Bind CheckIn}" Width="80" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <!--
                     <StackPanel Orientation="Horizontal" Width="942" Margin="0,0,0,0" >
                         <TextBlock Name="Name"
                                     Text="{x:Bind Name}"
@@ -48,10 +96,71 @@
                         <TextBlock Text="{x:Bind CheckIn}"
                                    Width="80" />
                     </StackPanel>
+                    -->
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <RelativePanel HorizontalAlignment="Left" Height="714" Margin="1192,17,0,0" VerticalAlignment="Top" Width="179">
+
+        <Grid Margin="1012,103,129,205">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" x:Name="OptionsText"  Text="Options" TextWrapping="Wrap"  FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
+            <Button x:Name="AddItemButton" Content="Add Item" Click="AddItemButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Height="32" Width="118">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock Text="Access Denied"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Button>
+            <Button x:Name="RemoveItemButton" Content="Remove Item" Click="RemoveButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="32" Width="118">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock Text="Access Denied"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Button>
+            <Button x:Name="RemoveAllButton" Content="Remove All" Click="RemoveAllButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Height="32" Width="118">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock Text="Access Denied"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Button>
+            <Button x:Name="UpdateButton" Content="Update" Click="UpdateButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Height="32" Width="118">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock Text="Access Denied"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Button>
+            <Button x:Name="BackButton" Content="Logoff" Click="LogOffClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="7" Height="32" Width="118"/>
+            <Button x:Name="ScanButton" Content="Scan QR Code" Click="ScanButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Height="32" Width="118"/>
+            <Button x:Name="PrintButton" Content="Print QR Code" Click="PrintButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Height="32" Width="118"/>
+            <Button x:Name="SearchButton" Content="Search" Click="SearchButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Height="32" Width="118">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock Text="Access Denied"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Button>
+            <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Center" Click="ExitButtonClick" VerticalAlignment="Center" Grid.Row="9" Width="118" Height="32"/>
+            <Button x:Name="ExportExcel" Content="Export to Excel" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ExportExcel_Click" Grid.Row="10" Height="32" Width="118"/>
+        </Grid>
+
+        <!--
+        <RelativePanel HorizontalAlignment="Left" Height="714" Margin="1064,110,0,0" VerticalAlignment="Top" Width="179">
             <TextBlock x:Name="OptionsText" Height="53" Text="Options" TextWrapping="Wrap" Width="132" FontSize="36" VerticalAlignment="Top" Margin="21,0,0,0" HorizontalAlignment="Left"/>
             <Button x:Name="AddItemButton" Content="Add Item" Height="56" Width="179" Click="AddItemButtonClick" VerticalAlignment="Top" Margin="0,59,0,0" HorizontalAlignment="Center">
                 <FlyoutBase.AttachedFlyout>
@@ -94,6 +203,6 @@
             <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Center" Margin="0,588,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="ExitButtonClick"/>
             <Button x:Name="ExportExcel" Content="Export to Excel" HorizontalAlignment="Center" Margin="0,656,0,0" VerticalAlignment="Top" Height="58" Width="179" Click="ExportExcel_Click"/>
         </RelativePanel>
-        <StackPanel HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="658" Margin="62,251,0,0"/>
+        -->
     </Grid>
 </Page>

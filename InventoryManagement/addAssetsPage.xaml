@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Style="{StaticResource GridStyle}">
         <TextBlock HorizontalAlignment="Left" Margin="621,56,0,0" TextWrapping="Wrap" Text="Add Assets" VerticalAlignment="Top" FontSize="72" TextAlignment="Center"/>
         <RelativePanel HorizontalAlignment="Left" Height="273" Margin="603,180,0,0" VerticalAlignment="Top" Width="400">
             <Button Content="Add" HorizontalAlignment="Left" Margin="300,223,0,0"  Click="AddButtonClick" VerticalAlignment="Top" Height="50" Width="100">
