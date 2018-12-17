@@ -16,7 +16,7 @@ namespace AssetObj
         public bool CheckIn { get; set; }
 
         /// <summary>
-        /// Default constructor that initializes a new instance of the class.
+        /// Default constructor that initializes a new instance of the asset class.
         /// </summary>
         public Asset()
         {
