@@ -15,6 +15,7 @@
                 <RowDefinition Height="7*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
+            
             <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="623,25,0,0" TextWrapping="Wrap" Text="Add Assets" VerticalAlignment="Top" FontSize="72" TextAlignment="Center" Height="103" Width="364"/>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>

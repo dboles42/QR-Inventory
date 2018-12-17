@@ -51,8 +51,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <RelativePanel HorizontalAlignment="Left" Height="529" VerticalAlignment="Top" Width="230" Margin="1060,169,0,0">
-
+        <RelativePanel HorizontalAlignment="Left" Height="529" VerticalAlignment="Top" Width="230" Margin="1048,153,0,0">
             <TextBlock Text="Name" Height="32" Width="97" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <TextBlock Text="Serial Number" Height="32" Width="147" FontSize="20" VerticalAlignment="Top" Margin="0,133,0,0" HorizontalAlignment="Left"/>
             <TextBlock Text="Model Number" Height="32" Width="170" FontSize="20" VerticalAlignment="Top" Margin="0,264,0,0" HorizontalAlignment="Left"/>
