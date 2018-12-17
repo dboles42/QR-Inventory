@@ -43,7 +43,7 @@ namespace InventoryManagement
             //Show the list view if the user has read permission
             if (mainMenu.CurrUser.ReadPermission)
             {
-                InventoryList.ItemsSource = i1.RetriveAllAssets();
+                InventoryList.ItemsSource = i1.RetrieveAllAssets();
             }
         }
 
@@ -92,7 +92,7 @@ namespace InventoryManagement
                 else
                 {
                     i1.RemoveAsset((Asset)InventoryList.SelectedItem);
-                    InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+                    InventoryList.ItemsSource = i1.RetrieveAllAssets();  //Refresh the List View
                     RemoveFlyoutText.Text = "The asset has been successfuly removed";
                     FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
                 }
@@ -119,7 +119,7 @@ namespace InventoryManagement
                 if ((int)answer.Id == 0)
                 {
                     i1.ClearInventory();
-                    InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+                    InventoryList.ItemsSource = i1.RetrieveAllAssets();  //Refresh the List View
                     MessageDialog msgbox2 = new MessageDialog("All assets successfully deleted from the inventory");
                     await msgbox2.ShowAsync();
                 }
@@ -285,8 +285,6 @@ namespace InventoryManagement
                 MessageDialog msgbox = new MessageDialog(ex.Message.ToString());
                 await msgbox.ShowAsync();
             }
-            
-
         }
     }
 }

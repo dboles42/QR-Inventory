@@ -216,7 +216,7 @@ namespace InventoryManagement
         /// Retrieves all assets in the inventoryList and places them in an observable collection
         /// </summary>
         /// <returns>An observable collection</returns>
-        public ObservableCollection<Asset> RetriveAllAssets()
+        public ObservableCollection<Asset> RetrieveAllAssets()
         {
             ObservableCollection<Asset> entries = new ObservableCollection<Asset>();
             foreach (Asset A in listOfAssets)

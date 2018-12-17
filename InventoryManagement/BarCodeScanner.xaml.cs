@@ -38,11 +38,10 @@ using DataAccessLibrary;
 
 namespace InventoryManagement
 {
-
     public partial class BarCodeScanner : Page
     {
         // Provides functionality to capture the output from the camera
-        public MediaCapture _mediaCapture;
+        public MediaCapture CameraCapture;
 
         // This object allows us to manage whether the display goes to sleep 
         // or not while our app is active.
@@ -51,13 +50,14 @@ namespace InventoryManagement
         Inventory i1 = new Inventory();
         DataAccess DataAccessKey = new DataAccess("Asset");
         Asset CheckInAsset = new Asset();
-
+        /// <summary>
+        /// Set the check in/out buttons to disabled by default 
+        /// </summary>
         public BarCodeScanner()
         {
             InitializeComponent();
             btnCheckIn.IsEnabled = false;
             btnCheckOut.IsEnabled = false;
-
         }
         /// <summary>
         /// Call Dipose() method if application suspends
@@ -70,26 +70,33 @@ namespace InventoryManagement
             Dispose();
             deferral.Complete();
         }
+        /// <summary>
+        /// Dispose When form is entered
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-           
+            Dispose();
         }
-
+        /// <summary>
+        /// Dispose when Form is extited
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             Dispose();
         }
 
         /// <summary>
-        /// Take the raw capture from webcome and dipose of it
+        /// If raw capture from webcom is NULL and dipose of it
         /// </summary>
-
+        
         private void Dispose()
         {
-            if (_mediaCapture != null)
+            if (CameraCapture != null)
             {
-                _mediaCapture.Dispose();
-                _mediaCapture = null;
+                CameraCapture.Dispose();
+                CameraCapture = null;
             }
 
 
@@ -103,16 +110,16 @@ namespace InventoryManagement
         public async void SoftwareButton(object sender, RoutedEventArgs e)
         {
             // This is where we want to save to.
-            var storageFolder = KnownFolders.SavedPictures;
+            StorageFolder storageFolder = KnownFolders.SavedPictures;
 
             // Create the file that we're going to save the photo to.
             var file = await storageFolder.CreateFileAsync("sample.jpg", CreationCollisionOption.ReplaceExisting);
 
 
             // Update the file with the contents of the photograph.
-            await _mediaCapture.CapturePhotoToStorageFileAsync(ImageEncodingProperties.CreateJpeg(), file);
+            await CameraCapture.CapturePhotoToStorageFileAsync(ImageEncodingProperties.CreateJpeg(), file);
 
-            await _mediaCapture.StopPreviewAsync();
+            await CameraCapture.StopPreviewAsync();
 
         }
         /// <summary>
@@ -123,6 +130,7 @@ namespace InventoryManagement
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+   
         public async void btnscan_Click(object sender, RoutedEventArgs e)
         {
 
@@ -183,14 +191,22 @@ namespace InventoryManagement
         }
 
 
-
+        /// <summary>
+        /// Dispose of any previous raw data when webcam is initalized.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InitializeWebCam(object sender, RoutedEventArgs e)
         {
             Dispose();
         }
 
         
-
+        /// <summary>
+        /// Exits the form and saves the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             DataAccessKey.RemoveAllRows();
@@ -199,7 +215,11 @@ namespace InventoryManagement
 
             
         }
-
+        /// <summary>
+        /// Check In Scanned Asset
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCheckIn_Click(object sender, RoutedEventArgs e)
         {
             i1.listOfAssets[i1.FindIndex(CheckInAsset)].CheckIn = true;
@@ -209,7 +229,11 @@ namespace InventoryManagement
                 btnCheckOut.IsEnabled = true;
             }
         }
-
+        /// <summary>
+        /// Checks out scanned Asset
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCheckOut_Click(object sender, RoutedEventArgs e)
         {
             i1.listOfAssets[i1.FindIndex(CheckInAsset)].CheckIn = false;
