@@ -51,7 +51,27 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <RelativePanel HorizontalAlignment="Left" Height="287" VerticalAlignment="Top" Width="394" Margin="814,203,0,0">
+        <RelativePanel HorizontalAlignment="Left" Height="529" VerticalAlignment="Top" Width="230" Margin="1060,169,0,0">
+
+            <TextBlock Text="Name" Height="32" Width="97" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <TextBlock Text="Serial Number" Height="32" Width="147" FontSize="20" VerticalAlignment="Top" Margin="0,133,0,0" HorizontalAlignment="Left"/>
+            <TextBlock Text="Model Number" Height="32" Width="170" FontSize="20" VerticalAlignment="Top" Margin="0,264,0,0" HorizontalAlignment="Left"/>
+            <TextBox x:Name="NameTextBox" HorizontalAlignment="Center" Margin="0,42,0,0" Text="" VerticalAlignment="Top" Height="40" Width="200"/>
+            <TextBox x:Name="SerialNumberTextBox" HorizontalAlignment="Center" Margin="0,169,0,0" Text="" VerticalAlignment="Top" Height="40" Width="200"/>
+            <TextBox x:Name="ModelNumberTextBox" HorizontalAlignment="Center" Margin="0,303,0,0" Text="" VerticalAlignment="Top" Height="40" Width="200"/>
+            <Button Content="Search" HorizontalAlignment="Left" Margin="9,378,0,0" VerticalAlignment="Top" Height="35" Width="96" Click="SearchButtonClick">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock x:Name="flyoutText"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Button>
+            <Button Content="Back" HorizontalAlignment="Left" Margin="10,446,0,0" VerticalAlignment="Top" Height="35" Width="96" Click="BackButtonClick"/>
+
+        </RelativePanel>
+
+        <!--
+        <RelativePanel HorizontalAlignment="Left" Height="287" VerticalAlignment="Top" Width="394" Margin="962,201,0,0">
             <TextBlock Text="Name" Height="32" Width="97" FontSize="20" VerticalAlignment="Top" Margin="15,16,0,0" HorizontalAlignment="Left"/>
             <TextBlock Text="Serial Number" Height="32" Width="147" FontSize="20" VerticalAlignment="Top" Margin="15,76,0,0" HorizontalAlignment="Left"/>
             <TextBlock Text="Model Number" Height="32" Width="170" FontSize="20" VerticalAlignment="Top" Margin="15,146,0,0" HorizontalAlignment="Left"/>
@@ -67,5 +87,6 @@
             </Button>
             <Button Content="Back" HorizontalAlignment="Left" Margin="80,231,0,0" VerticalAlignment="Top" Height="35" Width="96" Click="BackButtonClick"/>
         </RelativePanel>
+        -->
     </Grid>
 </Page>

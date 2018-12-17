@@ -8,8 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <!-- Create main grid that-->
     <Grid Style="{StaticResource GridStyle}">
         <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="441,32,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="212" FontSize="48" TextAlignment="Left"/>
+        <!-- create and configure scrollable list with columns-->
         <ListView Name="InventoryList"
                   SelectionMode="Single"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
