@@ -35,7 +35,7 @@
             </ListView.HeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local1:Asset">
-                    <StackPanel Orientation="Horizontal" Width="942" Margin="0,0,0,0" >
+                    <StackPanel Orientation="Horizontal" Width="942" Margin="0,0,0,0" HorizontalAlignment="Left">
                         <TextBlock Name="Name"
                                     Text="{x:Bind Name}"
                                     Width="150" />
@@ -46,7 +46,7 @@
                         <TextBlock Text="{x:Bind Description}"
                                    Width="200" />
                         <TextBlock Text="{x:Bind Price}"
-                                   Width="80" />
+                                   Width="80" HorizontalAlignment="Left"/>
                         <TextBlock Text="{x:Bind CheckIn}"
                                    Width="80" />
                     </StackPanel>
