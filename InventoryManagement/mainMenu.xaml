@@ -140,8 +140,8 @@
                     </Flyout>
                 </FlyoutBase.AttachedFlyout>
             </Button>
-            <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Center" Click="ExitButtonClick" VerticalAlignment="Center" Grid.Row="18" Width="140" Height="48"/>
-            <Button x:Name="ExportExcel" Content="Export to Excel" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ExportExcel_Click" Grid.Row="20" Height="48" Width="140"/>
+            <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Center" Click="ExitButtonClick" VerticalAlignment="Center" Grid.Row="20" Width="140" Height="48"/>
+            <Button x:Name="ExportExcel" Content="Export to Excel" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ExportExcel_Click" Grid.Row="18" Height="48" Width="140"/>
         </Grid>
     </Grid>
 </Page>
