@@ -269,14 +269,23 @@ namespace InventoryManagement
 
             string filename = "test.xlsx";
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            StorageFile file = await storageFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
-            var stream = System.IO.File.Open(file.Path, FileMode.Open);
-            bool check = stream is FileStream;
+            try
+            {
+                StorageFile file = await storageFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+                var stream = System.IO.File.Open(file.Path, FileMode.Open);
+                bool check = stream is FileStream;
+                excel.SaveAs(stream);
+                stream.Close();
+                var success = await Windows.System.Launcher.LaunchFileAsync(file);
 
-            excel.SaveAs(stream);
-            stream.Close();
+            }
+            catch (FileLoadException ex)
+            {
+                MessageDialog msgbox = new MessageDialog(ex.Message.ToString());
+                await msgbox.ShowAsync();
+            }
+            
 
-            var success = await Windows.System.Launcher.LaunchFileAsync(file);
         }
     }
 }
