@@ -99,7 +99,7 @@
                 <Button x:Name="RemoveItemButton" Content="Remove Item" Click="RemoveButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Height="48" Width="140" Margin="0,0,0,0">
                     <FlyoutBase.AttachedFlyout>
                         <Flyout>
-                            <TextBlock Text="Access Denied"/>
+                            <TextBlock x:Name="RemoveFlyoutText"/>
                         </Flyout>
                     </FlyoutBase.AttachedFlyout>
                 </Button>
@@ -119,7 +119,13 @@
                 </Button>
                 <Button x:Name="BackButton" Content="Logoff" Click="LogOffClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="10" Height="48" Width="140"/>
                 <Button x:Name="ScanButton" Content="Scan QR Code" Click="ScanButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="12" Height="48" Width="140"/>
-                <Button x:Name="PrintButton" Content="Print QR Code" Click="PrintButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="14" Height="48" Width="140"/>
+                <Button x:Name="PrintButton" Content="Print QR Code" Click="PrintButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="14" Height="48" Width="140">
+                    <FlyoutBase.AttachedFlyout>
+                        <Flyout>
+                            <TextBlock x:Name="printFlyoutText"/>
+                        </Flyout>
+                    </FlyoutBase.AttachedFlyout>
+                </Button>
                 <Button x:Name="SearchButton" Content="Search" Click="SearchButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="16" Height="48" Width="140">
                     <FlyoutBase.AttachedFlyout>
                         <Flyout>

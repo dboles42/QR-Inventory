@@ -10,7 +10,7 @@
 
     <Grid Style="{StaticResource GridStyle}">
         <TextBlock HorizontalAlignment="Left" Margin="395,48,0,0" TextWrapping="Wrap" Text="Registration" VerticalAlignment="Top" FontSize="100" TextAlignment="Center" Height="158" Width="636"/>
-        <StackPanel HorizontalAlignment="Left" Margin="603,204,0,247" VerticalAlignment="Stretch" >
+        <StackPanel HorizontalAlignment="Left" Margin="603,204,0,183" >
             <TextBox x:Name="UsernameTextBox" FontSize="24" PlaceholderText="Register Username" HorizontalAlignment="Left"  VerticalAlignment="Top" Header="Username"/>
             <PasswordBox x:Name="PasswordText" PasswordChar="*" PlaceholderText="Register Password" FontSize="24" HorizontalAlignment="Center"  Header="Password" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="220"/>
             <CheckBox x:Name="ReadCheck" Content="Read Permission" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="0,15,0,0"/>
