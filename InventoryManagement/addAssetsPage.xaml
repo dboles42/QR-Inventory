@@ -9,7 +9,40 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Style="{StaticResource GridStyle}">
-        <TextBlock HorizontalAlignment="Left" Margin="621,56,0,0" TextWrapping="Wrap" Text="Add Assets" VerticalAlignment="Top" FontSize="72" TextAlignment="Center"/>
+        <Grid Margin="10,20,10,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="621,56,0,0" TextWrapping="Wrap" Text="Add Assets" VerticalAlignment="Top" FontSize="72" TextAlignment="Center"/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                
+
+
+            </Grid>
+
+        </Grid>
+        
         <RelativePanel HorizontalAlignment="Left" Height="273" Margin="603,180,0,0" VerticalAlignment="Top" Width="400">
             <Button Content="Add" HorizontalAlignment="Left" Margin="300,223,0,0"  Click="AddButtonClick" VerticalAlignment="Top" Height="50" Width="100">
                 <FlyoutBase.AttachedFlyout>
