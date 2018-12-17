@@ -39,15 +39,15 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" Height="68" Width="183"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" FontSize="24" />
+                <TextBlock Text="Name" Height="50" Width="183"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" FontSize="24" />
                 <TextBox x:Name="nameTextBox" Text="" Width="316" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="3" Height="50" Margin="0,0,0,0" />
-                <TextBlock Text="Description" Height="68" Width="183" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="24"/>
+                <TextBlock Text="Description" Height="50" Width="183" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="24"/>
                 <TextBox x:Name="descriptionText" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Width="316" Grid.Row="2" Grid.Column="3" Height="50" Margin="0,0,0,0"/>
-                <TextBlock Text="Price" Height="68" Width="183" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="4" Grid.Column="1" FontSize="24" Margin="0,0,0,0"/>
+                <TextBlock Text="Price" Height="50" Width="183" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="4" Grid.Column="1" FontSize="24" Margin="0,0,0,0"/>
                 <TextBox x:Name="priceText" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="316" Grid.Row="4" Grid.Column="3" Height="50" Margin="0,0,0,0" />
-                <TextBlock Text="Serial Number"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1" FontSize="24" Height="68" Margin="0,0,0,0" Width="183"/>
+                <TextBlock Text="Serial Number"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1" FontSize="24" Height="50" Margin="0,0,0,0" Width="183"/>
                 <TextBox x:Name="serialnumText" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="316" Grid.Row="6" Grid.Column="3" Height="50" Margin="0,0,0,0"/>
-                <TextBlock Text="Model Number"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="1" FontSize="24" Height="68" Margin="0,0,0,0" Width="183"/>
+                <TextBlock Text="Model Number"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="1" FontSize="24" Height="50" Margin="0,0,0,0" Width="183"/>
                 <TextBox x:Name="modelnumText" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="316" Grid.Row="8" Grid.Column="3" Height="49" Margin="0,0,0,0"/>
                 <Button Content="Add" HorizontalAlignment="Left" Click="AddButtonClick" VerticalAlignment="Center" Height="50" Width="100" Grid.Row="10" Grid.Column="3">
                     <FlyoutBase.AttachedFlyout>
