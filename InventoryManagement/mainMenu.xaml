@@ -11,9 +11,7 @@
     <!-- Create main grid that-->
     <Grid Style="{StaticResource GridStyle}">
         <TextBlock x:Name="pageTitle" HorizontalAlignment="Left" Margin="427,8,0,0" Text="Inventory" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="212" FontSize="48" TextAlignment="Left"/>
-        <!-- create and configure scrollable list with columns-->
-
-        <!--main nested grid-->
+        <!-- Create and format nested grids to organize/ streamline elements-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -21,6 +19,7 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
+            <!-- create and configure scrollable list with columns-->
             <ListView Grid.Column="1" Name="InventoryList"
                   SelectionMode="Single"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
