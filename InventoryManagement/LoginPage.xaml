@@ -8,8 +8,9 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <!-- Grid styling-->
     <Grid Style="{StaticResource GridStyle}">
-
+        <!-- Create and format nested grids to organize/ streamline elements-->
         <Grid Margin="10,20,10,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
@@ -34,6 +35,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
+                <!-- Place TextBoxes and TextBloxs in desired rows and columns within grid-->
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Username" FontSize="30" TextWrapping="Wrap" Height="73"/>
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="Password" FontSize="31" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="64" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
                 <TextBox Grid.Row="1" Grid.Column="3" x:Name="UsernameTextBox" Text="" Height="64" FontSize="24" PlaceholderText="Enter Username"/>
@@ -41,14 +43,15 @@
                 <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontSize ="22" Height="34"  Text="Don't have an acccount?" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Margin="8.5,57,0,0"/>
                 <HyperlinkButton Grid.Row="3" Grid.Column="2" Content="Sign up! :D" HorizontalAlignment="Center" Height="87" VerticalAlignment="Center" Width="122" FontSize="22" Click="HyperlinkButton_Click"/>
 
+
                 <Button Grid.Row="3" Grid.Column="3" x:Name="LoginButton" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center" Height="56" Width="134" Click="LoginButton_Click" Tapped="LoginButton_Tapped">
+                    <!-- Flyout messages prompt user of incorrect credentials-->
                     <FlyoutBase.AttachedFlyout>
                         <Flyout>
                             <TextBlock Text="Access Denied"/>
                         </Flyout>
                     </FlyoutBase.AttachedFlyout>
                 </Button>
-
             </Grid>
         </Grid>
     </Grid>

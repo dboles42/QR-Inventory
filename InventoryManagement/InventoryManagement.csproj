@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Wallpaper.jpg" />
+    <Content Include="Images\wallpaper2.jpg" />
     <Content Include="Images\wood.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

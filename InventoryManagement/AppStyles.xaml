@@ -3,9 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:InventoryManagement">
 
-    <ImageBrush x:Key="WoodBrush" ImageSource="Images/wood.jpg"/>
+    <!-- Styles dictionary created to add same wallpaper to different pages of APP-->
+    <!-- Code taken from book-->
+    <ImageBrush x:Key="customBackground" ImageSource="Images/wallpaper2.jpg"/>
     <Style x:Key="GridStyle" TargetType="Grid">
-        <Setter Property="Background" Value="{StaticResource WoodBrush}"/>
+        <Setter Property="Background" Value="{StaticResource customBackground}"/>
     </Style>
 
 </ResourceDictionary>
