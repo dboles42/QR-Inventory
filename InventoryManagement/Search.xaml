@@ -9,6 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <!-- Create and format nested grids to organize/ streamline elements-->
     <Grid Style="{StaticResource GridStyle}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -17,6 +18,7 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
+            <!-- create and configure scrollable list with columns-->
             <ListView Grid.Column="1" Name="InventoryList"
                   SelectionMode="Single"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -58,6 +60,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <!-- Relative stackpanel contains textboxes and textblocks-->
             <RelativePanel Grid.Column="2" HorizontalAlignment="Left" Height="646" VerticalAlignment="Center" Width="356" Margin="53.5,0,0,0" Grid.ColumnSpan="2">
                 <TextBlock Text="Name" Height="32" Width="97" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 <TextBlock Text="Serial Number" Height="32" Width="147" FontSize="20" VerticalAlignment="Top" Margin="0,133,0,0" HorizontalAlignment="Left"/>
@@ -77,26 +80,5 @@
 
             </RelativePanel>
         </Grid>
-
-
-
-        <!--
-        <RelativePanel HorizontalAlignment="Left" Height="287" VerticalAlignment="Top" Width="394" Margin="962,201,0,0">
-            <TextBlock Text="Name" Height="32" Width="97" FontSize="20" VerticalAlignment="Top" Margin="15,16,0,0" HorizontalAlignment="Left"/>
-            <TextBlock Text="Serial Number" Height="32" Width="147" FontSize="20" VerticalAlignment="Top" Margin="15,76,0,0" HorizontalAlignment="Left"/>
-            <TextBlock Text="Model Number" Height="32" Width="170" FontSize="20" VerticalAlignment="Top" Margin="15,146,0,0" HorizontalAlignment="Left"/>
-            <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="180,16,0,0" Text="" VerticalAlignment="Top" Height="40" Width="200"/>
-            <TextBox x:Name="SerialNumberTextBox" HorizontalAlignment="Left" Margin="180,76,0,0" Text="" VerticalAlignment="Top" Height="40" Width="200"/>
-            <TextBox x:Name="ModelNumberTextBox" HorizontalAlignment="Left" Margin="180,146,0,0" Text="" VerticalAlignment="Top" Height="40" Width="200"/>
-            <Button Content="Search" HorizontalAlignment="Left" Margin="280,231,0,0" VerticalAlignment="Top" Height="35" Width="96" Click="SearchButtonClick">
-                <FlyoutBase.AttachedFlyout>
-                    <Flyout>
-                        <TextBlock x:Name="flyoutText"/>
-                    </Flyout>
-                </FlyoutBase.AttachedFlyout>
-            </Button>
-            <Button Content="Back" HorizontalAlignment="Left" Margin="80,231,0,0" VerticalAlignment="Top" Height="35" Width="96" Click="BackButtonClick"/>
-        </RelativePanel>
-        -->
     </Grid>
 </Page>

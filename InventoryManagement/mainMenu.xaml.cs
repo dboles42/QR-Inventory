@@ -43,7 +43,7 @@ namespace InventoryManagement
             //Show the list view if the user has read permission
             if (mainMenu.CurrUser.ReadPermission)
             {
-                InventoryList.ItemsSource = i1.RetriveAllAssets();
+                InventoryList.ItemsSource = i1.RetrieveAllAssets();
             }
         }
 
@@ -73,11 +73,12 @@ namespace InventoryManagement
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void RemoveButtonClick(object sender, RoutedEventArgs e)
+        private void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
             //If the user doesn't have remove permission, show them that access is denied
             if (!mainMenu.CurrUser.RemovePermission)
             {
+                RemoveFlyoutText.Text = "Access Denied";
                 FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
             else
@@ -85,15 +86,15 @@ namespace InventoryManagement
                 //Check if the user hasn't selected an asset
                 if (InventoryList.SelectedItem == null)
                 {
-                    MessageDialog msgbox = new MessageDialog("You have to select an item before executing this command.");
-                    await msgbox.ShowAsync();
+                    RemoveFlyoutText.Text = "You have to select an asset before removing";
+                    FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
                 }
                 else
                 {
                     i1.RemoveAsset((Asset)InventoryList.SelectedItem);
-                    InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
-                    MessageDialog msgbox = new MessageDialog("The asset has been successfully removed.");
-                    await msgbox.ShowAsync();
+                    InventoryList.ItemsSource = i1.RetrieveAllAssets();  //Refresh the List View
+                    RemoveFlyoutText.Text = "The asset has been successfuly removed";
+                    FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
                 }
             }
         }
@@ -118,7 +119,7 @@ namespace InventoryManagement
                 if ((int)answer.Id == 0)
                 {
                     i1.ClearInventory();
-                    InventoryList.ItemsSource = i1.RetriveAllAssets();  //Refresh the List View
+                    InventoryList.ItemsSource = i1.RetrieveAllAssets();  //Refresh the List View
                     MessageDialog msgbox2 = new MessageDialog("All assets successfully deleted from the inventory");
                     await msgbox2.ShowAsync();
                 }
@@ -184,12 +185,12 @@ namespace InventoryManagement
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void PrintButtonClick(object sender, RoutedEventArgs e)
+        private void PrintButtonClick(object sender, RoutedEventArgs e)
         {
             if (InventoryList.SelectedItem == null)
             {
-                MessageDialog msgbox = new MessageDialog("You have to select an item before executing this command.");
-                await msgbox.ShowAsync();
+                printFlyoutText.Text = "You have to select an asset before printing the QR code";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
             else
             {

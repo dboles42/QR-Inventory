@@ -68,7 +68,7 @@ namespace InventoryManagement
                 {
                     //Sort the list then show it
                     i1.SortInventory();
-                    InventoryList.ItemsSource = i1.RetriveAllAssets();
+                    InventoryList.ItemsSource = i1.RetrieveAllAssets();
                 }           
             }
         }
