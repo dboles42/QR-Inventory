@@ -71,7 +71,7 @@ namespace InventoryManagement
                 flyoutText.Text = "Please enter a serial number for the asset.";
                 FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
-            else if ((string.IsNullOrWhiteSpace(priceText.Text)) || !(Int32.TryParse(modelnumText.Text, out int modelNum)))
+            else if ((string.IsNullOrWhiteSpace(priceText.Text)))
             {
                 flyoutText.Text = "Please enter the model number.";
                 FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
@@ -80,7 +80,7 @@ namespace InventoryManagement
             else
             {
                 //Add the asset 
-                i1.AddAsset(nameTextBox.Text, descriptionText.Text,priceText.Text, modelNum, serialnumText.Text);
+                i1.AddAsset(nameTextBox.Text, descriptionText.Text,priceText.Text, modelnumText.Text, serialnumText.Text);
 
                 //Check if the user wants to add more assets
                 MessageDialog msgbox = new MessageDialog("The asset has been successfully added.\nWould you like to add more assets?");
