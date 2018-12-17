@@ -88,35 +88,35 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" x:Name="OptionsText"  Text="Options" TextWrapping="Wrap"  FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
-                <Button x:Name="AddItemButton" Content="Add Item" Click="AddItemButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="48" Width="140" Margin="0,0,0,0">
+                <Button x:Name="AddItemButton" Content="Add Item" Click="AddItemButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Height="48" Width="140" Margin="0,0,0,0">
                     <FlyoutBase.AttachedFlyout>
                         <Flyout>
                             <TextBlock Text="Access Denied"/>
                         </Flyout>
                     </FlyoutBase.AttachedFlyout>
                 </Button>
-                <Button x:Name="RemoveItemButton" Content="Remove Item" Click="RemoveButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Height="48" Width="140" Margin="0,0,0,0">
+                <Button x:Name="RemoveItemButton" Content="Remove Item" Click="RemoveButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Height="48" Width="140" Margin="0,0,0,0">
                     <FlyoutBase.AttachedFlyout>
                         <Flyout>
                             <TextBlock x:Name="RemoveFlyoutText"/>
                         </Flyout>
                     </FlyoutBase.AttachedFlyout>
                 </Button>
-                <Button x:Name="RemoveAllButton" Content="Remove All" Click="RemoveAllButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Height="48" Width="140" Margin="0,0,0,0">
+                <Button x:Name="RemoveAllButton" Content="Remove All" Click="RemoveAllButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Height="48" Width="140" Margin="0,0,0,0">
                     <FlyoutBase.AttachedFlyout>
                         <Flyout>
                             <TextBlock Text="Access Denied"/>
                         </Flyout>
                     </FlyoutBase.AttachedFlyout>
                 </Button>
-                <Button x:Name="UpdateButton" Content="Update" Click="UpdateButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Height="48" Width="140">
+                <Button x:Name="UpdateButton" Content="Update" Click="UpdateButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="10" Height="48" Width="140">
                     <FlyoutBase.AttachedFlyout>
                         <Flyout>
                             <TextBlock Text="Access Denied"/>
                         </Flyout>
                     </FlyoutBase.AttachedFlyout>
                 </Button>
-                <Button x:Name="BackButton" Content="Logoff" Click="LogOffClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="10" Height="48" Width="140"/>
+                <Button x:Name="BackButton" Content="Logoff" Click="LogOffClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="18" Height="48" Width="140"/>
                 <Button x:Name="ScanButton" Content="Scan QR Code" Click="ScanButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="12" Height="48" Width="140"/>
                 <Button x:Name="PrintButton" Content="Print QR Code" Click="PrintButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="14" Height="48" Width="140">
                     <FlyoutBase.AttachedFlyout>
@@ -125,7 +125,7 @@
                         </Flyout>
                     </FlyoutBase.AttachedFlyout>
                 </Button>
-                <Button x:Name="SearchButton" Content="Search" Click="SearchButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="16" Height="48" Width="140">
+                <Button x:Name="SearchButton" Content="Search" Click="SearchButtonClick" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="48" Width="140">
                     <FlyoutBase.AttachedFlyout>
                         <Flyout>
                             <TextBlock Text="Access Denied"/>
@@ -133,7 +133,7 @@
                     </FlyoutBase.AttachedFlyout>
                 </Button>
                 <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Center" Click="ExitButtonClick" VerticalAlignment="Center" Grid.Row="20" Width="140" Height="48"/>
-                <Button x:Name="ExportExcel" Content="Export to Excel" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ExportExcel_Click" Grid.Row="18" Height="48" Width="140"/>
+                <Button x:Name="ExportExcel" Content="Export to Excel" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ExportExcel_Click" Grid.Row="16" Height="48" Width="140"/>
             </Grid>
 
         </Grid>
