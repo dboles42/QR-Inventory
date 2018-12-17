@@ -25,13 +25,16 @@ namespace InventoryManagement
         Inventory i1 = new Inventory();
         DataAccess DataAccessKey = new DataAccess("Asset");
 
+        /// <summary>
+        /// Constructor for the addAssets page
+        /// </summary>
         public addAssetsPage()
         {
             this.InitializeComponent();
         }
 
         /// <summary>
-        /// Sends the user back to the mainMenu
+        /// Button that sends the user back to the mainMenu when clicked
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

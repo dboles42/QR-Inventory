@@ -25,7 +25,9 @@ namespace InventoryManagement
     /// </summary>
     public sealed partial class Search : Page
     {
-
+        /// <summary>
+        /// Page constructor
+        /// </summary>
         public Search()
         {
             this.InitializeComponent();
@@ -47,7 +49,6 @@ namespace InventoryManagement
                 InventoryList.ItemsSource = null;       //Don't display anything in the list view
 
             }
-
             else
             {
                 Inventory i1 = new Inventory();
@@ -68,11 +69,14 @@ namespace InventoryManagement
             }
         }
         
-        //Back button that sends the user back to the main menu
+        /// <summary>
+        /// Back button that sends the user to the mainMenu if clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(mainMenu));
         }
-
     }
 }

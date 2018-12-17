@@ -18,7 +18,6 @@ using Windows.UI.Popups;
 using AssetObj;
 using DataAccessLibrary;
 using UserObj;
-
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using Windows.Storage;
@@ -48,15 +47,6 @@ namespace InventoryManagement
             }
         }
 
-        /// <summary>
-        /// simple button that takes user to first page if needed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(BarCodeScanner));
-        }
         /// <summary>
         /// Adds an asset when the button is clicked if the user has permission
         /// </summary>
@@ -92,6 +82,7 @@ namespace InventoryManagement
             }
             else
             {
+                //Check if the user hasn't selected an asset
                 if (InventoryList.SelectedItem == null)
                 {
                     MessageDialog msgbox = new MessageDialog("You have to select an item before executing this command.");
@@ -106,6 +97,7 @@ namespace InventoryManagement
                 }
             }
         }
+
         /// <summary>
         /// Removes all assets when the user has remove permissions and requests verification. Refreshes the page to show changes.
         /// </summary>
@@ -186,6 +178,7 @@ namespace InventoryManagement
             CurrentAsset = (Asset)InventoryList.SelectedItem;
             this.Frame.Navigate(typeof(BarCodeScanner));
         }
+
         /// <summary>
         /// If the respective print button is clicked the program navigates to BarcodeGenerator page 
         /// </summary>
@@ -223,12 +216,19 @@ namespace InventoryManagement
             this.Frame.Navigate(typeof(LoginPage));
         }
 
+        /// <summary>
+        /// Sends the user to the search page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchButtonClick(object sender, RoutedEventArgs e)
         {
+            //Refresh the database then go to the search page
             AssetDataAccessKey.RemoveAllRows();
             AssetDataAccessKey.InsertListToTable(i1.listOfAssets);
             this.Frame.Navigate(typeof(Search));
         }
+
         /// <summary>
         /// Export Existing list to Excel using Epplus library.  Epplus requires filestream NOT StorageFIle. 
         /// Since path definitions for Filestreams are locked by
@@ -239,7 +239,6 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private async void ExportExcel_Click(object sender, RoutedEventArgs e)
         {
-
             int RowIndex = 1;
             ExcelPackage excel = new ExcelPackage();
             var workSheet = excel.Workbook.Worksheets.Add("AssetInventory");

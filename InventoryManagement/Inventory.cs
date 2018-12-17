@@ -13,6 +13,7 @@ namespace InventoryManagement
         public List<Asset> listOfAssets { get; set; } = new List<Asset>();
         public int NumberOfAssets { get; set; }
         DataAccess DataAccessKey = new DataAccess("Asset");
+
         /// <summary>
         /// Default constructor for the inventory class
         /// </summary>
@@ -85,7 +86,7 @@ namespace InventoryManagement
         }
 
         /// <summary>
-        /// 
+        /// Compares two inventories based on the number of assets in each inventory
         /// </summary>
         /// <param name="that">The inventory we are comparing with the original</param>
         /// <returns>Returns 1 if the current inventory has more assets than the other inventory, -1 if it has less, and 0 if they have the
@@ -200,6 +201,7 @@ namespace InventoryManagement
             }
             return filterdList;
         }
+
         /// <summary>
         /// Finds the index of an asset in the list of assets
         /// </summary>
