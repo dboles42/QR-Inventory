@@ -284,8 +284,6 @@ namespace InventoryManagement
                 MessageDialog msgbox = new MessageDialog(ex.Message.ToString());
                 await msgbox.ShowAsync();
             }
-            
-
         }
     }
 }

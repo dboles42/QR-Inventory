@@ -44,12 +44,12 @@
                 <TextBlock x:Name="Price_Copy" HorizontalAlignment="Center" Text="Price ($)" VerticalAlignment="Center" Height="50" Width="150" Grid.Row="4" Grid.Column="1"/>
                 <TextBlock x:Name="Model_Copy" HorizontalAlignment="Center" Text="Model #" VerticalAlignment="Center" Height="50" Width="150" Grid.Row="6" Grid.Column="1"/>
                 <TextBlock x:Name="Serial_Copy" HorizontalAlignment="Center" Text="Serial #" VerticalAlignment="Center" Height="50" Width="150" Grid.Row="8" Grid.Column="1"/>
-                <TextBox x:Name="Name" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="3"/>
-                <TextBox x:Name="Description" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="3"/>
-                <TextBox x:Name="Price" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="3"/>
-                <TextBox x:Name="Model" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="3"/>
-                <TextBox x:Name="Serial" Text="" Height="50" Width="275" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="3" />
-                <TextBox x:Name="ScanResult" HorizontalAlignment="Left" Text="" VerticalAlignment="Center" Height="50" Width="423" Grid.Row="10" Grid.Column="3"/>
+                <TextBlock x:Name="Name" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="3"/>
+                <TextBlock x:Name="Description" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="3"/>
+                <TextBlock x:Name="Price" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="3"/>
+                <TextBlock x:Name="Model" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="3"/>
+                <TextBlock x:Name="Serial" Text="" Height="50" Width="275" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="3" />
+                <TextBlock x:Name="ScanResult" HorizontalAlignment="Left" Text="" VerticalAlignment="Center" Height="50" Width="423" Grid.Row="10" Grid.Column="3"/>
                 <Button x:Name="btnscan" Click="btnscan_Click" Content=" Scan Qr Code" HorizontalAlignment="Center" VerticalAlignment="Center" Height="83" Width="134" Grid.Row="0" Grid.Column="4"/>
                 <Button x:Name="btnCheckIn" Click="btnCheckIn_Click" Content=" Check In Asset" HorizontalAlignment="Center" VerticalAlignment="Center" Height="83" Width="134" Grid.Row="2" Grid.Column="4"/>
                 <Button x:Name="btnCheckOut" Click="btnCheckOut_Click" Content=" Check Out Asset" HorizontalAlignment="Center" VerticalAlignment="Center" Height="83" Width="134" Grid.Row="4" Grid.Column="4"/>

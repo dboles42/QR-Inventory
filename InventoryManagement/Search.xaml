@@ -73,6 +73,7 @@
                     </FlyoutBase.AttachedFlyout>
                 </Button>
                 <Button Content="Back" HorizontalAlignment="Left" Margin="10,446,0,0" VerticalAlignment="Top" Height="35" Width="96" Click="BackButtonClick"/>
+                <Button Content="Export" HorizontalAlignment="Left" Margin="10,510,0,0" VerticalAlignment="Top" Height="35" Width="96" Click="ExportExcel_Click"/>
 
             </RelativePanel>
         </Grid>
