@@ -234,7 +234,7 @@ namespace InventoryManagement
         /// Export Existing list to Excel using Epplus library.  Epplus requires filestream NOT StorageFIle. 
         /// Since path definitions for Filestreams are locked by
         /// security controls, I convert the StorageFile (which gives permissions in win10 to file) to system.IO.Filestream before
-        /// saving.
+        /// saving.  Catches fileopened exception in case user has already opened excel file.  
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -243,7 +243,6 @@ namespace InventoryManagement
             int RowIndex = 1;
             ExcelPackage excel = new ExcelPackage();
             var workSheet = excel.Workbook.Worksheets.Add("AssetInventory");
-            workSheet.TabColor = System.Drawing.Color.Black;
             workSheet.DefaultRowHeight = 12;
             //Setup Header
             workSheet.Row(1).Height = 20;
