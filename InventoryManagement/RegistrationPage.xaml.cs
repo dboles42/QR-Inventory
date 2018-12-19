@@ -24,24 +24,29 @@ namespace InventoryManagement
     /// </summary>
     public sealed partial class RegistrationPage : Page
     {
-        bool IsTextBoxEmpty { get; set; }
         DataAccess LoginDataAccessKey = new DataAccess("Login");
+        /// <summary>
+        /// Registrations page constructor
+        /// </summary>
         public RegistrationPage()
         {
             this.InitializeComponent();
         }
-
+        /// <summary>
+        /// When the username and password is filled it allows you to register an account with the database with respective permissions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)
         {
             User Registered = new User();
             if (UsernameTextBox.Text.CompareTo("") == 0 ||
                 PasswordText.Password.CompareTo("") == 0)
             {
-                IsTextBoxEmpty = true;
+                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
             }
             else
             {
-                IsTextBoxEmpty = false;
                 Registered.Username = UsernameTextBox.Text;
                 Registered.Password = PasswordText.Password;
                 Registered.ReadPermission = (bool)ReadCheck.IsChecked;
@@ -51,13 +56,9 @@ namespace InventoryManagement
                 this.Frame.Navigate(typeof(LoginPage));
             }
         }
-
-        private void RegistrationButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (IsTextBoxEmpty == true)
-            {
-                Flyout.ShowAttachedFlyout((FrameworkElement)sender);
-            }
+            this.Frame.Navigate(typeof(LoginPage));
         }
     }
 }

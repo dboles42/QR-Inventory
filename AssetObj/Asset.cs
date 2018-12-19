@@ -10,21 +10,21 @@ namespace AssetObj
         public string Name { get; set; }
         public string Description { get; set; }
         public string IDnumber { get; set; }
-        public double Price { get; set; }
-        public int ModelNumber { get; set; }
+        public string Price { get; set; }
+        public string ModelNumber { get; set; }
         public string SerialNumber { get; set; }
         public bool CheckIn { get; set; }
 
         /// <summary>
-        /// Default constructor that initializes a new instance of the class.
+        /// Default constructor that initializes a new instance of the asset class.
         /// </summary>
         public Asset()
         {
             this.Name = "Empty";
             this.Description = "Empty";
-            this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_"); // The char "-" is an escape sequence in SQL and not just a char so it bugs the query "_" is a char wildcard
-            this.Price = 0;
-            this.ModelNumber = 0;
+            this.IDnumber = Guid.NewGuid().ToString();
+            this.Price = "0.0";
+            this.ModelNumber = "0";
             this.SerialNumber = "Empty";
             this.CheckIn = false;
         }
@@ -32,16 +32,17 @@ namespace AssetObj
         /// <summary>
         /// Explicit value constructor that Initializes a new instance of the asset class.
         /// </summary>
-        /// <param name="Name">Name.</param>
-        /// <param name="Description">Description.</param>
-        /// <param name="ModelNumber">Model number.</param>
-        /// <param name="SerialNumber">Serial number.</param>
-        /// <param name="CheckIn">If set to <c>true</c> check in.</param>
-        public Asset(string Name, string Description, double Price, int ModelNumber, string SerialNumber, bool CheckIn)
+        /// <param name="Name"></param>
+        /// <param name="Description"></param>
+        /// <param name="Price"></param>
+        /// <param name="ModelNumber"></param>
+        /// <param name="SerialNumber"></param>
+        /// <param name="CheckIn"></param>
+        public Asset(string Name, string Description, string Price, string ModelNumber, string SerialNumber, bool CheckIn)
         {
             this.Name = Name;
             this.Description = Description;
-            this.IDnumber = (Guid.NewGuid().ToString()).Replace("-", "_"); // The char "-" is an escape sequence in SQL and not just a char so it bugs the query "_" is a char wildcard
+            this.IDnumber = Guid.NewGuid().ToString();
             this.Price = Price;
             this.ModelNumber = ModelNumber;
             this.SerialNumber = SerialNumber;
@@ -78,8 +79,8 @@ namespace AssetObj
         /// <returns>A string that represents the current asset.</returns>
         public override string ToString()
         {
-            return $"name: {this.Name}\nDescription: {this.Description}\nID number: {this.IDnumber}\nPrice: {this.Price}\n" +
-                $"Model Number: {this.ModelNumber}\nSerial Number: {this.SerialNumber}\nCheck In: {this.CheckIn}\n";
+            return $"Name: {this.Name} Description: {this.Description} ID number: {this.IDnumber} Price: {this.Price} " +
+                $"Model Number: {this.ModelNumber} Serial Number: {this.SerialNumber} Check In: {this.CheckIn}\n";
         }
     }
 }

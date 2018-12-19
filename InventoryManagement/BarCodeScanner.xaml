@@ -8,23 +8,57 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <Button x:Name="btnscan" Click="btnscan_Click" Content=" Scan Qr Code" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,128,0,0" Height="83" Width="134"/>
-        <RelativePanel HorizontalAlignment="Left" Height="278" Margin="549,128,0,0" VerticalAlignment="Top" Width="423">
-            <TextBox x:Name="Name" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="143,0,0,0" HorizontalAlignment="Left"/>
-            <TextBox x:Name="Description" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="144,41,0,0" HorizontalAlignment="Left"/>
-            <TextBox x:Name="Price" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="144,84,0,0" HorizontalAlignment="Left"/>
-            <TextBox x:Name="Model" Text="" Height="38" Width="279"  VerticalAlignment="Top" Margin="144,128,0,0" HorizontalAlignment="Left"/>
-            <TextBox x:Name="Serial" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="144,171,0,0" Height="38" Width="279" />
-            <TextBlock x:Name="Name_Copy" HorizontalAlignment="Left" Text="Name" VerticalAlignment="Top" Height="38" Width="135" />
-            <TextBlock x:Name="Description_Copy" HorizontalAlignment="Left" Text="Description" VerticalAlignment="Top" Margin="0,41,0,0" Height="38" Width="135" />
-            <TextBlock x:Name="Price_Copy" HorizontalAlignment="Left" Text="Price ($)" VerticalAlignment="Top" Margin="0,84,0,0" Height="38" Width="135" />
-            <TextBlock x:Name="Model_Copy" HorizontalAlignment="Left" Text="Model #" VerticalAlignment="Top" Margin="0,128,0,0" Height="38" Width="135" />
-            <TextBlock x:Name="Serial_Copy" HorizontalAlignment="Left" Text="Serial #" VerticalAlignment="Top" Margin="0,171,0,0" Height="38" Width="135" />
-            <TextBox x:Name="ScanResult" HorizontalAlignment="Center" Margin="0,246,0,0" Text="" VerticalAlignment="Top" Height="27" Width="423" />
-        </RelativePanel>
-        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="180,500,0,0" VerticalAlignment="Top" Height="56" Width="134" Click="BackButton_Click"/>
-        <Button x:Name="btnCheckIn" Click="btnCheckIn_Click" Content=" Check In Asset" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,245,0,0" Height="83" Width="134"/>
-        <Button x:Name="btnCheckOut" Click="btnCheckOut_Click" Content=" Check Out Asset" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,359,0,0" Height="83" Width="134"/>
+    <Grid Style="{StaticResource GridStyle}">
+        <!-- -->
+        <!-- Create and format nested grids to organize/ streamline elements-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Place TextBoxes and TextBloxs in desired rows and columns within grid-->
+                <TextBlock x:Name="Name_Copy" HorizontalAlignment="Center" Text="Name" VerticalAlignment="Center" Height="50" Width="150" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock x:Name="Description_Copy" HorizontalAlignment="Center" Text="Description" VerticalAlignment="Center" Height="50" Width="150" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock x:Name="Price_Copy" HorizontalAlignment="Center" Text="Price ($)" VerticalAlignment="Center" Height="50" Width="150" Grid.Row="4" Grid.Column="1"/>
+                <TextBlock x:Name="Model_Copy" HorizontalAlignment="Center" Text="Model #" VerticalAlignment="Center" Height="50" Width="150" Grid.Row="6" Grid.Column="1"/>
+                <TextBlock x:Name="Serial_Copy" HorizontalAlignment="Center" Text="Serial #" VerticalAlignment="Center" Height="50" Width="150" Grid.Row="8" Grid.Column="1"/>
+                <TextBlock x:Name="Name" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="3"/>
+                <TextBlock x:Name="Description" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="3"/>
+                <TextBlock x:Name="Price" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="3"/>
+                <TextBlock x:Name="Model" Text="" Height="50" Width="275"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="3"/>
+                <TextBlock x:Name="Serial" Text="" Height="50" Width="275" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="3" />
+                <TextBlock x:Name="ScanResult" HorizontalAlignment="Left" Text="" VerticalAlignment="Center" Height="50" Width="423" Grid.Row="10" Grid.Column="3"/>
+                <Button x:Name="btnscan" Click="btnscan_Click" Content=" Scan Qr Code" HorizontalAlignment="Center" VerticalAlignment="Center" Height="83" Width="134" Grid.Row="0" Grid.Column="4"/>
+                <Button x:Name="btnCheckIn" Click="btnCheckIn_Click" Content=" Check In Asset" HorizontalAlignment="Center" VerticalAlignment="Center" Height="83" Width="134" Grid.Row="2" Grid.Column="4"/>
+                <Button x:Name="btnCheckOut" Click="btnCheckOut_Click" Content=" Check Out Asset" HorizontalAlignment="Center" VerticalAlignment="Center" Height="83" Width="134" Grid.Row="4" Grid.Column="4"/>
+                <Button x:Name="backButton" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="56" Width="134" Click="BackButton_Click" Grid.Row="6" Grid.Column="4"/>
+            </Grid>
+            <TextBlock x:Name="TitleText" HorizontalAlignment="Left" Margin="453,16,0,0" Text="Barcode Scanner" TextWrapping="Wrap" VerticalAlignment="Top" Height="111" Width="634" FontSize="72"/>
+        </Grid>
     </Grid>
 </Page>

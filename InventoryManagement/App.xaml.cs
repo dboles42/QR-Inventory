@@ -32,7 +32,6 @@ namespace InventoryManagement
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            DataAccess DataAccessKey = new DataAccess("Asset");
         }
 
         /// <summary>

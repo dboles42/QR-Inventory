@@ -13,36 +13,36 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using DataAccessLibrary;
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using Windows.UI.Popups;
 
 namespace InventoryManagement
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// This page is used to add assets to the inventory
     /// </summary>
     public sealed partial class addAssetsPage : Page
     {
-        private string nameInput { get; set; }
-        private string descripInput { get; set; }
-        private double priceInput { get; set; }
-        private int modelNumInput { get; set; }
-        private string serialNumInput { get; set; }
-
         Inventory i1 = new Inventory();
         DataAccess DataAccessKey = new DataAccess("Asset");
 
+        /// <summary>
+        /// Constructor for the addAssets page
+        /// </summary>
         public addAssetsPage()
         {
             this.InitializeComponent();
         }
 
         /// <summary>
-        /// routes user back to inventory page
+        /// Button that sends the user back to the mainMenu when clicked
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            //Update the database then go back to mainMenu
+            DataAccessKey.RemoveAllRows();
+            DataAccessKey.InsertListToTable(i1.listOfAssets);
             this.Frame.Navigate(typeof(mainMenu));
         }
 
@@ -51,12 +51,63 @@ namespace InventoryManagement
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddButtonClick(object sender, RoutedEventArgs e)
+        private async void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            i1.AddAsset((string) nameTextBox.Text,(string) descriptionText.Text, double.Parse(priceText.Text), int.Parse(modelnumText.Text), serialnumText.Text);
-            DataAccessKey.RemoveAllRows();
-            DataAccessKey.InsertListToTable(i1.listOfAssets);
-            Frame.Navigate(typeof(mainMenu));
+            //Check if the contents of the textboxes are appropriate 
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+            {
+                flyoutText.Text = "Please enter a name for the asset.";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            else if (string.IsNullOrWhiteSpace(descriptionText.Text))
+            {
+                flyoutText.Text = "Please enter a description for the asset.";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            else if( (string.IsNullOrWhiteSpace(priceText.Text)) || !(Double.TryParse(priceText.Text, out double price)))
+            {
+                flyoutText.Text = "Please enter a number for the price.";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            else if (string.IsNullOrWhiteSpace(serialnumText.Text))
+            {
+                flyoutText.Text = "Please enter a serial number for the asset.";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            else if ((string.IsNullOrWhiteSpace(priceText.Text)))
+            {
+                flyoutText.Text = "Please enter the model number.";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            //If the contents of the textboxes are appropriate, add the asset to the inventory and check if more need to be added
+            else
+            {
+                //Add the asset 
+                i1.AddAsset(nameTextBox.Text, descriptionText.Text,priceText.Text, modelnumText.Text, serialnumText.Text);
+
+                //Check if the user wants to add more assets
+                MessageDialog msgbox = new MessageDialog("The asset has been successfully added.\nWould you like to add more assets?");
+                msgbox.Commands.Add(new UICommand { Label = "Yes", Id = 0 });
+                msgbox.Commands.Add(new UICommand { Label = "No", Id = 1 });
+                var answer = await msgbox.ShowAsync();
+
+                //If the user wants to add more assets, clear the textboxes
+                if ((int)answer.Id == 0)
+                {
+                    //Reset the value of the text boxes
+                    nameTextBox.Text = descriptionText.Text = priceText.Text = modelnumText.Text = serialnumText.Text = "";
+                    flyoutText.Text = "Please enter the values for the new asset.";
+                    FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+                }
+
+                //If the user doesn't want to add more assets, update the database then go back to mainMenu
+                else
+                {
+                    DataAccessKey.RemoveAllRows();
+                    DataAccessKey.InsertListToTable(i1.listOfAssets);
+                    Frame.Navigate(typeof(mainMenu));
+                }
+            }
         }
     }
 }

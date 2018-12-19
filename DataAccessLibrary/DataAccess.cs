@@ -12,25 +12,35 @@ namespace DataAccessLibrary
     /// </summary>
     public class DataAccess : IComparable<DataAccess>
     {
+        /// <summary>
+        /// Private Fields
+        /// </summary>
         private string DB { get; set; }
         private string WorkingTable { get; set; }
         private string AssetsInv { get; set; }
         private string LoginInfo { get; set; }
 
+        /// <summary>
+        /// Defualt Constructor
+        /// </summary>
         public DataAccess()
         {
             DB = "InventoryDB.db";
-            AssetsInv = "AssetsInventory";
+            AssetsInv = "AssetsInventory42";
             LoginInfo = "LoginInfo";
             WorkingTable = "Default";
 
             InitializeDatabase();
         }
 
+        /// <summary>
+        /// Explicit constructor that takes in the table the developer is working on.
+        /// </summary>
+        /// <param name="WorkingTable"></param>
         public DataAccess(string WorkingTable)
         {
             DB = "InventoryDB.db";
-            AssetsInv = "AssetsInventory";
+            AssetsInv = "AssetsInventory42";
             LoginInfo = "LoginInfo";
             if (WorkingTable.CompareTo("Asset") == 0)
             {
@@ -60,11 +70,11 @@ namespace DataAccessLibrary
                     "EXISTS " + AssetsInv + " (" +
                     "AssetName VARCHAR(255)," +
                     "Description VARCHAR(255)," +
+                    "Price VARCHAR(255)," +
                     "IDNumber VARCHAR(255)," +
-                    "CheckIn INT NOT NULL," +
-                    "Price FLOAT NOT NULL," +
-                    "ModelNumber INT NOT NULL," +
-                    "SerialNumber VARCHAR(255))";
+                    "SerialNumber VARCHAR(255)," +
+                    "ModelNumber VARCHAR(255)," +
+                    "CheckIn INT NOT NULL)";
 
                 String CreateLoginTableQuery = "CREATE TABLE IF NOT " +
                     "EXISTS " + LoginInfo + " (" +
@@ -104,13 +114,13 @@ namespace DataAccessLibrary
                     {
                         SqliteCommand insertCommand = new SqliteCommand();
                         insertCommand.Connection = DBase;
-                        insertCommand.CommandText = $"INSERT INTO " + AssetsInv + " VALUES (@Name, @Description, @IDnumber, @CheckIn, " +
-                                                                                   "@Price, @ModelNumber, @SerialNumber);";
+                        insertCommand.CommandText = $"INSERT INTO " + AssetsInv + $" VALUES (@Name, @Description, @Price, @IDnumber, " +
+                                                                                   "@SerialNumber, @ModelNumber, @CheckIn);";
                         insertCommand.Parameters.AddWithValue("@Name", currAsset.Name);
                         insertCommand.Parameters.AddWithValue("@Description", currAsset.Description);
-                        insertCommand.Parameters.AddWithValue("@IDnumber", currAsset.IDnumber);
+                        insertCommand.Parameters.AddWithValue("@IDnumber", currAsset.IDnumber.Replace("-","_"));
                         insertCommand.Parameters.AddWithValue("@CheckIn", currAsset.CheckIn);
-                        insertCommand.Parameters.AddWithValue("@Price", currAsset.Price);
+                        insertCommand.Parameters.AddWithValue("@Price", currAsset.Price.Replace(".","_"));
                         insertCommand.Parameters.AddWithValue("@ModelNumber", currAsset.ModelNumber);
                         insertCommand.Parameters.AddWithValue("@SerialNumber", currAsset.SerialNumber);
 
@@ -123,6 +133,10 @@ namespace DataAccessLibrary
             }
         }
 
+        /// <summary>
+        /// Inserts a user in the Login Information table of the database
+        /// </summary>
+        /// <param name="user"></param>
         public void InsertUserToTable(User user)
         {
             if (WorkingTable.CompareTo(LoginInfo) == 0)
@@ -154,6 +168,7 @@ namespace DataAccessLibrary
                 }
             }
         }
+
         /// <summary>
         /// Retrieves all the contents of a table as a list of Assets
         /// </summary>
@@ -176,10 +191,10 @@ namespace DataAccessLibrary
                     Asset temp = new Asset();
                     temp.Name = query.GetString(0);
                     temp.Description = query.GetString(1);
-                    temp.IDnumber = query.GetString(2);
-                    temp.Price = query.GetDouble(3);
-                    temp.ModelNumber = query.GetInt32(4);
-                    temp.SerialNumber = query.GetString(5);
+                    temp.Price = query.GetString(2).Replace("_", ".");
+                    temp.IDnumber = query.GetString(3).Replace("_", "-");
+                    temp.SerialNumber = query.GetString(4);
+                    temp.ModelNumber = query.GetString(5);
                     temp.CheckIn = query.GetBoolean(6);
 
                     listOfAssets.Add(temp);
@@ -192,6 +207,12 @@ namespace DataAccessLibrary
             return listOfAssets;
         }
 
+        /// <summary>
+        /// Gets the user based on username and password
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
         public User getUser(string Username, string Password)
         {
             User temp = new User();
@@ -234,6 +255,7 @@ namespace DataAccessLibrary
             }
             return temp;
         }
+
         /// <summary>
         /// This method removes all rows/contents of the AssetsInv table in the Database
         /// </summary>
@@ -255,11 +277,21 @@ namespace DataAccessLibrary
                 DBase.Dispose();
             }
         }
+
+        /// <summary>
+        /// Tells you what database your in and what table that instance of DataAccess is working with
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"| Database: {DB} | Table: {WorkingTable} |"; 
         }
 
+        /// <summary>
+        /// Compares the working tables with each other
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public int CompareTo(DataAccess other)
         {
             if (other != null)

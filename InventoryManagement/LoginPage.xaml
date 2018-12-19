@@ -8,26 +8,51 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="579,171,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="100" TextAlignment="Center" Height="149" Width="333"/>
+    <!-- Grid styling-->
+    <Grid Style="{StaticResource GridStyle}">
+        <!-- Create and format nested grids to organize/ streamline elements-->
+        <Grid Margin="10,20,10,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Login" VerticalAlignment="Center" FontSize="100" TextAlignment="Center" Height="149" Width="333" Grid.RowSpan="2"/>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
 
-        <StackPanel HorizontalAlignment="Left" Height="119" Margin="539,381,0,0" VerticalAlignment="Top" Width="180">
-            <TextBlock Text="Username" FontSize="30" TextWrapping="Wrap" Height="73"/>
-            <TextBlock Text="Password" FontSize="31" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="64" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Height="137" Margin="722,381,0,0" VerticalAlignment="Top" Width="250">
-            <TextBox x:Name="UsernameTextBox" Text="" Height="64" FontSize="24" PlaceholderText="Enter Username"/>
-            <PasswordBox x:Name="PasswordText" Height="64" PasswordChar="*" PlaceholderText="Enter Password" FontSize="24"/>
-        </StackPanel>
+                <!-- Place TextBoxes and TextBloxs in desired rows and columns within grid-->
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Username" FontSize="30" TextWrapping="Wrap" Height="73"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="Password" FontSize="31" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="64" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="1" Grid.Column="3" x:Name="UsernameTextBox" Text="" Height="64" FontSize="24" PlaceholderText="Enter Username"/>
+                <PasswordBox Grid.Row="2" Grid.Column="3"  x:Name="PasswordText" Height="64" PasswordChar="*" PlaceholderText="Enter Password" FontSize="24"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontSize ="22" Height="34"  Text="Don't have an acccount?" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Margin="8.5,57,0,0"/>
+                <HyperlinkButton Grid.Row="3" Grid.Column="2" Content="Sign up! :D" HorizontalAlignment="Center" Height="87" VerticalAlignment="Center" Width="122" FontSize="22" Click="HyperlinkButton_Click"/>
 
-        <HyperlinkButton Content="Sign up! :D" HorizontalAlignment="Left" Height="87" Margin="678,539,0,0" VerticalAlignment="Top" Width="122" FontSize="22" Click="HyperlinkButton_Click"/>
-        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="838,554,0,0" VerticalAlignment="Top" Height="56" Width="134" Click="LoginButton_Click" Tapped="LoginButton_Tapped">
-            <FlyoutBase.AttachedFlyout>
-                <Flyout>
-                    <TextBlock Text="Access Denied"/>
-                </Flyout>
-            </FlyoutBase.AttachedFlyout>
-        </Button>
-        <TextBlock HorizontalAlignment="Left" FontSize ="22" Height="34" Margin="436,568,0,0" Text="Don't have an acccount?" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
+
+                <Button Grid.Row="3" Grid.Column="3" x:Name="LoginButton" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center" Height="56" Width="134" Click="LoginButton_Click" Tapped="LoginButton_Tapped">
+                    <!-- Flyout messages prompt user of incorrect credentials-->
+                    <FlyoutBase.AttachedFlyout>
+                        <Flyout>
+                            <TextBlock Text="Access Denied"/>
+                        </Flyout>
+                    </FlyoutBase.AttachedFlyout>
+                </Button>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
